@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function Footer() {
     return (
         <footer className="border-top py-3 mt-auto">

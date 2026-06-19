@@ -1,23 +1,26 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import MainLayout from "./layouts/MainLayout";
+
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ThemeProvider>
+      
         <Routes>
           <Route element={<MainLayout />}>
             <Route index element={<HomePage />} />
-            <Route element={<ProductDetails />} />
+            <Route path="products/:id" element={<ProductDetails />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
+      </ThemeProvider>
       </BrowserRouter>
-    </ThemeProvider>
+    
   );
 }
 export default App;
