@@ -10,10 +10,10 @@ function Header() {
                 <div className="container d-flex flex-column align-items-center">
 
                     <div className="text-center my-2">
-                        <NavLink className="navbar-brand quest-brand m-0" to="/">
+                        <NavLink className="navbar-brand brand m-0" to="/">
                             JSON'S QUEST
                         </NavLink>
-                        <p className="quest-tagline">i nostri prodotti per la Missione Quotidiana</p>
+                        <p className="tagline">i nostri prodotti per la Missione Quotidiana</p>
                     </div>
                     <button
                         className="navbar-toggler quest-toggler"
