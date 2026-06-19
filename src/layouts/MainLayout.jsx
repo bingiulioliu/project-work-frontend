@@ -1,16 +1,20 @@
 import { Outlet } from "react-router";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-
+import Header from "../components/Header/header";
+import Footer from "../components/Footer/Footer";
+import "../styles/index.css";
 function MainLayout() {
     return (
-        <>
-            <Header />
-            <main className="container my-4">
-                <Outlet />
-            </main>
+
+        <div className="main-background">
+            <div>
+                <Header />
+
+                <main className="main-content my-4">
+                    <Outlet />
+                </main>
+            </div>
             <Footer />
-        </>
+        </div>
     );
 }
 
