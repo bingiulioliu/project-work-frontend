@@ -1,5 +1,5 @@
-import { NavLink } from "react-router";
-import useTheme from "../../hooks/useTheme";
+import { NavLink } from "react-router-dom";
+import useTheme from "../hooks/useTheme.js";
 import "./header.css";
 
 function Header() {
