@@ -6,9 +6,9 @@ function MainLayout() {
     return (
         <>
             <Header />
-            <main className="container my-4">
+            
                 <Outlet />
-            </main>
+            
             <Footer />
         </>
     );
