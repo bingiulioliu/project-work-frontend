@@ -1,0 +1,13 @@
+.container-footer {
+    background-color: var(--bg-header-box);
+    border-top: 1px solid var(--border-gold);
+    padding: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    font-family: 'Cinzel', 'Georgia', serif;
+    color: var(--text-muted) !important;
+    /*fissa il footer sotto cosi' non va al centro pagina*/
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

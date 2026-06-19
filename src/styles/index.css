@@ -10,3 +10,24 @@
   componenti. Per stili specifici di un singolo componente è preferibile
   usare un CSS Module (es. `NomeComponente.module.css`).
 */
+:root {
+  --bg-black: #0c0c0c;
+  --bg-header-box: #141414;
+  --bg-card-center: #4A0E17;
+  --bg-card-edge: #1A1A1A;
+  --text-ivory: #F5F2EB;
+  --text-muted: #A8A29E;
+  --button-amber: #D97706;
+  --border-gold: #855831;
+}
+
+.main-background {
+  background-image:
+    url("/img/background.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+
+}
