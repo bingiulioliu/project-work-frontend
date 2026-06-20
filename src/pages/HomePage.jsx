@@ -1,12 +1,45 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchRarestProducts } from "../utils/fetchRarestProducts";
+import { fetchCheapestProducts } from "../utils/fetchCheapestProducts";
 import "./HomePage.css";
 
 export default function HomePage() {
+  const [rarestProducts, setRarestProducts] = useState([]);
+  const [isLoadingRarest, setIsLoadingRarest] = useState(true);
+
+  const [cheapestProducts, setCheapestProducts] = useState([]);
+  const [isLoadingCheapest, setIsLoadingCheapest] = useState(true);
+
+  useEffect(() => {
+    fetchRarestProducts()
+      .then((products) => {
+        setRarestProducts(products);
+      })
+      .catch((error) => {
+        console.error("Errore prodotti più rari:", error);
+      })
+      .finally(() => {
+        setIsLoadingRarest(false);
+      });
+
+    fetchCheapestProducts()
+      .then((products) => {
+        setCheapestProducts(products);
+      })
+      .catch((error) => {
+        console.error("Errore prodotti più economici:", error);
+      })
+      .finally(() => {
+        setIsLoadingCheapest(false);
+      });
+  }, []);
+
   return (
     <main className="quest-home">
       <section className="quest-hero">
         <div className="container-fluid px-4">
-          
+
 
           <div className="quest-hero-content text-center">
             <p className="quest-kicker">La piazza del mercato</p>
@@ -61,43 +94,115 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="col-12 col-lg-8 mt-5 mt-lg-0">
-              <div className="quest-section-heading d-flex justify-content-between align-items-center">
-                <h2>Missioni in evidenza</h2>
+            <section className="quest-products-section">
+              <div className="container-fluid px-4">
+                <div className="quest-section-heading d-flex justify-content-between align-items-center mb-4">
+                  <h2>Artefatti più rari</h2>
 
-                <Link to="/products" className="quest-see-all">
-                  Vedi tutte le missioni
-                </Link>
-              </div>
-
-              <div className="row g-4 mt-3">
-                <div className="col-12 col-md-6">
-                  <article className="quest-product-card">
-                    <span className="quest-card-badge">Leggendario</span>
-                    <h3>Framework Incantato</h3>
-                    <p>
-                      Un artefatto mistico per velocizzare ogni quest frontend.
-                    </p>
-                    <Link to="/products" className="quest-card-link">
-                      Scopri artefatto
-                    </Link>
-                  </article>
+                  <Link to="/products" className="quest-see-all">
+                    Vedi tutti
+                  </Link>
                 </div>
 
-                <div className="col-12 col-md-6">
-                  <article className="quest-product-card">
-                    <span className="quest-card-badge">Novità</span>
-                    <h3>Pozione di Debug</h3>
-                    <p>
-                      Elimina bug ostinati e recupera punti concentrazione.
-                    </p>
-                    <Link to="/products" className="quest-card-link">
-                      Scopri artefatto
-                    </Link>
-                  </article>
-                </div>
+                {isLoadingRarest ? (
+                  <p className="text-light">Caricamento artefatti...</p>
+                ) : (
+                  <div className="row g-4">
+                    {rarestProducts.map((product) => (
+                      <div className="col-12 col-md-6 col-lg" key={product.slug}>
+                        <article className="quest-product-card h-100">
+                          {product.image && (
+                            <img
+                              src={
+                                product.image.startsWith("http")
+                                  ? product.image
+                                  : `/img/${product.image}`
+                              }
+                              alt={product.name}
+                              className="quest-product-img"
+                            />
+                          )}
+
+                          <div className="quest-product-body">
+                            <span className={`quest-rarity quest-rarity-${product.rarity}`}>
+                              {product.rarity}
+                            </span>
+
+                            <h3>{product.name}</h3>
+
+                            <p className="quest-price">
+                              {Number(product.price).toFixed(2)} €
+                            </p>
+
+                            <Link
+                              to={`/products/${product.slug}`}
+                              className="quest-card-link"
+                            >
+                              Vedi dettaglio
+                            </Link>
+                          </div>
+                        </article>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
+            </section>
+
+            <section className="quest-products-section">
+              <div className="container-fluid px-4">
+                <div className="quest-section-heading d-flex justify-content-between align-items-center mb-4">
+                  <h2>Offerte della gilda</h2>
+
+                  <Link to="/products" className="quest-see-all">
+                    Vedi tutti
+                  </Link>
+                </div>
+
+                {isLoadingCheapest ? (
+                  <p className="text-light">Caricamento offerte...</p>
+                ) : (
+                  <div className="row g-4">
+                    {cheapestProducts.map((product) => (
+                      <div className="col-12 col-md-6 col-lg" key={product.slug}>
+                        <article className="quest-product-card h-100">
+                          {product.image && (
+                            <img
+                              src={
+                                product.image.startsWith("http")
+                                  ? product.image
+                                  : `/img/${product.image}`
+                              }
+                              alt={product.name}
+                              className="quest-product-img"
+                            />
+                          )}
+
+                          <div className="quest-product-body">
+                            <span className={`quest-rarity quest-rarity-${product.rarity}`}>
+                              {product.rarity}
+                            </span>
+
+                            <h3>{product.name}</h3>
+
+                            <p className="quest-price">
+                              {Number(product.price).toFixed(2)} €
+                            </p>
+
+                            <Link
+                              to={`/products/${product.slug}`}
+                              className="quest-card-link"
+                            >
+                              Vedi dettaglio
+                            </Link>
+                          </div>
+                        </article>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </section>
           </div>
 
           <div className="quest-floating-card d-none d-lg-block"></div>
