@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap");
+
+.product-details-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at center, rgba(214, 173, 51, 0.08), transparent 36%),
+        linear-gradient(180deg, #151309 0%, #090803 100%);
+    color: #f4efe1;
+    font-family: "Cinzel", serif;
+    padding: 5rem 0;
+}
+
+.product-details-card {
+    background: rgba(28, 26, 17, 0.95);
+    border: 1px solid rgba(225, 189, 75, 0.22);
+    border-radius: 18px;
+    padding: 2.5rem;
+    box-shadow:
+        0 18px 0 rgba(0, 0, 0, 0.45),
+        inset 0 0 0 1px rgba(255, 232, 113, 0.06);
+}
+
+.product-image-wrapper {
+    background: #f0ead8;
+    border: 4px solid rgba(167, 91, 23, 0.85);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow:
+        0 12px 0 rgba(0, 0, 0, 0.35),
+        inset 0 0 0 3px rgba(255, 255, 255, 0.45);
+}
+
+.product-details-image {
+    width: 100%;
+    max-height: 430px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.product-info {
+    padding: 1rem;
+}
+
+.product-category {
+    color: #f3c72e;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.78rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.product-title {
+    font-family: "Cormorant Garamond", serif;
+    color: #f4efe1;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 0.95;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.45);
+}
+
+.product-description {
+    max-width: 680px;
+    color: #cfc4ad;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.product-price {
+    display: inline-block;
+    background: #d6a719;
+    color: #241b05;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.45);
+}
+
+.product-button {
+    display: block;
+    width: fit-content;
+    border: 2px solid #e7bd2d;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #e7bd2d 0%, #c89206 100%);
+    color: #30270c;
+    padding: 0.8rem 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 1rem;
+    font-weight: 900;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.65);
+}
+
+.product-button:hover {
+    background: #ffd449;
+    color: #211906;
+    border-color: #ffd449;
+}
+
+.cart-message {
+    color: #f3c72e;
+    font-weight: 800;
+    margin-top: 1.2rem;
+}
+
+@media (max-width: 991px) {
+    .product-details-page {
+        padding: 3rem 0;
+    }
+
+    .product-details-card {
+        padding: 1.8rem;
+    }
+
+    .product-info {
+        text-align: center;
+    }
+
+    .product-button {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .product-details-card {
+        padding: 1.2rem;
+    }
+
+    .product-title {
+        font-size: 3rem;
+    }
+
+    .product-description {
+        font-size: 1rem;
+    }
+
+    .product-price {
+        font-size: 1.25rem;
+    }
+
+    .product-button {
+        width: 100%;
+    }
+}
