@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import useTheme from "../hooks/useTheme.js";
 import "./header.css";
 
@@ -38,15 +38,7 @@ function Header() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/carrello">Carrello 🛒</NavLink>
                             </li>
-                            <li className="nav-item ms-lg-4 mt-3 mt-lg-0">
-                                <button
-                                    className="btn-theme-ritual"
-                                    onClick={toggleTheme}
-                                    aria-label="Cambia atmosfera"
-                                >
-                                    {theme === 'light' ? '🌙' : '☀️'}
-                                </button>
-                            </li>
+
                         </ul>
                     </div>
 

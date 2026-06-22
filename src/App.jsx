@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import MainLayout from "./layouts/MainLayout";
 
+import Catalogo from './components/Catalogo';
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
@@ -14,6 +15,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route index element={<HomePage />} />
             <Route path="products/:slug" element={<ProductDetails />} />
+            <Route path="catalogo" element={<Catalogo />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

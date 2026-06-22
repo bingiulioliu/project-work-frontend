@@ -10,6 +10,17 @@
   componenti. Per stili specifici di un singolo componente è preferibile
   usare un CSS Module (es. `NomeComponente.module.css`).
 */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-header-box);
+}
+
+
+
 :root {
   --bg-black: #0c0c0c;
   --bg-header-box: #141414;
@@ -29,5 +40,6 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 100vh;
+  padding-bottom: 50px;
 
 }
