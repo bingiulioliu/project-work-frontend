@@ -79,7 +79,6 @@ export default function HomePage() {
             <div className="container-fluid px-4">
               <div className="quest-section-heading d-flex justify-content-between align-items-center mb-4">
                 <h2>Oggetti più rari</h2>
-                <p>Artefatti catalogati in base alla rarità</p>
 
                 <Link to="/products" className="quest-see-all">
                   Vedi tutti
@@ -103,7 +102,7 @@ export default function HomePage() {
             <section className="quest-products-section">
               <div className="container-fluid px-4">
                 <div className="quest-section-heading d-flex justify-content-between align-items-center mb-4">
-                  <h2>Offerte del mercante: i più economici</h2>
+                  <h2>Essenziali</h2>
 
                   <Link to="/products" className="quest-see-all">
                     Vedi tutti
