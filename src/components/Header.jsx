@@ -1,20 +1,24 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import useTheme from "../hooks/useTheme.js";
 import "./header.css";
 
 function Header() {
     const { theme, toggleTheme } = useTheme();
+
     return (
         <header className="container-header">
-            <nav className="navbar navbar-expand-lg">
-                <div className="container d-flex flex-column align-items-center">
+            <nav className="navbar navbar-expand-lg quest-navbar">
+                <div className="container-fluid px-4 px-lg-5">
+                    <NavLink className="navbar-brand brand" to="/">
+                        <img
+                            src=""
+                            alt="JSON's Quest"
+                            className="header-logo"
+                        />
 
-                    <div className="text-center my-2">
-                        <NavLink className="navbar-brand brand m-0" to="/">
-                            JSON'S QUEST
-                        </NavLink>
-                        <p className="tagline">i nostri prodotti per la Missione Quotidiana</p>
-                    </div>
+                        
+                    </NavLink>
+
                     <button
                         className="navbar-toggler quest-toggler"
                         type="button"
@@ -22,33 +26,65 @@ function Header() {
                         data-bs-target="#mainNav"
                         aria-controls="mainNav"
                         aria-expanded="false"
-                        aria-label="Toggle navigation"
+                        aria-label="Apri menu"
                     >
                         <span className="navbar-toggler-icon" />
                     </button>
-                    <div className="collapse navbar-collapse w-100" id="mainNav">
-                        <ul className="navbar-nav mx-auto align-items-center nav-links">
+
+                    <div className="collapse navbar-collapse" id="mainNav">
+                        <ul className="navbar-nav ms-auto align-items-lg-center nav-links">
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/chi-siamo">Chi Siamo</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/catalogo">Catalogo</NavLink>
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive ? "nav-link active" : "nav-link"
+                                    }
+                                    to="/"
+                                    end
+                                >
+                                    Piazza
+                                </NavLink>
                             </li>
 
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/carrello">Carrello 🛒</NavLink>
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive ? "nav-link active" : "nav-link"
+                                    }
+                                    to="/chi-siamo"
+                                >
+                                    Chi siamo
+                                </NavLink>
                             </li>
 
+                            <li className="nav-item">
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive ? "nav-link active" : "nav-link"
+                                    }
+                                    to="/products"
+                                >
+                                    Catalogo
+                                </NavLink>
+                            </li>
+
+                            <li className="nav-item">
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive ? "nav-link active" : "nav-link"
+                                    }
+                                    to="/carrello"
+                                >
+                                    Carrello 🛒
+                                </NavLink>
+                            </li>
+
+                            
                         </ul>
                     </div>
-
                 </div>
             </nav>
         </header>
     );
-
-
-
 }
 
 export default Header;
