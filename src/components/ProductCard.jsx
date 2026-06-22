@@ -10,7 +10,7 @@ function ProductCard({ product }) {
     return (
         <article className="quest-card h-100">
             <div className="quest-card-inner">
-                <Link to={`/product/${product.slug}`} className="quest-card-image-link">
+                <Link to={`/products/${product.slug}`} className="quest-card-image-link">
                     {product.image && (
                         <img
                             src={imageSrc}
