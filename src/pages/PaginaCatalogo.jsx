@@ -1,7 +1,7 @@
 //searchpage
 
 import React, { useState } from 'react';
-import './catalogo.css';
+import "./PaginaCatalogo.css";
 
 function Catalogo() {
     //I filtri sono pronti per quando serviranno
@@ -100,7 +100,7 @@ function Catalogo() {
                             <div className="card-inner-border">
                                 <div className="card-thumb-area">
 
-                                    <img src="./public/img/img di prova.jpg" alt="Tazza Artigianale" className="card-thumb-img" />
+                                    <img src="" alt="Tazza Artigianale" className="card-thumb-img" />
                                 </div>
                                 <div className="card-info-area text-center">
                                     <h3 className="item-card-title">Bastone da scalata </h3>
