@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import "./PaginaCatalogo.css";
 import { fetchProducts } from '../utils/fetchProducts';
-import { useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 
 function Catalogo() {
@@ -10,29 +9,58 @@ function Catalogo() {
     const [category, setCategory] = useState('all');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    const [sortBy, setSortBy] = useState('recenti');
+    const [sortBy, setSortBy] = useState('data-recente');
 
     const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
+
+    const sortProducts = (items) => {
+        const sorted = [...items];
+
+        switch (sortBy) {
+            case 'prezzo-crescente':
+                return sorted.sort((a, b) => Number(a.price) - Number(b.price));
+            case 'prezzo-decrescente':
+                return sorted.sort((a, b) => Number(b.price) - Number(a.price));
+            case 'nome':
+                return sorted.sort((a, b) =>
+                    String(a.name).localeCompare(String(b.name), undefined, { sensitivity: 'base' })
+                );
+            case 'data-recente': {
+                const getTimestamp = (item) => {
+                    const date = item.date || item.createdAt || item.updatedAt;
+                    return date ? new Date(date).getTime() : 0;
+                };
+                return sorted.sort((a, b) => getTimestamp(b) - getTimestamp(a));
+            }
+            default:
+                return sorted;
+        }
+    };
+
+    const displayedProducts = useMemo(() => sortProducts(searchResults), [searchResults, sortBy]);
 
     // Carica i prodotti all'avvio
     useEffect(() => {
         fetchProducts().then((data) => {
             setProducts(data);
-            setFilteredProducts(data);
+            setSearchResults(data);
         });
     }, []);
 
     // Debounce della ricerca: filtra dopo mezzo secondo di inattività
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (searchTerm.trim() === '') {
-                setFilteredProducts(products);
+            const term = searchTerm.trim().toLowerCase();
+
+            if (term === '') {
+                setSearchResults(products);
             } else {
-                const filtered = products.filter(product =>
-                    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                setSearchResults(
+                    products.filter(product =>
+                        product.name.toLowerCase().includes(term)
+                    )
                 );
-                setFilteredProducts(filtered);
             }
         }, 500);
 
@@ -105,9 +133,10 @@ function Catalogo() {
                                 value={sortBy}
                                 onChange={(e) => setSortBy(e.target.value)}
                             >
-                                <option value="prezzo-crescente">Prezzo: Minore</option>
-                                <option value="prezzo-decrescente">Prezzo: Maggiore</option>
-                                <option value="nome">Nome (A-Z)</option>
+                                <option value="prezzo-crescente">Prezzo: Minore → Maggiore</option>
+                                <option value="prezzo-decrescente">Prezzo: Maggiore → Minore</option>
+                                <option value="nome">Nome: A → Z</option>
+                                <option value="data-recente">Data: Più recente</option>
                             </select>
                         </div>
 
@@ -115,11 +144,21 @@ function Catalogo() {
                 </div>
 
                 <div className="row g-2">
-                    {filteredProducts.map((product) => (
-                        <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={product.slug}>
-                            <ProductCard product={product} />
+                    {displayedProducts.length > 0 ? (
+                        displayedProducts.map((product) => (
+                            <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={product.slug}>
+                                <ProductCard product={product} />
+                            </div>
+                        ))
+                    ) : (
+                        <div className="col-12">
+                            <div className="text-center py-5 border rounded-3 bg-dark bg-opacity-25">
+                                <p className="mb-2 text-secondary">Nessuna traccia di tesori qui...</p>
+                                <h2 className="h5 text-secondary">Il tuo incantesimo di ricerca non ha evocato nulla.</h2>
+                                <p className="mb-0 text-secondary">Prova a cambiare parola chiave o a espandere i criteri per trovare nuovi cimeli.</p>
+                            </div>
                         </div>
-                    ))}
+                    )}
                 </div>
 
 
