@@ -5,15 +5,15 @@ import "../styles/index.css";
 
 function MainLayout() {
     return (
-        <div className="main-background">
-            
-                <Header />
+        <div className="main-background my-4 pb-5">
 
-                <Outlet />
+            <Header />
+
+            <Outlet />
 
 
-                <Footer />
-            
+            <Footer />
+
         </div>
     );
 }
