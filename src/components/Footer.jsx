@@ -9,7 +9,7 @@ function Footer() {
                     <div className="col-12 col-lg-5">
                         <Link to="/" className="footer-brand">
                             <img
-                                src=""
+                                src="img/logo.png"
                                 alt="JSON's Quest"
                                 className="footer-logo"
                             />
