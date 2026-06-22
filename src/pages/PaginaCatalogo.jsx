@@ -13,10 +13,31 @@ function Catalogo() {
     const [sortBy, setSortBy] = useState('recenti');
 
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
+    // Carica i prodotti all'avvio
     useEffect(() => {
-        fetchProducts().then(setProducts);
+        fetchProducts().then((data) => {
+            setProducts(data);
+            setFilteredProducts(data);
+        });
     }, []);
+
+    // Debounce della ricerca: filtra dopo mezzo secondo di inattività
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (searchTerm.trim() === '') {
+                setFilteredProducts(products);
+            } else {
+                const filtered = products.filter(product =>
+                    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                setFilteredProducts(filtered);
+            }
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [searchTerm, products]);
 
     return (
         <div className="container  py-5  text-ivory">
@@ -94,7 +115,7 @@ function Catalogo() {
                 </div>
 
                 <div className="row g-2">
-                    {products.map((product) => (
+                    {filteredProducts.map((product) => (
                         <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={product.slug}>
                             <ProductCard product={product} />
                         </div>
