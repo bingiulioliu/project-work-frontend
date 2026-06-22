@@ -1,7 +1,8 @@
-//searchpage
-
 import React, { useState } from 'react';
 import "./PaginaCatalogo.css";
+import { fetchProducts } from '../utils/fetchProducts';
+import { useEffect } from 'react';
+import ProductCard from '../components/ProductCard';
 
 function Catalogo() {
     //I filtri sono pronti per quando serviranno
@@ -11,6 +12,12 @@ function Catalogo() {
     const [maxPrice, setMaxPrice] = useState('');
     const [sortBy, setSortBy] = useState('recenti');
 
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetchProducts().then(setProducts);
+    }, []);
+
     return (
         <div className="container  py-5  text-ivory">
             <h1 className="page-title text-center ">Archivio degli Equipaggiamenti</h1>
@@ -18,7 +25,6 @@ function Catalogo() {
             <div className="filter-main-box py-5">
                 <div className="filter-main-box mb-5">
                     <div className="row g-3">
-
 
                         <div className="col-md-4">
                             <label className="form-label text-light">Cerca per Nome</label>
@@ -29,13 +35,9 @@ function Catalogo() {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
 
-
-
-
                             />
 
                         </div>
-
 
                         <div className="col-md-3">
                             <label className="form-label text-light">Categoria</label>
@@ -91,33 +93,14 @@ function Catalogo() {
                     </div>
                 </div>
 
-
-                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-
-                    {/* CARD DI PROVA 1 */}
-                    <div className="col">
-                        <div className="item-card">
-                            <div className="card-inner-border">
-                                <div className="card-thumb-area">
-
-                                    <img src="" alt="Tazza Artigianale" className="card-thumb-img" />
-                                </div>
-                                <div className="card-info-area text-center">
-                                    <h3 className="item-card-title">Bastone da scalata </h3>
-                                    <p className="item-card-subtitle text-light">Ti rende la scalata più leggera ma ti fa invecchiare precocemente.</p>
-                                    <p className="item-card-price">24.90 oro</p>
-
-                                    <div className="d-flex gap-2 justify-content-center mt-3">
-                                        <button className="btn-amber-action flex-grow-1">
-                                            Aggiungi al Carrello
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                <div className="row">
+                    {products.map((product) => (
+                        <div className="col" key={product.slug}>
+                            <ProductCard product={product} />
                         </div>
-                    </div>
-
+                    ))}
                 </div>
+
 
             </div>
         </div>
