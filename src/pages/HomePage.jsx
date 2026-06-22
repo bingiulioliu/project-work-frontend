@@ -89,8 +89,15 @@ export default function HomePage() {
                 <p className="text-light">Caricamento artefatti...</p>
               ) : (
                 <div className="row g-4">
-                  {rarestProducts.map((product) => (
-                    <div className="col-12 col-md-6 col-lg" key={product.slug}>
+                  {rarestProducts.map((product, index) => (
+                    <div
+                      className={
+                        index === 0
+                          ? "col-12 col-md-6 col-lg-12"
+                          : "col-12 col-md-6 col-lg-3"
+                      }
+                      key={product.slug}
+                    >
                       <ProductCard product={product} />
                     </div>
                   ))}
@@ -113,8 +120,15 @@ export default function HomePage() {
                   <p className="text-light">Caricamento offerte...</p>
                 ) : (
                   <div className="row g-4">
-                    {cheapestProducts.map((product) => (
-                      <div className="col-12 col-md-6 col-lg" key={product.slug}>
+                    {cheapestProducts.map((product, index) => (
+                      <div
+                        className={
+                          index === 0
+                            ? "col-12 col-md-6 col-lg-12"
+                            : "col-12 col-md-6 col-lg-3"
+                        }
+                        key={product.slug}
+                      >
                         <ProductCard product={product} />
                       </div>
                     ))}
