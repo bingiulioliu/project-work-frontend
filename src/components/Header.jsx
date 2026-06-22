@@ -50,9 +50,9 @@ function Header() {
                                     className={({ isActive }) =>
                                         isActive ? "nav-link active" : "nav-link"
                                     }
-                                    to="/chi-siamo"
+                                    to="/products"
                                 >
-                                    Chi siamo
+                                    Catalogo
                                 </NavLink>
                             </li>
 
@@ -61,9 +61,9 @@ function Header() {
                                     className={({ isActive }) =>
                                         isActive ? "nav-link active" : "nav-link"
                                     }
-                                    to="/products"
+                                    to="/chi-siamo"
                                 >
-                                    Catalogo
+                                    Chi siamo
                                 </NavLink>
                             </li>
 
