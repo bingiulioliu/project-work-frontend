@@ -72,7 +72,7 @@ function ProductDetails() {
                     <div className="col-12 col-lg-6">
                         <div className="product-image-wrapper">
                             <img
-                                src={`/img/${product.image}`}
+                                src={`http://localhost:3000/img/${product.image}`}
                                 alt={product.name}
                                 className="product-details-image"
                             />
