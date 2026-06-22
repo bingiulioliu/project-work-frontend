@@ -1,0 +1,131 @@
+.quest-card {
+    background: #15110d;
+    border: 1px solid #9a641f;
+    border-radius: 4px;
+    padding: 1rem;
+    color: #fff7e8;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.35);
+}
+
+.quest-card-inner {
+    min-height: 100%;
+    border: 1px solid rgba(196, 129, 45, 0.35);
+    background:
+        radial-gradient(circle at top, rgba(125, 31, 42, 0.7), transparent 55%),
+        linear-gradient(180deg, #251719 0%, #3a0810 100%);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.quest-card-image-link {
+    display: block;
+    text-decoration: none;
+}
+
+.quest-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 1.6rem;
+}
+
+.quest-card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.quest-card-rarity {
+    align-self: center;
+    margin-bottom: 0.7rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.quest-card-rarity-common {
+    background: #d6c8aa;
+    color: #2b2114;
+}
+
+.quest-card-rarity-rare {
+    background: #5b8fd9;
+    color: #071323;
+}
+
+.quest-card-rarity-legendary {
+    background: #e6a000;
+    color: #211300;
+}
+
+.quest-card-title {
+    font-family: "Cormorant Garamond", serif;
+    color: #fff7e8;
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+}
+
+.quest-card-description {
+    color: #fff1df;
+    font-style: italic;
+    line-height: 1.35;
+    margin-bottom: 1.2rem;
+
+    display: -webkit-box;
+    
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.quest-card-price {
+    color: #fff7e8;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-top: auto;
+    margin-bottom: 1rem;
+}
+
+.quest-card-button {
+    width: 100%;
+    border: 0;
+    border-radius: 3px;
+    background: #e58400;
+    color: #140b04;
+    padding: 0.8rem 1rem;
+    font-family: "Cinzel", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.quest-card-button:hover {
+    background: #ff9d18;
+    transform: translateY(-2px);
+}
+
+.quest-card-detail {
+    display: inline-block;
+    margin-top: 0.9rem;
+    color: #f0c34a;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+}
+
+.quest-card-detail:hover {
+    color: #ffe27a;
+}
