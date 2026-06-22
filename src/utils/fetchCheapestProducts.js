@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:3000";
 
 export async function fetchCheapestProducts() {
-    const response = await fetch(`${API_URL}/products`);
+    const response = await fetch(`${API_URL}/products/cheapest`);
 
     if (!response.ok) {
         throw new Error("Errore nel recupero dei prodotti più economici");
@@ -9,11 +9,5 @@ export async function fetchCheapestProducts() {
 
     const data = await response.json();
 
-    const products = data.results || [];
-
-    const cheapestProducts = products
-        .sort((a, b) => Number(a.price) - Number(b.price))
-        .slice(0, 5);
-
-    return cheapestProducts;
+    return data.results || [];
 }
