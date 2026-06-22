@@ -4,8 +4,9 @@ import Footer from "../components/Footer";
 import "../styles/index.css";
 
 function MainLayout() {
-    return (
-        <div className="main-background my-4 pb-5">
+    return <>
+    
+        {/* <div className="main-background my-4 pb-5"> */}
 
             <Header />
 
@@ -14,8 +15,9 @@ function MainLayout() {
 
             <Footer />
 
-        </div>
-    );
+        {/* </div> */}
+    </>
+    ;
 }
 
 export default MainLayout;
