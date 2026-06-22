@@ -11,7 +11,7 @@ function Header() {
                 <div className="container-fluid px-4 px-lg-5">
                     <NavLink className="navbar-brand brand" to="/">
                         <img
-                            src="img/logo.png"
+                            src="img/jason_logo.png"
                             alt="JSON's Quest"
                             className="header-logo"
                         />
