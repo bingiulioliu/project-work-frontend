@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { fetchRarestProducts } from "../utils/fetchRarestProducts";
 import { fetchCheapestProducts } from "../utils/fetchCheapestProducts";
 import "./HomePage.css";
+import ProductCard from "../components/ProductCard";
 
 export default function HomePage() {
   const [rarestProducts, setRarestProducts] = useState([]);
@@ -42,27 +43,30 @@ export default function HomePage() {
 
 
           <div className="quest-hero-content text-center">
-            <p className="quest-kicker">La piazza del mercato</p>
+            <p className="quest-kicker">Benvenuto a la piazza del mercato</p>
 
             <h1 className="quest-title">
-              Benvenuto alla Gilda dei Developer
+              L'Equipaggiamento per le
+              tue Battaglie Quotidiane
             </h1>
 
             <p className="quest-subtitle mx-auto">
-              Forgia il tuo futuro con strumenti leggendari. Dalle API mistiche
-              ai Framework incantati, ogni riga di codice è una pozione per il
-              successo.
+              Forgia il tuo destino con artefatti leggensari curati dai
+              migliori fabbri della Gilda. Dalla domotica incantata al
+              vestiario dell'invisibilità.
             </p>
 
             <div className="quest-actions d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-              <Link to="/products" className="btn quest-btn quest-btn-primary">
-                <span className="me-2">🪄</span>
-                Equipaggiati
+              <Link to="/product" className="btn quest-btn quest-btn-secondary">
+                Inizia l'avventura
               </Link>
 
-              <Link to="/categories" className="btn quest-btn quest-btn-secondary">
-                Esplora catalogo
+              <Link to="/product" className="btn quest-btn quest-btn-primary">
+                <span className="me-2">🪄</span>
+                Vedi offerte
               </Link>
+
+
             </div>
           </div>
         </div>
@@ -74,7 +78,8 @@ export default function HomePage() {
 
             <div className="container-fluid px-4">
               <div className="quest-section-heading d-flex justify-content-between align-items-center mb-4">
-                <h2>Artefatti più rari</h2>
+                <h2>Oggetti più rari</h2>
+                <p>Artefatti catalogati in base alla rarità</p>
 
                 <Link to="/products" className="quest-see-all">
                   Vedi tutti
@@ -87,38 +92,7 @@ export default function HomePage() {
                 <div className="row g-4">
                   {rarestProducts.map((product) => (
                     <div className="col-12 col-md-6 col-lg" key={product.slug}>
-                      <article className="quest-product-card h-100">
-                        {product.image && (
-                          <img
-                            src={
-                              product.image.startsWith("http")
-                                ? product.image
-                                : `/img/${product.image}`
-                            }
-                            alt={product.name}
-                            className="quest-product-img"
-                          />
-                        )}
-
-                        <div className="quest-product-body">
-                          <span className={`quest-rarity quest-rarity-${product.rarity}`}>
-                            {product.rarity}
-                          </span>
-
-                          <h3>{product.name}</h3>
-
-                          <p className="quest-price">
-                            {Number(product.price).toFixed(2)} €
-                          </p>
-
-                          <Link
-                            to={`/products/${product.slug}`}
-                            className="quest-card-link"
-                          >
-                            Vedi dettaglio
-                          </Link>
-                        </div>
-                      </article>
+                      <ProductCard product={product} />
                     </div>
                   ))}
                 </div>
@@ -129,7 +103,7 @@ export default function HomePage() {
             <section className="quest-products-section">
               <div className="container-fluid px-4">
                 <div className="quest-section-heading d-flex justify-content-between align-items-center mb-4">
-                  <h2>Offerte della gilda</h2>
+                  <h2>Offerte del mercante: i più economici</h2>
 
                   <Link to="/products" className="quest-see-all">
                     Vedi tutti
@@ -142,38 +116,7 @@ export default function HomePage() {
                   <div className="row g-4">
                     {cheapestProducts.map((product) => (
                       <div className="col-12 col-md-6 col-lg" key={product.slug}>
-                        <article className="quest-product-card h-100">
-                          {product.image && (
-                            <img
-                              src={
-                                product.image.startsWith("http")
-                                  ? product.image
-                                  : `/img/${product.image}`
-                              }
-                              alt={product.name}
-                              className="quest-product-img"
-                            />
-                          )}
-
-                          <div className="quest-product-body">
-                            <span className={`quest-rarity quest-rarity-${product.rarity}`}>
-                              {product.rarity}
-                            </span>
-
-                            <h3>{product.name}</h3>
-
-                            <p className="quest-price">
-                              {Number(product.price).toFixed(2)} €
-                            </p>
-
-                            <Link
-                              to={`/products/${product.slug}`}
-                              className="quest-card-link"
-                            >
-                              Vedi dettaglio
-                            </Link>
-                          </div>
-                        </article>
+                        <ProductCard product={product} />
                       </div>
                     ))}
                   </div>
@@ -182,7 +125,7 @@ export default function HomePage() {
             </section>
           </div>
 
-          
+
         </div>
       </section>
     </main>
