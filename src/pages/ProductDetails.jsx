@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./ProductDetails.css";
 
 function ProductDetails() {
     const { slug } = useParams();
@@ -44,93 +45,113 @@ function ProductDetails() {
     }
 
     if (errorMessage) {
+        return (
+            <main className="container py-5">
+                <h1>Ops!</h1>
+                <p>{errorMessage}</p>
+            </main>
+        );
+    }
+
+    if (!product) {
+        return (
+            <main className="container py-5">
+                <p>Prodotto non disponibile.</p>
+            </main>
+        );
+    }
+    const formattedPrice = Number(product.price).toLocaleString("it-IT", {
+        style: "currency",
+        currency: "EUR"
+    });
+
     return (
-        <main className="container py-5">
-            <h1>Ops!</h1>
-            <p>{errorMessage}</p>
-        </main>
-    );
-}
-
-if (!product) {
-    return (
-        <main className="container py-5">
-            <p>Prodotto non disponibile.</p>
-        </main>
-    );
-}
-
-    return (
-        <main className="container py-5">
-            <section className="row g-4 align-items-center">
-                <div className="col-12 col-md-6">
-                    <img
-                        src={`/img/${product.image}`}
-                        alt={product.name}
-                        className="img-fluid rounded shadow"
-                    />
-                </div>
-
-                <div className="col-12 col-md-6">
-                    <span className="badge text-bg-warning mb-3">
-                        {product.rarity}
-                    </span>
-
-                    <h1 className="mb-3">{product.name}</h1>
-
-                    <p className="lead">{product.description}</p>
-
-                    <p className="fs-4 fw-bold">
-                        {product.price} monete d&apos;oro
-                    </p>
-
-                    {product.categories?.length > 0 && (
-                        <div className="mb-3">
-                            <h5>Categorie</h5>
-
-                            <div className="d-flex flex-wrap gap-2">
-                                {product.categories.map((category) => (
-                                    <span
-                                        key={category.slug}
-                                        className="badge text-bg-secondary"
-                                    >
-                                        {category.name}
-                                    </span>
-                                ))}
-                            </div>
+        <main className="product-details-page">
+            <section className="container">
+                <div className="product-details-card row g-4 align-items-center">
+                    <div className="col-12 col-lg-6">
+                        <div className="product-image-wrapper">
+                            <img
+                                src={`/img/${product.image}`}
+                                alt={product.name}
+                                className="product-details-image"
+                            />
                         </div>
-                    )}
+                    </div>
 
-                    {product.tags?.length > 0 && (
-                        <div className="mb-4">
-                            <h5>Tag</h5>
+                    <div className="col-12 col-lg-6">
+                        <div className="product-info">
+                            <span className="product-rarity">
+                                {product.rarity}
+                            </span>
 
-                            <div className="d-flex flex-wrap gap-2">
-                                {product.tags.map((tag) => (
-                                    <span
-                                        key={tag.slug}
-                                        className="badge text-bg-dark"
-                                    >
-                                        {tag.name}
-                                    </span>
-                                ))}
+                            <h1 className="product-title">
+                                {product.name}
+                            </h1>
+
+                            <p className="product-description">
+                                {product.description}
+                            </p>
+
+                            <div className="product-price-box">
+                                <span className="product-price-label">
+                                    Prezzo
+                                </span>
+
+                                <p className="product-price">
+                                    {formattedPrice}
+                                </p>
                             </div>
+
+                            {product.categories?.length > 0 && (
+                                <div className="product-section">
+                                    <h5>Categorie</h5>
+
+                                    <div className="product-badges">
+                                        {product.categories.map((category) => (
+                                            <span
+                                                key={category.slug}
+                                                className="product-category-badge"
+                                            >
+                                                {category.name}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {product.tags?.length > 0 && (
+                                <div className="product-section">
+                                    <h5>Tag</h5>
+
+                                    <div className="product-badges">
+                                        {product.tags.map((tag) => (
+                                            <span
+                                                key={tag.slug}
+                                                className="product-tag-badge"
+                                            >
+                                                {tag.name}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            <button
+                                type="button"
+                                className="product-cart-button"
+                                onClick={handleAddToCart}
+                            >
+                                Aggiungi all&apos;inventario
+                            </button>
+
+                            {cartMessage && (
+                                <p className="product-cart-message">
+                                    {cartMessage}
+                                </p>
+                            )}
                         </div>
-                    )}
-
-                    <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={handleAddToCart}
-                    >
-                        Aggiungi all&apos;inventario
-                    </button>
-
-                    {cartMessage && (
-                        <p className="mt-3 text-success fw-semibold">
-                            {cartMessage}
-                        </p>
-                    )}
+                    </div>
                 </div>
             </section>
         </main>
