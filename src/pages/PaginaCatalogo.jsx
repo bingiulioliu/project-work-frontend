@@ -93,9 +93,9 @@ function Catalogo() {
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="row g-2">
                     {products.map((product) => (
-                        <div className="col" key={product.slug}>
+                        <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={product.slug}>
                             <ProductCard product={product} />
                         </div>
                     ))}
