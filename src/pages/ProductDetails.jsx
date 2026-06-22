@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ProductDetails.css";
+import { getImgUrl } from "../utils/getImgUrl";
 
 function ProductDetails() {
     const { slug } = useParams();
@@ -72,7 +73,7 @@ function ProductDetails() {
                     <div className="col-12 col-lg-6">
                         <div className="product-image-wrapper">
                             <img
-                                src={`http://localhost:3000/img/${product.image}`}
+                                src={getImgUrl(product.image)}
                                 alt={product.name}
                                 className="product-details-image"
                             />

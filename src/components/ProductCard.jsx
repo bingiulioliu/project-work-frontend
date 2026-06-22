@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import "./ProductCard.css";
+import { getImgUrl } from "../utils/getImgUrl";
 
 function ProductCard({ product }) {
     const imageSrc = product.image?.startsWith("http")
         ? product.image
-        : `/img/${product.image}`;
+        : getImgUrl(product.image);
 
     return (
         <article className="quest-card h-100">
