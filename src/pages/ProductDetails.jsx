@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./ProductDetails.css";
 import { getImgUrl } from "../utils/getImgUrl";
 
 function ProductDetails() {
     const { slug } = useParams();
+    const navigate = useNavigate();
 
     const [product, setProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +33,10 @@ function ProductDetails() {
                 setIsLoading(false);
             });
     }, [slug]);
+
+    function handleGoBack() {
+        navigate(-1);
+    }
 
     function handleAddToCart() {
         setCartMessage("Oggetto aggiunto all'inventario!");
@@ -69,6 +74,9 @@ function ProductDetails() {
     return (
         <main className="product-details-page">
             <section className="container">
+                <button type="button"
+                    className="product-back-button"
+                    onClick={handleGoBack}>Torna indietro</button>
                 <div className="product-details-card row g-4 align-items-center">
                     <div className="col-12 col-lg-6">
                         <div className="product-image-wrapper">

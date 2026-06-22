@@ -171,6 +171,29 @@
     margin-top: 1.2rem;
 }
 
+.product-back-button {
+    display: inline-block;
+    border: 1px solid rgba(244, 239, 225, 0.22);
+    border-radius: 999px;
+    background: rgba(244, 239, 225, 0.06);
+    color: #d8cfb8;
+    padding: 0.55rem 1rem;
+    margin-bottom: 2rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.product-back-button:hover {
+    background: rgba(216, 170, 24, 0.14);
+    color: #f4efe1;
+    border-color: rgba(216, 170, 24, 0.45);
+}
+
 @media (max-width: 991px) {
     .product-details-page {
         padding: 3rem 0;
