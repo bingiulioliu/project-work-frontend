@@ -57,11 +57,11 @@ export default function HomePage() {
             </p>
 
             <div className="quest-actions d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-              <Link to="/product" className="btn quest-btn quest-btn-secondary">
+              <Link to="/products" className="btn quest-btn quest-btn-secondary">
                 Inizia l'avventura
               </Link>
 
-              <Link to="/product" className="btn quest-btn quest-btn-primary">
+              <Link to="/products" className="btn quest-btn quest-btn-primary">
                 <span className="me-2">🪄</span>
                 Vedi offerte
               </Link>
