@@ -1,17 +1,19 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./ProductCard.css";
 import { getImgUrl } from "../utils/getImgUrl";
+import useWishlist from "../hooks/useWishlist";
 
 function ProductCard({ product }) {
-    const [isFavorite, setIsFavorite] = useState(false);
+    const { toggleWishlist, isInWishlist } = useWishlist();
+
+    const isFavorite = isInWishlist(product.slug);
 
     const imageSrc = product.image?.startsWith("http")
         ? product.image
         : getImgUrl(product.image);
 
     function handleFavoriteClick() {
-        setIsFavorite((currentValue) => !currentValue);
+        toggleWishlist(product);
     }
 
     return (

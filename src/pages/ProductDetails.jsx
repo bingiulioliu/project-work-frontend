@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "./ProductDetails.css";
 import { getImgUrl } from "../utils/getImgUrl";
+import useWishlist from "../hooks/useWishlist";
 
 function ProductDetails() {
     const { slug } = useParams();
     const navigate = useNavigate();
 
+    const { toggleWishlist, isInWishlist } = useWishlist();
+
     const [product, setProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const [cartMessage, setCartMessage] = useState("");
-    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
@@ -45,7 +47,7 @@ function ProductDetails() {
     }
 
     function handleFavoriteClick() {
-        setIsFavorite((currentValue) => !currentValue);
+        toggleWishlist(product);
     }
 
     if (isLoading) {
@@ -88,6 +90,8 @@ function ProductDetails() {
             </main>
         );
     }
+
+    const isFavorite = isInWishlist(product.slug);
 
     const formattedPrice = Number(product.price).toLocaleString("it-IT", {
         style: "currency",

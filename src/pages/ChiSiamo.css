@@ -1,0 +1,326 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:wght@600;700;800&display=swap");
+
+.about-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, rgba(231, 189, 45, 0.10), transparent 34%),
+        linear-gradient(180deg, #100e08 0%, #17140d 100%);
+    color: #f4efe1;
+    font-family: "Cinzel", serif;
+    padding: 5rem 0 6rem;
+}
+
+.about-hero {
+    max-width: 920px;
+    margin: 0 auto 4rem;
+}
+
+.about-kicker {
+    color: #f3c72e;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 0.75rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 12px rgba(243, 199, 46, 0.35);
+}
+
+.about-hero h1,
+.about-section-heading h2,
+.about-cta h2 {
+    font-family: "Cormorant Garamond", serif;
+    color: #fff7e8;
+    font-weight: 800;
+    text-shadow: 0 5px 0 rgba(0, 0, 0, 0.55);
+}
+
+.about-hero h1 {
+    font-size: clamp(4rem, 8vw, 6.5rem);
+    line-height: 0.9;
+    margin-bottom: 1.7rem;
+}
+
+.about-intro {
+    max-width: 760px;
+    color: #d8ccb2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.12rem;
+    line-height: 1.75;
+    font-weight: 600;
+}
+
+.about-card {
+    background: #15110d;
+    border: 1px solid rgba(231, 189, 45, 0.68);
+    border-radius: 6px;
+    padding: 1.2rem;
+    box-shadow:
+        0 18px 36px rgba(0, 0, 0, 0.55),
+        0 0 22px rgba(231, 189, 45, 0.08);
+    margin-bottom: 5rem;
+}
+
+.about-card-inner {
+    position: relative;
+    border: 1px solid rgba(196, 129, 45, 0.42);
+    background:
+        radial-gradient(circle at top, rgba(125, 31, 42, 0.82), transparent 58%),
+        linear-gradient(180deg, #271719 0%, #450711 100%);
+    padding: clamp(1.4rem, 4vw, 3rem);
+}
+
+.about-card-inner::before {
+    content: "";
+    position: absolute;
+    inset: 1rem;
+    border: 1px solid rgba(231, 189, 45, 0.12);
+    pointer-events: none;
+}
+
+.about-scroll,
+.about-values {
+    position: relative;
+    z-index: 2;
+}
+
+.about-scroll-label {
+    display: inline-block;
+    color: #f3c72e;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.about-scroll h2 {
+    font-family: "Cormorant Garamond", serif;
+    color: #fff7e8;
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    line-height: 0.95;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.about-scroll p {
+    color: #fff1df;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+}
+
+.about-values {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.about-value {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: rgba(13, 11, 5, 0.38);
+    border: 1px solid rgba(231, 189, 45, 0.24);
+    padding: 1.2rem;
+}
+
+.about-value span {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ef9300, #d97800);
+    color: #140b04;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.45);
+}
+
+.about-value h3 {
+    color: #fff7e8;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+}
+
+.about-value p {
+    color: #d8ccb2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    margin-bottom: 0;
+    line-height: 1.55;
+}
+
+.about-team {
+    margin-bottom: 5rem;
+}
+
+.about-section-heading {
+    max-width: 760px;
+    margin: 0 auto 3rem;
+}
+
+.about-section-heading h2 {
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 0.95;
+}
+
+.about-member-card {
+    height: 100%;
+    background: #15110d;
+    border: 1px solid rgba(231, 189, 45, 0.65);
+    color: #fff7e8;
+    padding: 1rem;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-member-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 18px 32px rgba(0, 0, 0, 0.48),
+        0 0 18px rgba(231, 189, 45, 0.12);
+}
+
+.about-member-card::before {
+    content: "";
+    display: block;
+    height: 4px;
+    background: linear-gradient(90deg, #ef9300, #f3c72e, #ef9300);
+    margin-bottom: 1.2rem;
+}
+
+.about-member-icon {
+    display: inline-flex;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at top, rgba(125, 31, 42, 0.82), transparent 58%),
+        linear-gradient(180deg, #271719 0%, #450711 100%);
+    border: 1px solid rgba(231, 189, 45, 0.42);
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.about-member-card h3 {
+    font-family: "Cormorant Garamond", serif;
+    color: #fff7e8;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+}
+
+.about-member-card p {
+    color: #d8ccb2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.about-cta {
+    max-width: 820px;
+    margin: 0 auto;
+    background: #15110d;
+    border: 1px solid rgba(231, 189, 45, 0.68);
+    padding: 3rem 2rem;
+    box-shadow:
+        0 18px 36px rgba(0, 0, 0, 0.55),
+        0 0 22px rgba(231, 189, 45, 0.08);
+}
+
+.about-cta h2 {
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 0.95;
+    margin-bottom: 1.4rem;
+}
+
+.about-cta p {
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    color: #d8ccb2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.7;
+}
+
+.about-cta-button {
+    display: inline-block;
+    border: 0;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #ef9300, #d97800);
+    color: #140b04;
+    padding: 0.95rem 2rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.9rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.55);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-cta-button:hover {
+    background: linear-gradient(180deg, #ffae24, #ec8500);
+    color: #140b04;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.62);
+}
+
+@media (max-width: 991px) {
+    .about-page {
+        padding: 4rem 0 5rem;
+    }
+
+    .about-card-inner {
+        padding: 2rem 1.4rem;
+    }
+
+    .about-scroll,
+    .about-values {
+        text-align: center;
+    }
+
+    .about-value {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-page {
+        padding: 3rem 0 4rem;
+    }
+
+    .about-hero h1 {
+        font-size: 3.6rem;
+    }
+
+    .about-card {
+        padding: 0.8rem;
+    }
+
+    .about-card-inner {
+        padding: 1.5rem 1rem;
+    }
+
+    .about-card-inner::before {
+        inset: 0.65rem;
+    }
+
+    .about-section-heading h2,
+    .about-cta h2 {
+        font-size: 3rem;
+    }
+
+    .about-cta {
+        padding: 2.2rem 1.2rem;
+    }
+}
