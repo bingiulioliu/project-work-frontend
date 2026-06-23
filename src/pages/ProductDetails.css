@@ -1,73 +1,195 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:wght@600;700;800&display=swap");
 
 .product-details-page {
     min-height: 100vh;
     background:
-        radial-gradient(circle at center, rgba(214, 173, 51, 0.07), transparent 36%),
-        linear-gradient(180deg, #151309 0%, #090803 100%);
+        radial-gradient(circle at top, rgba(231, 189, 45, 0.10), transparent 34%),
+        linear-gradient(180deg, #100e08 0%, #17140d 100%);
     color: #f4efe1;
     font-family: "Cinzel", serif;
-    padding: 5rem 0;
+    padding: 4.5rem 0 6rem;
+}
+
+.product-back-button {
+    display: inline-block;
+    border: 1px solid rgba(231, 189, 45, 0.42);
+    border-radius: 999px;
+    background: rgba(244, 239, 225, 0.06);
+    color: #d8cfb8;
+    padding: 0.65rem 1.1rem;
+    margin-bottom: 2rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.product-back-button:hover {
+    background: rgba(231, 189, 45, 0.14);
+    color: #f3c72e;
+    border-color: #f3c72e;
 }
 
 .product-details-card {
-    background: rgba(28, 26, 17, 0.95);
-    border: 1px solid rgba(225, 189, 75, 0.18);
-    border-radius: 18px;
-    padding: 2.5rem;
+    position: relative;
+    background: #15110d;
+    border: 1px solid rgba(231, 189, 45, 0.68);
+    border-radius: 6px;
+    padding: 1.2rem;
     box-shadow:
-        0 18px 0 rgba(0, 0, 0, 0.45),
-        inset 0 0 0 1px rgba(255, 232, 113, 0.04);
+        0 18px 36px rgba(0, 0, 0, 0.55),
+        0 0 22px rgba(231, 189, 45, 0.08);
+}
+
+.product-details-inner {
+    position: relative;
+    min-height: 100%;
+    border: 1px solid rgba(196, 129, 45, 0.42);
+    background:
+        radial-gradient(circle at top, rgba(125, 31, 42, 0.82), transparent 58%),
+        linear-gradient(180deg, #271719 0%, #450711 100%);
+    padding: clamp(1.4rem, 4vw, 3rem);
+}
+
+.product-details-inner::before {
+    content: "";
+    position: absolute;
+    inset: 1rem;
+    border: 1px solid rgba(231, 189, 45, 0.12);
+    pointer-events: none;
+}
+
+.product-favorite-button {
+    position: absolute;
+    top: 1.8rem;
+    right: 1.8rem;
+    z-index: 20;
+
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #f3c72e;
+
+    background: rgba(13, 11, 5, 0.9);
+    color: #f3c72e;
+
+    font-size: 1.5rem;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.product-favorite-button:hover {
+    transform: scale(1.08);
+    background: rgba(231, 189, 45, 0.18);
+}
+
+.product-favorite-button.is-favorite {
+    background: #e7bd2d;
+    color: #3a0810;
+    box-shadow: 0 0 20px rgba(231, 189, 45, 0.62);
+}
+
+.product-image-frame {
+    position: relative;
+    background: #15110d;
+    border: 1px solid rgba(231, 189, 45, 0.65);
+    padding: 1rem;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.35);
 }
 
 .product-image-wrapper {
-    background: #f0ead8;
-    border: 4px solid rgba(167, 91, 23, 0.75);
-    border-radius: 14px;
-    text-align: center;
-    box-shadow:
-        0 12px 0 rgba(0, 0, 0, 0.35),
-        inset 0 0 0 3px rgba(255, 255, 255, 0.45);
+    min-height: 460px;
+    background:
+        radial-gradient(circle at center, rgba(231, 189, 45, 0.18), transparent 42%),
+        linear-gradient(180deg, #30191c 0%, #24070d 100%);
+    border: 1px solid rgba(196, 129, 45, 0.42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
 }
 
 .product-details-image {
     width: 100%;
-    max-height: 430px;
-    object-fit: cover;
-    border-radius: 8px;
+    max-height: 410px;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.48));
 }
 
 .product-info {
-    padding: 1rem;
+    position: relative;
+    z-index: 2;
+    padding: 1rem 0;
+}
+
+.product-kicker {
+    color: #f3c72e;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 0.76rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 12px rgba(243, 199, 46, 0.35);
 }
 
 .product-rarity {
     display: inline-block;
-    color: #d8aa18;
-    text-transform: uppercase;
-    letter-spacing: 0.35em;
-    font-size: 0.78rem;
+    margin-bottom: 1.4rem;
+    padding: 0.32rem 0.95rem;
+    border-radius: 999px;
+    font-family: "Cinzel", serif;
+    font-size: 0.72rem;
     font-weight: 900;
-    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+}
+
+.product-rarity-common {
+    background: #d6c8aa;
+    color: #2b2114;
+}
+
+.product-rarity-rare {
+    background: #6ea8fe;
+    color: #071323;
+}
+
+.product-rarity-legendary {
+    background: #e6a000;
+    color: #211300;
 }
 
 .product-title {
     font-family: "Cormorant Garamond", serif;
-    color: #f4efe1;
-    font-size: clamp(3rem, 6vw, 5rem);
-    line-height: 0.95;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.45);
+    color: #fff7e8;
+    font-size: clamp(3.2rem, 6vw, 5.8rem);
+    line-height: 0.92;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    text-shadow:
+        0 5px 0 rgba(0, 0, 0, 0.6),
+        0 0 18px rgba(231, 189, 45, 0.12);
 }
 
 .product-description {
     max-width: 680px;
-    color: #cfc4ad;
+    color: #fff1df;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.08rem;
+    line-height: 1.75;
     font-weight: 500;
+    font-style: italic;
     margin-bottom: 2rem;
 }
 
@@ -77,25 +199,22 @@
 
 .product-price-label {
     display: block;
-    color: #a99b7b;
+    color: #cfc4ad;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 900;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.65rem;
 }
 
 .product-price {
     display: inline-block;
-    background: rgba(244, 239, 225, 0.08);
-    color: #f4efe1;
-    border: 1px solid rgba(225, 189, 75, 0.35);
-    padding: 0.55rem 1rem;
-    border-radius: 999px;
-    font-size: 1.45rem;
-    font-weight: 900;
+    color: #fff7e8;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.2rem;
+    font-weight: 800;
     margin-bottom: 0;
-    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.35);
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.55);
 }
 
 .product-section {
@@ -104,10 +223,10 @@
 
 .product-section h5 {
     font-family: "Cormorant Garamond", serif;
-    color: #f4efe1;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
+    color: #fff7e8;
+    font-size: 1.45rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
 }
 
 .product-badges {
@@ -122,9 +241,10 @@
     display: inline-flex;
     align-items: center;
     width: fit-content;
-    padding: 0.35rem 0.75rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 999px;
-    font-size: 0.72rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.7rem;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -134,89 +254,168 @@
 .product-category-badge {
     background: rgba(244, 239, 225, 0.08);
     color: #d8cfb8;
-    border: 1px solid rgba(244, 239, 225, 0.18);
+    border: 1px solid rgba(244, 239, 225, 0.2);
 }
 
 .product-tag-badge {
-    background: rgba(216, 170, 24, 0.12);
-    color: #d8aa18;
-    border: 1px solid rgba(216, 170, 24, 0.32);
+    background: rgba(216, 170, 24, 0.14);
+    color: #f3c72e;
+    border: 1px solid rgba(216, 170, 24, 0.38);
+}
+
+.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
 .product-cart-button {
-    display: block;
-    width: fit-content;
-    border: 2px solid rgba(231, 189, 45, 0.75);
-    border-radius: 5px;
-    background: linear-gradient(180deg, #c99a18 0%, #9f7207 100%);
-    color: #171204;
-    padding: 0.8rem 2.2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 1rem;
+    border: 0;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #ef9300, #d97800);
+    color: #140b04;
+    padding: 0.95rem 2rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.95rem;
     font-weight: 900;
-    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.55);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .product-cart-button:hover {
-    background: #e7bd2d;
-    color: #211906;
-    border-color: #e7bd2d;
+    background: linear-gradient(180deg, #ffae24, #ec8500);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.62);
+}
+
+.product-secondary-link {
+    color: #f3c72e;
+    font-family: "Cinzel", serif;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    text-decoration: none;
+}
+
+.product-secondary-link:hover {
+    color: #ffe27a;
+    text-shadow: 0 0 10px rgba(243, 199, 46, 0.35);
 }
 
 .product-cart-message {
-    color: #d8aa18;
-    font-weight: 800;
+    color: #f3c72e;
+    font-weight: 900;
     margin-top: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
 }
 
-.product-back-button {
+.product-status-card {
+    background: #15110d;
+    border: 1px solid rgba(231, 189, 45, 0.65);
+    color: #fff7e8;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.35);
+}
+
+.product-status-card h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 3rem;
+    color: #fff7e8;
+}
+
+.product-status-link {
     display: inline-block;
-    border: 1px solid rgba(244, 239, 225, 0.22);
-    border-radius: 999px;
-    background: rgba(244, 239, 225, 0.06);
-    color: #d8cfb8;
-    padding: 0.55rem 1rem;
-    margin-bottom: 2rem;
-    font-family: "Cinzel", serif;
-    font-size: 0.85rem;
-    font-weight: 800;
+    margin-top: 1rem;
+    color: #f3c72e;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-decoration: none;
 }
 
-.product-back-button:hover {
-    background: rgba(216, 170, 24, 0.14);
-    color: #f4efe1;
-    border-color: rgba(216, 170, 24, 0.45);
+.product-status-link:hover {
+    color: #ffe27a;
+}
+
+.product-favorite-action {
+    border: 2px solid rgba(231, 189, 45, 0.75);
+    border-radius: 4px;
+    background: rgba(13, 11, 5, 0.72);
+    color: #f3c72e;
+    padding: 0.95rem 2rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.55);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.product-favorite-action:hover {
+    background: rgba(231, 189, 45, 0.16);
+    color: #ffe27a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.62);
+}
+
+.product-favorite-action.is-favorite {
+    background: #e7bd2d;
+    color: #3a0810;
 }
 
 @media (max-width: 991px) {
     .product-details-page {
-        padding: 3rem 0;
+        padding: 3rem 0 4rem;
     }
 
-    .product-details-card {
-        padding: 1.8rem;
+    .product-details-inner {
+        padding: 2rem 1.4rem;
+    }
+
+    .product-image-wrapper {
+        min-height: 360px;
     }
 
     .product-info {
         text-align: center;
     }
 
-    .product-badges {
+    .product-badges,
+    .product-actions {
         justify-content: center;
     }
 
-    .product-cart-button {
-        margin: 0 auto;
+    .product-favorite-action {
+        top: 1.4rem;
+        right: 1.4rem;
     }
 }
 
 @media (max-width: 767px) {
     .product-details-card {
+        padding: 0.8rem;
+    }
+
+    .product-details-inner {
+        padding: 1.5rem 1rem;
+    }
+
+    .product-details-inner::before {
+        inset: 0.65rem;
+    }
+
+    .product-image-wrapper {
+        min-height: 280px;
         padding: 1.2rem;
     }
 
@@ -229,10 +428,19 @@
     }
 
     .product-price {
-        font-size: 1.25rem;
+        font-size: 1.8rem;
     }
 
     .product-cart-button {
+        width: 100%;
+    }
+
+    .product-secondary-link {
+        width: 100%;
+        text-align: center;
+    }
+
+    .product-favorite-action {
         width: 100%;
     }
 }
