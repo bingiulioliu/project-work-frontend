@@ -1,10 +1,17 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./PaginaCatalogo.css";
 import { fetchProducts } from '../utils/fetchProducts';
 import ProductCard from '../components/ProductCard';
 
+const sortMap = {
+    'prezzo-crescente': { sort: 'price', order: 'asc' },
+    'prezzo-decrescente': { sort: 'price', order: 'desc' },
+    'nome': { sort: 'name', order: 'asc' },
+    'data-recente': { sort: 'updated_at', order: 'desc' }
+};
+
 function Catalogo() {
-    //I filtri sono pronti per quando serviranno
+
     const [searchTerm, setSearchTerm] = useState('');
     const [category, setCategory] = useState('all');
     const [minPrice, setMinPrice] = useState('');
@@ -12,62 +19,36 @@ function Catalogo() {
     const [sortBy, setSortBy] = useState('data-recente');
 
     const [products, setProducts] = useState([]);
-    const [searchResults, setSearchResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const sortProducts = (items) => {
-        const sorted = [...items];
+    // evito il debounce al primo render
+    const firtRender = useRef(true);
 
-        switch (sortBy) {
-            case 'prezzo-crescente':
-                return sorted.sort((a, b) => Number(a.price) - Number(b.price));
-            case 'prezzo-decrescente':
-                return sorted.sort((a, b) => Number(b.price) - Number(a.price));
-            case 'nome':
-                return sorted.sort((a, b) =>
-                    String(a.name).localeCompare(String(b.name), undefined, { sensitivity: 'base' })
-                );
-            case 'data-recente': {
-                const getTimestamp = (item) => {
-                    const date = item.date || item.createdAt || item.updatedAt;
-                    return date ? new Date(date).getTime() : 0;
-                };
-                return sorted.sort((a, b) => getTimestamp(b) - getTimestamp(a));
-            }
-            default:
-                return sorted;
-        }
-    };
-
-    const displayedProducts = useMemo(() => sortProducts(searchResults), [searchResults, sortBy]);
-
-    // Carica i prodotti all'avvio
     useEffect(() => {
-        fetchProducts().then((data) => {
-            setProducts(data);
-            setSearchResults(data);
-        });
-    }, []);
+        const debounce = firtRender.current ? 0 : 500;
+        firtRender.current = false;
 
-    // Debounce della ricerca: filtra dopo mezzo secondo di inattività
-    useEffect(() => {
         const timer = setTimeout(() => {
-            const term = searchTerm.trim().toLowerCase();
+            const { sort, order } = sortMap[sortBy] || {};
 
-            if (term === '') {
-                setSearchResults(products);
-            } else {
-                setSearchResults(
-                    products.filter(product =>
-                        product.name.toLowerCase().includes(term)
-                    )
-                );
-            }
-        }, 500);
+            const filters = {};
+            if (searchTerm.trim()) filters.search = searchTerm.trim();
+            if (category !== 'all') filters.category = category;
+            if (minPrice) filters.min_price = minPrice;
+            if (maxPrice) filters.max_price = maxPrice;
+            if (sort) filters.sort = sort;
+            if (order) filters.order = order;
+
+            setIsLoading(true);
+            fetchProducts(filters)
+                .then(setProducts)
+                .finally(() => setIsLoading(false));
+        }, debounce);
 
         return () => clearTimeout(timer);
-    }, [searchTerm, products]);
+    }, [searchTerm, category, minPrice, maxPrice, sortBy])
 
-    return (
+    return <>
         <div className="container  py-5  text-ivory">
             <h1 className="page-title text-center ">Archivio degli Equipaggiamenti</h1>
 
@@ -144,8 +125,12 @@ function Catalogo() {
                 </div>
 
                 <div className="row g-2">
-                    {displayedProducts.length > 0 ? (
-                        displayedProducts.map((product) => (
+                    {isLoading ? (
+                        <div className="col-12 text-center py-5">
+                            <p className="text-secondary">Sto consultando gli archivi della Gilda...</p>
+                        </div>
+                    ) : products.length > 0 ? (
+                        products.map((product) => (
                             <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={product.slug}>
                                 <ProductCard product={product} />
                             </div>
@@ -164,7 +149,7 @@ function Catalogo() {
 
             </div>
         </div>
-    );
+    </>;
 }
 
 export default Catalogo;
