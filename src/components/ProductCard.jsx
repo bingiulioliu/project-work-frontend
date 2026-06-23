@@ -29,12 +29,6 @@ function ProductCard({ product }) {
                         {product.name}
                     </h3>
 
-                    {product.description && (
-                        <p className="quest-card-description">
-                            {product.description}
-                        </p>
-                    )}
-
                     <p className="quest-card-price">
                         {Number(product.price).toFixed(2)} €
                     </p>
