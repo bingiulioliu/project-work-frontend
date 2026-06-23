@@ -77,9 +77,11 @@ function Catalogo() {
                                 onChange={(e) => setCategory(e.target.value)}
                             >
                                 <option value="all">Tutti i Cimeli</option>
-                                <option value="casa">Casa</option>
-                                <option value="sport">Sport</option>
-                                <option value="altro">Altro</option>
+                                <option value="armi">Armi</option>
+                                <option value="accessori">Accessori</option>
+                                <option value="equipaggiamento">Equipaggiamento</option>
+                                <option value="consumabili">Consumabili</option>
+                                <option value="reliquie">Reliquie</option>
                             </select>
                         </div>
 
@@ -117,7 +119,7 @@ function Catalogo() {
                                 <option value="prezzo-crescente">Prezzo: Minore → Maggiore</option>
                                 <option value="prezzo-decrescente">Prezzo: Maggiore → Minore</option>
                                 <option value="nome">Nome: A → Z</option>
-                                <option value="data-recente">Data: Più recente</option>
+                                <option value="data-recente">Più recenti</option>
                             </select>
                         </div>
 
