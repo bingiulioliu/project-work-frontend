@@ -16,7 +16,7 @@ function Header() {
                             className="header-logo"
                         />
 
-                        
+
                     </NavLink>
 
                     <button
@@ -41,7 +41,7 @@ function Header() {
                                     to="/"
                                     end
                                 >
-                                    Piazza
+                                    Home
                                 </NavLink>
                             </li>
 
@@ -68,6 +68,12 @@ function Header() {
                             </li>
 
                             <li className="nav-item">
+                                <NavLink className="nav-link" to="/preferiti">
+                                    Preferiti ♥
+                                </NavLink>
+                            </li>
+
+                            <li className="nav-item">
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive ? "nav-link active" : "nav-link"
@@ -78,7 +84,7 @@ function Header() {
                                 </NavLink>
                             </li>
 
-                            
+
                         </ul>
                     </div>
                 </div>
