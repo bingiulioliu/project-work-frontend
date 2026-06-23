@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:wght@600;700;800&display=swap");
 
 .quest-home {
     min-height: 100vh;
@@ -7,164 +7,197 @@
     font-family: "Cinzel", serif;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .quest-hero {
-    min-height: 70vh;
+    min-height: 78vh;
     background:
-        radial-gradient(circle at center, rgba(214, 173, 51, 0.08), transparent 35%),
-        linear-gradient(180deg, #151309 0%, #090803 100%);
-    border-bottom: 1px solid rgba(225, 189, 75, 0.14);
+        radial-gradient(circle at top, rgba(231, 189, 45, 0.10), transparent 36%),
+        linear-gradient(180deg, #100e08 0%, #17140d 100%);
+    border-bottom: 1px solid rgba(231, 189, 45, 0.25);
     position: relative;
     display: flex;
     align-items: center;
-}
-
-
-.quest-navbar {
-    height: 72px;
-    border-bottom: 1px solid rgba(237, 203, 92, 0.2);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.45);
-}
-
-.quest-back-icon {
-    color: #d8aa18;
-    font-size: 1rem;
-}
-
-.quest-logo {
-    font-family: "Cormorant Garamond", serif;
-    color: #e7bd2d;
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    text-shadow: 0 2px 0 #000;
-}
-
-.quest-logo:hover {
-    color: #ffd85d;
-}
-
-.quest-nav-list {
-    list-style: none;
-    padding-left: 0;
-}
-
-.quest-nav-link {
-    color: #bcb4a4;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    font-size: 0.78rem;
-    font-weight: 800;
-}
-
-.quest-nav-link:hover,
-.quest-nav-link.active {
-    color: #f3c72e;
-}
-
-.quest-shield {
-    color: #f3c72e;
-    font-size: 1.4rem;
-    filter: drop-shadow(0 0 8px rgba(243, 199, 46, 0.3));
-}
-
-.quest-avatar {
-    width: 46px;
-    height: 46px;
-    border: 2px solid #d5a719;
-    border-radius: 14px;
-    padding: 3px;
-    background: #1f1a0e;
-    box-shadow: 0 0 16px rgba(243, 199, 46, 0.25);
-    overflow: hidden;
-}
-
-.quest-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+    padding: 5rem 1rem;
 }
 
 .quest-hero-content {
-    max-width: 980px;
+    position: relative;
+    z-index: 2;
+    max-width: 1120px;
     margin: 0 auto;
-    padding-top: 6rem;
-    padding-bottom: 7rem;
+    padding: 4.5rem 3rem;
+    text-align: center;
+
+    border: 1px solid rgba(231, 189, 45, 0.72);
+    border-radius: 6px;
+
+    background:
+        radial-gradient(circle at top, rgba(125, 31, 42, 0.85), transparent 58%),
+        linear-gradient(180deg, #271719 0%, #450711 100%);
+
+    box-shadow:
+        0 18px 36px rgba(0, 0, 0, 0.55),
+        inset 0 0 0 1px rgba(255, 232, 113, 0.08);
+}
+
+.quest-hero-content::before {
+    content: "";
+    position: absolute;
+    inset: 1.1rem;
+    border: 1px solid rgba(196, 129, 45, 0.42);
+    pointer-events: none;
 }
 
 .quest-kicker {
+    position: relative;
+    z-index: 2;
     color: #f3c72e;
     text-transform: uppercase;
-    letter-spacing: 0.35em;
-    font-size: 0.8rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
+    letter-spacing: 0.42em;
+    font-size: 0.78rem;
+    font-weight: 900;
+    margin-bottom: 1.4rem;
+    text-shadow: 0 0 12px rgba(243, 199, 46, 0.35);
 }
 
 .quest-title {
+    position: relative;
+    z-index: 2;
     font-family: "Cormorant Garamond", serif;
-    font-size: clamp(3rem, 7vw, 5.3rem);
-    line-height: 0.95;
-    font-weight: 700;
-    color: #f4efe1;
-    margin-bottom: 1.8rem;
-    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.45);
+    font-size: clamp(3.8rem, 7vw, 6.4rem);
+    line-height: 0.9;
+    font-weight: 800;
+    color: #fff7e8;
+    margin-bottom: 2.2rem;
+    text-shadow:
+        0 5px 0 rgba(0, 0, 0, 0.6),
+        0 0 18px rgba(231, 189, 45, 0.12);
 }
 
 .quest-subtitle {
-    max-width: 720px;
-    color: #cfc4ad;
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+    color: #fff1df;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: clamp(1rem, 1.7vw, 1.35rem);
-    line-height: 1.6;
-    font-weight: 500;
+    font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+    line-height: 1.7;
+    font-weight: 600;
     margin-bottom: 3rem;
 }
 
 .quest-actions {
+    position: relative;
+    z-index: 2;
     margin-top: 1rem;
 }
 
 .quest-btn {
     min-width: 340px;
-    border-radius: 5px;
-    padding: 0.8rem 2.2rem;
+    border-radius: 4px;
+    padding: 0.95rem 2.3rem;
+
     text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 1rem;
+    letter-spacing: 0.13em;
+    font-family: "Cinzel", serif;
+    font-size: 0.95rem;
     font-weight: 900;
+
     border-width: 2px;
-    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.65);
+    box-shadow:
+        0 5px 0 rgba(0, 0, 0, 0.55),
+        inset 0 0 0 1px rgba(255, 244, 177, 0.12);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.quest-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 0 rgba(0, 0, 0, 0.62),
+        0 0 18px rgba(231, 189, 45, 0.18);
 }
 
 .quest-btn-primary {
-    background: linear-gradient(180deg, #e7bd2d 0%, #c89206 100%);
-    color: #30270c;
-    border-color: #e7bd2d;
+    background: linear-gradient(180deg, #ef9300, #d97800);
+    color: #140b04;
+    border-color: #ef9300;
 }
 
 .quest-btn-primary:hover {
-    background: #ffd449;
-    color: #211906;
-    border-color: #ffd449;
+    background: linear-gradient(180deg, #ffae24, #ec8500);
+    color: #100802;
+    border-color: #ffae24;
 }
 
 .quest-btn-secondary {
-    background: #39352d;
-    color: #f3eee1;
-    border-color: #5a5140;
+    background: rgba(13, 11, 5, 0.72);
+    color: #f3c72e;
+    border-color: rgba(231, 189, 45, 0.7);
 }
 
 .quest-btn-secondary:hover {
-    background: #50483a;
-    color: #ffffff;
-    border-color: #8d7954;
+    background: rgba(231, 189, 45, 0.15);
+    color: #ffe27a;
+    border-color: #f3c72e;
 }
 
-/* MARKET SECTION */
+/* =========================
+   PRODUCTS SECTIONS
+========================= */
+
+.quest-products-section {
+    background:
+        linear-gradient(180deg, #1c1a11 0%, #211e13 100%);
+    padding: 8rem 0 5.5rem;
+    border-top: 1px solid rgba(225, 189, 75, 0.18);
+}
+
+.quest-products-section + .quest-products-section {
+    padding-top: 5rem;
+    border-top: 1px solid rgba(225, 189, 75, 0.10);
+}
+
+.quest-section-heading {
+    margin-bottom: 2.5rem;
+}
+
+.quest-section-heading h2 {
+    font-family: "Cormorant Garamond", serif;
+    color: #f4efe1;
+    font-size: clamp(2.8rem, 4vw, 4.2rem);
+    line-height: 1;
+    margin-bottom: 0;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.45);
+}
+
+.quest-see-all {
+    color: #f3c72e;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-decoration: none;
+    margin-right: 1rem;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.quest-see-all:hover {
+    color: #ffd95a;
+    text-shadow: 0 0 10px rgba(243, 199, 46, 0.35);
+}
+
+/* =========================
+   OLD JSON CARD
+========================= */
 
 .quest-market {
     min-height: 55vh;
@@ -268,124 +301,9 @@
     font-size: 0.8rem;
 }
 
-.quest-section-heading h2 {
-    font-family: "Cormorant Garamond", serif;
-    color: #f4efe1;
-    font-size: 2.6rem;
-    margin-bottom: 0;
-}
-
-.quest-see-all {
-    color: #f3c72e;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 0.75rem;
-    font-weight: 900;
-    text-decoration: none;
-}
-
-.quest-see-all:hover {
-    color: #ffd95a;
-}
-
-.quest-product-card {
-    min-height: 230px;
-    background: #f0ead8;
-    color: #2d2518;
-    border-radius: 6px;
-    border: 3px solid rgba(62, 50, 31, 0.4);
-    padding: 1.6rem;
-    box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35);
-}
-
-.quest-card-badge {
-    display: inline-block;
-    background: #d6a719;
-    color: #241b05;
-    padding: 0.3rem 0.6rem;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 1rem;
-}
-
-.quest-product-card h3 {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-.quest-product-card p {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: #5b5141;
-}
-
-.quest-card-link {
-    color: #8a5b00;
-    font-weight: 900;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.8rem;
-}
-
-
-
-/* RESPONSIVE */
-
-@media (max-width: 991px) {
-    .quest-hero-content {
-        padding-top: 160px;
-    }
-
-    .quest-market {
-        padding-top: 3rem;
-    }
-
-    .quest-section-heading {
-        flex-direction: column;
-        align-items: flex-start !important;
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 767px) {
-    .quest-navbar {
-        height: 68px;
-    }
-
-    .quest-logo {
-        font-size: 1.45rem;
-    }
-
-    .quest-hero {
-        min-height: 82vh;
-    }
-
-    .quest-hero-content {
-        padding-top: 120px;
-    }
-
-    .quest-title {
-        font-size: 3.2rem;
-    }
-
-    .quest-btn {
-        width: 100%;
-        min-width: auto;
-    }
-
-    .old-json-card {
-        max-width: 100%;
-    }
-}
-
-.quest-products-section {
-    background: #1c1a11;
-    padding: 5rem 0;
-}
+/* =========================
+   LEGACY PRODUCT CLASSES
+========================= */
 
 .quest-product-card {
     background: #f0ead8;
@@ -393,6 +311,8 @@
     border-radius: 8px;
     border: 3px solid rgba(62, 50, 31, 0.45);
     overflow: hidden;
+    min-height: 230px;
+    padding: 1.6rem;
     box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35);
 }
 
@@ -407,11 +327,17 @@
     padding: 1.3rem;
 }
 
-.quest-product-body h3 {
+.quest-product-body h3,
+.quest-product-card h3 {
     font-family: "Cormorant Garamond", serif;
     font-size: 1.7rem;
     font-weight: 700;
     margin-top: 0.8rem;
+}
+
+.quest-product-card p {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #5b5141;
 }
 
 .quest-price {
@@ -419,6 +345,7 @@
     color: #3b2616;
 }
 
+.quest-card-badge,
 .quest-rarity {
     display: inline-block;
     border-radius: 999px;
@@ -427,6 +354,12 @@
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.12em;
+}
+
+.quest-card-badge {
+    background: #d6a719;
+    color: #241b05;
+    margin-bottom: 1rem;
 }
 
 .quest-rarity-legendary {
@@ -451,4 +384,72 @@
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-size: 0.75rem;
+}
+
+.quest-card-link:hover {
+    color: #c89206;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 991px) {
+    .quest-hero {
+        min-height: 72vh;
+    }
+
+    .quest-hero-content {
+        padding: 6rem 1rem 6.5rem;
+    }
+
+    .quest-products-section {
+        padding: 6rem 0 4.5rem;
+    }
+
+    .quest-section-heading {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 1rem;
+    }
+
+    .quest-market {
+        padding-top: 3rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .quest-hero {
+        min-height: 78vh;
+    }
+
+    .quest-hero-content {
+        padding: 5.5rem 1rem 6rem;
+    }
+
+    .quest-kicker {
+        letter-spacing: 0.28em;
+        font-size: 0.68rem;
+    }
+
+    .quest-title {
+        font-size: clamp(3rem, 16vw, 4.4rem);
+    }
+
+    .quest-subtitle {
+        font-size: 1rem;
+    }
+
+    .quest-btn {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .quest-section-heading h2 {
+        font-size: 2.8rem;
+    }
+
+    .old-json-card {
+        max-width: 100%;
+    }
 }

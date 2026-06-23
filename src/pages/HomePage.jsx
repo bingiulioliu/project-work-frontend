@@ -43,31 +43,28 @@ export default function HomePage() {
 
 
           <div className="quest-hero-content text-center">
-            <p className="quest-kicker">Benvenuto a la piazza del mercato</p>
+            <p className="quest-kicker">Benvenuto alla piazza del mercato</p>
 
             <h1 className="quest-title">
-              L'Equipaggiamento per le
-              tue Battaglie Quotidiane
+              L&apos;Equipaggiamento per le tue Battaglie Quotidiane
             </h1>
 
             <p className="quest-subtitle mx-auto">
-              Forgia il tuo destino con artefatti leggensari curati dai
-              migliori fabbri della Gilda. Dalla domotica incantata al
-              vestiario dell'invisibilità.
+              Forgia il tuo destino con artefatti leggendari curati dai migliori fabbri
+              della Gilda. Dalla domotica incantata al vestiario dell&apos;invisibilità.
             </p>
 
             <div className="quest-actions d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-              <Link to="/products" className="btn quest-btn quest-btn-secondary">
-                Inizia l'avventura
-              </Link>
-
               <Link to="/products" className="btn quest-btn quest-btn-primary">
                 <span className="me-2">🪄</span>
                 Vedi offerte
               </Link>
 
-
+              <Link to="/products" className="btn quest-btn quest-btn-secondary">
+                Inizia l&apos;avventura
+              </Link>
             </div>
+
           </div>
         </div>
       </section>
