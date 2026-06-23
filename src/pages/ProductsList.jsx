@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import "./PaginaCatalogo.css";
+import "./ProductsList.css";
 import { fetchProducts } from '../utils/fetchProducts';
 import ProductCard from '../components/ProductCard';
 
@@ -10,7 +10,7 @@ const sortMap = {
     'data-recente': { sort: 'updated_at', order: 'desc' }
 };
 
-function Catalogo() {
+function ProductsList() {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [category, setCategory] = useState('all');
@@ -154,4 +154,4 @@ function Catalogo() {
     </>;
 }
 
-export default Catalogo;
+export default ProductsList;
