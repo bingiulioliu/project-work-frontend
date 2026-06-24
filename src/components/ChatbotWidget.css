@@ -16,10 +16,17 @@
   padding: 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   line-height: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
 }
 
 .chatbot-toggle:hover {
   filter: brightness(1.08);
+}
+
+.chatbot-toggle:active {
+  cursor: grabbing;
 }
 
 .chatbot-avatar {
@@ -28,6 +35,8 @@
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(245, 242, 235, 0.45);
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
 .chatbot-panel {

@@ -21,17 +21,45 @@ const INITIAL_MESSAGES = [
 ];
 
 function ChatbotWidget() {
+  const widgetRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const dragRef = useRef({
+    active: false,
+    pointerId: null,
+    lastX: 0,
+    lastY: 0,
+    moved: false,
+  });
   const [sessionId] = useState(getOrCreateSessionId);
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!isOpen) return;
     messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
   }, [isOpen, messages, isLoading]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleOutsidePointerDown(event) {
+      const widget = widgetRef.current;
+      if (!widget) return;
+
+      if (!widget.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", handleOutsidePointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsidePointerDown);
+    };
+  }, [isOpen]);
 
   const historyForApi = useMemo(
     () =>
@@ -74,15 +102,106 @@ function ChatbotWidget() {
     }
   }
 
+  function handleTogglePointerDown(event) {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+
+    event.preventDefault();
+    event.currentTarget.setPointerCapture(event.pointerId);
+
+    dragRef.current.active = true;
+    dragRef.current.pointerId = event.pointerId;
+    dragRef.current.lastX = event.clientX;
+    dragRef.current.lastY = event.clientY;
+    dragRef.current.moved = false;
+  }
+
+  function handleTogglePointerMove(event) {
+    const drag = dragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
+
+    const deltaX = event.clientX - drag.lastX;
+    const deltaY = event.clientY - drag.lastY;
+
+    drag.lastX = event.clientX;
+    drag.lastY = event.clientY;
+
+    if (Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1) {
+      drag.moved = true;
+    }
+
+    setDragOffset((prev) => {
+      const widget = widgetRef.current;
+      if (!widget) return prev;
+
+      const rect = widget.getBoundingClientRect();
+      const viewportPadding = 8;
+
+      let allowedDeltaX = deltaX;
+      let allowedDeltaY = deltaY;
+
+      if (rect.left + allowedDeltaX < viewportPadding) {
+        allowedDeltaX = viewportPadding - rect.left;
+      }
+
+      if (rect.right + allowedDeltaX > window.innerWidth - viewportPadding) {
+        allowedDeltaX = (window.innerWidth - viewportPadding) - rect.right;
+      }
+
+      if (rect.top + allowedDeltaY < viewportPadding) {
+        allowedDeltaY = viewportPadding - rect.top;
+      }
+
+      if (rect.bottom + allowedDeltaY > window.innerHeight - viewportPadding) {
+        allowedDeltaY = (window.innerHeight - viewportPadding) - rect.bottom;
+      }
+
+      return {
+        x: prev.x + allowedDeltaX,
+        y: prev.y + allowedDeltaY,
+      };
+    });
+  }
+
+  function stopDrag(event) {
+    const drag = dragRef.current;
+    if (!drag.active || drag.pointerId !== event.pointerId) return;
+
+    drag.active = false;
+    drag.pointerId = null;
+    drag.lastX = 0;
+    drag.lastY = 0;
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  }
+
+  function handleToggleClick() {
+    if (dragRef.current.moved) {
+      dragRef.current.moved = false;
+      return;
+    }
+
+    setIsOpen((prev) => !prev);
+  }
+
   return (
-    <div className="chatbot-widget">
+    <div
+      className="chatbot-widget"
+      ref={widgetRef}
+      style={{ transform: `translate(${dragOffset.x}px, ${dragOffset.y}px)` }}
+    >
       <button
         type="button"
         className="chatbot-toggle"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onPointerDown={handleTogglePointerDown}
+        onPointerMove={handleTogglePointerMove}
+        onPointerUp={stopDrag}
+        onPointerCancel={stopDrag}
+        onClick={handleToggleClick}
         aria-label={isOpen ? "Chiudi chat" : "Apri chat"}
       >
-        <img src="/img/jsonny.png" alt="Jsonny" className="chatbot-avatar" />
+        <img src="/img/jsonny.png" alt="Jsonny" className="chatbot-avatar" draggable={false} />
       </button>
 
       {isOpen ? (
