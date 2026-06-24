@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
+import { CartProvider } from "./contexts/CartContext";
 import MainLayout from "./layouts/MainLayout";
 
 import HomePage from "./pages/HomePage";
@@ -10,23 +11,27 @@ import Wishlist from "./pages/Wishlist";
 import ChiSiamo from "./pages/ChiSiamo";
 import ProductsList from "./pages/ProductsList";
 import ScrollToTop from "./hooks/ScrollToTop";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <ScrollToTop/>
+        <ScrollToTop />
         <WishlistProvider>
-          <Routes>
-            <Route element={<MainLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="products" element={<ProductsList />} />
-              <Route path="products/:slug" element={<ProductDetails />} />
-              <Route path="chi-siamo" element={<ChiSiamo />} />
-              <Route path="preferiti" element={<Wishlist />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
+          <CartProvider>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="products" element={<ProductsList />} />
+                <Route path="products/:slug" element={<ProductDetails />} />
+                <Route path="chi-siamo" element={<ChiSiamo />} />
+                <Route path="preferiti" element={<Wishlist />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </CartProvider>
         </WishlistProvider>
       </ThemeProvider>
     </BrowserRouter>

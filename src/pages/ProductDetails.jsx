@@ -3,12 +3,14 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import "./ProductDetails.css";
 import { getImgUrl } from "../utils/getImgUrl";
 import useWishlist from "../hooks/useWishlist";
+import useCart from "../hooks/useCart";
 
 function ProductDetails() {
     const { slug } = useParams();
     const navigate = useNavigate();
 
     const { toggleWishlist, isInWishlist } = useWishlist();
+    const { addToCart } = useCart();
 
     const [product, setProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -43,6 +45,7 @@ function ProductDetails() {
     }
 
     function handleAddToCart() {
+        addToCart(product);
         setCartMessage("Artefatto aggiunto all'inventario!");
     }
 

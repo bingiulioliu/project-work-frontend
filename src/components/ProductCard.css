@@ -175,3 +175,28 @@
 .quest-card-actions {
     margin-top: auto;
 }
+
+.quest-card-cart-message {
+    margin: 0.9rem 0 0;
+    color: #f3c72e;
+    font-family: "Cinzel", serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(243, 199, 46, 0.35);
+    animation: cartMessageFade 0.25s ease;
+}
+
+@keyframes cartMessageFade {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
