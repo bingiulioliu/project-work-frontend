@@ -33,16 +33,19 @@ function Footer() {
 
                         <ul className="footer-list">
                             <li>
-                                <Link to="/">Piazza</Link>
-                            </li>
-                            <li>
-                                <Link to="/chi-siamo">Chi siamo</Link>
+                                <Link to="/">Home</Link>
                             </li>
                             <li>
                                 <Link to="/products">Catalogo</Link>
                             </li>
                             <li>
-                                <Link to="/carrello">Carrello</Link>
+                                <Link to="/chi-siamo">Chi siamo</Link>
+                            </li>
+                            <li>
+                                <Link to="/preferiti">Preferiti</Link>
+                            </li>
+                            <li>
+                                <Link to="/carrello">Inventario</Link>
                             </li>
                         </ul>
                     </div>
@@ -65,7 +68,6 @@ function Footer() {
                             </li>
                         </ul>
                     </div>
-
                     
                 </div>
 
