@@ -13,6 +13,7 @@ import ChiSiamo from "./pages/ChiSiamo";
 import ProductsList from "./pages/ProductsList";
 import ScrollToTop from "./hooks/ScrollToTop";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path="chi-siamo" element={<ChiSiamo />} />
                 <Route path="preferiti" element={<Wishlist />} />
                 <Route path="cart" element={<Cart />} />
+                <Route path="checkout" element={<Checkout />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
