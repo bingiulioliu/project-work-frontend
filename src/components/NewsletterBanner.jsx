@@ -8,25 +8,60 @@ function NewsletterBanner() {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
-        if (!email.trim()) {
+        const cleanEmail = email.trim();
+
+        if (!cleanEmail) {
             setErrorMessage("Inserisci una email valida per ricevere la pergamena.");
             return;
         }
 
+        if (isSubmitting) {
+            return;
+        }
+
+        setIsSubmitting(true);
         setErrorMessage("");
-        setMessage("Pergamena inviata! Grazie per esserti unito alla Gilda.");
+        setMessage("");
 
-        console.log(`Email registrata: ${email}`);
+        try {
+            const response = await fetch("http://localhost:3000/newsletter", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: cleanEmail,
+                }),
+            });
 
-        localStorage.setItem("jsonQuestNewsletterEmail", email);
+            const data = await response.json();
 
-        setTimeout(() => {
-            hideNewsletter();
-        }, 1800);
+            if (!response.ok) {
+                setErrorMessage(data.error || "Errore durante l'iscrizione alla newsletter.");
+                setIsSubmitting(false);
+                return;
+            }
+
+            console.log(`Email registrata: ${cleanEmail}`);
+
+            localStorage.setItem("jsonQuestNewsletterEmail", cleanEmail);
+
+            setMessage("Pergamena inviata! Grazie per esserti unito alla Gilda.");
+
+            setTimeout(() => {
+                hideNewsletter();
+                setIsSubmitting(false);
+            }, 1800);
+        } catch (error) {
+            console.error("Errore richiesta newsletter:", error);
+            setErrorMessage("Errore di connessione al server.");
+            setIsSubmitting(false);
+        }
     }
 
     if (!isVisible) {
@@ -52,10 +87,11 @@ function NewsletterBanner() {
                         placeholder="Inserisci la tua email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
+                        disabled={isSubmitting}
                     />
 
-                    <button type="submit">
-                        Ricevi la pergamena
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "Invio pergamena..." : "Ricevi la pergamena"}
                     </button>
                 </form>
 
