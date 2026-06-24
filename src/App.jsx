@@ -1,16 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { WishlistProvider } from "./contexts/WishlistContext";
-import MainLayout from "./layouts/MainLayout";
-import { NewsletterProvider } from "./contexts/NewsletterContext";
-import Catalogo from "./pages/PaginaCatalogo";
-import HomePage from "./pages/HomePage";
-import NotFound from "./pages/NotFound";
-import ProductDetails from "./pages/ProductDetails";
-import Wishlist from "./pages/Wishlist";
-import ChiSiamo from "./pages/ChiSiamo";
-import ProductsList from "./pages/ProductsList";
-import ScrollToTop from "./hooks/ScrollToTop";
+import { ThemeProvider } from "./contexts/ThemeContext.jsx";
+import { WishlistProvider } from "./contexts/WishlistContext.jsx";
+import MainLayout from "./layouts/MainLayout.jsx";
+import { NewsletterProvider } from "./contexts/NewsletterContext.jsx";
+import ProductList from "./pages/ProductsList.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import ProductDetails from "./pages/ProductDetails.jsx";
+import Wishlist from "./pages/Wishlist.jsx";
+import ChiSiamo from "./pages/ChiSiamo.jsx";
+import ProductsList from "./pages/ProductsList.jsx";
+import ScrollToTop from "./hooks/ScrollToTop.jsx";
 
 function App() {
   return (
@@ -29,8 +29,8 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
-         </NewsletterProvider>
         </WishlistProvider>
+        </NewsletterProvider>
       </ThemeProvider>
     </BrowserRouter>
 
