@@ -1,0 +1,281 @@
+.checkout-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, rgba(231, 189, 45, 0.10), transparent 34%),
+        linear-gradient(180deg, #100e08 0%, #17140d 100%);
+    color: #f4efe1;
+    font-family: "Cinzel", serif;
+    padding: 5rem 0 6rem;
+}
+
+.checkout-heading {
+    max-width: 860px;
+    margin: 0 auto 4rem;
+}
+
+.checkout-kicker,
+.checkout-summary-kicker {
+    color: #f3c72e;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 12px rgba(243, 199, 46, 0.35);
+}
+
+.checkout-heading h1,
+.checkout-success h1,
+.checkout-empty h1 {
+    font-family: "Cormorant Garamond", serif;
+    color: #fff7e8;
+    font-size: clamp(4rem, 8vw, 6rem);
+    line-height: 0.9;
+    font-weight: 800;
+    text-shadow: 0 5px 0 rgba(0, 0, 0, 0.55);
+}
+
+.checkout-heading p,
+.checkout-success p,
+.checkout-empty p {
+    color: #d8ccb2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.checkout-card,
+.checkout-summary,
+.checkout-success,
+.checkout-empty {
+    background: #15110d;
+    border: 1px solid rgba(231, 189, 45, 0.68);
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow:
+        0 18px 36px rgba(0, 0, 0, 0.55),
+        0 0 22px rgba(231, 189, 45, 0.08);
+}
+
+.checkout-card h2,
+.checkout-summary h2 {
+    font-family: "Cormorant Garamond", serif;
+    color: #fff7e8;
+    font-size: 2.7rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.checkout-card label {
+    display: block;
+    color: #f3c72e;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.checkout-card input,
+.checkout-card textarea {
+    width: 100%;
+    border: 1px solid rgba(231, 189, 45, 0.35);
+    border-radius: 4px;
+    background: rgba(13, 11, 5, 0.78);
+    color: #f4efe1;
+    padding: 0.85rem 0.95rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    outline: none;
+}
+
+.checkout-card input:focus,
+.checkout-card textarea:focus {
+    border-color: #f3c72e;
+    box-shadow: 0 0 0 0.15rem rgba(243, 199, 46, 0.15);
+}
+
+.checkout-summary {
+    position: sticky;
+    top: 110px;
+}
+
+.checkout-products {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.checkout-product-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 1px solid rgba(196, 129, 45, 0.28);
+    background: rgba(13, 11, 5, 0.38);
+    padding: 1rem;
+}
+
+.checkout-product-row strong {
+    display: block;
+    color: #fff7e8;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.35rem;
+}
+
+.checkout-product-row span {
+    display: block;
+    color: #cfc4ad;
+    font-size: 0.8rem;
+}
+
+.checkout-product-row p {
+    color: #f3c72e;
+    font-weight: 900;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.checkout-summary-row,
+.checkout-summary-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(231, 189, 45, 0.18);
+    color: #d8ccb2;
+}
+
+.checkout-summary-total {
+    border-bottom: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff7e8;
+    font-size: 1.2rem;
+}
+
+.checkout-summary-total strong {
+    color: #f3c72e;
+}
+
+.checkout-main-button {
+    display: inline-block;
+    width: 100%;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #ef9300, #d97800);
+    color: #140b04;
+    padding: 0.95rem 1.5rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.88rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-align: center;
+    border: 0;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.55);
+    transition: all 0.2s ease;
+}
+
+.checkout-main-button:hover:not(:disabled) {
+    background: linear-gradient(180deg, #ffae24, #ec8500);
+    color: #140b04;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.62);
+}
+
+.checkout-main-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.checkout-back-link {
+    display: inline-block;
+    width: 100%;
+    margin-top: 1rem;
+    color: #f3c72e;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 0.76rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+}
+
+.checkout-back-link:hover {
+    color: #ffe27a;
+}
+
+.checkout-error {
+    background: rgba(150, 20, 20, 0.24);
+    border: 1px solid rgba(255, 120, 120, 0.35);
+    color: #ffb3b3;
+    padding: 0.9rem;
+    font-size: 0.85rem;
+}
+
+.checkout-success,
+.checkout-empty {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3rem;
+}
+
+.checkout-success-box {
+    max-width: 420px;
+    margin: 1rem auto;
+    border: 1px solid rgba(231, 189, 45, 0.35);
+    background: rgba(13, 11, 5, 0.42);
+    padding: 1rem;
+}
+
+.checkout-success-box span {
+    display: block;
+    color: #cfc4ad;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    font-weight: 900;
+    margin-bottom: 0.35rem;
+}
+
+.checkout-success-box strong {
+    color: #f3c72e;
+    font-size: 1.25rem;
+}
+
+.checkout-success .checkout-main-button,
+.checkout-empty .checkout-main-button {
+    width: auto;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 991px) {
+    .checkout-summary {
+        position: static;
+    }
+}
+
+@media (max-width: 575px) {
+    .checkout-page {
+        padding: 3.5rem 0 4rem;
+    }
+
+    .checkout-heading h1,
+    .checkout-success h1,
+    .checkout-empty h1 {
+        font-size: 3.6rem;
+    }
+
+    .checkout-card,
+    .checkout-summary,
+    .checkout-success,
+    .checkout-empty {
+        padding: 1.2rem;
+    }
+
+    .checkout-product-row {
+        flex-direction: column;
+    }
+}
