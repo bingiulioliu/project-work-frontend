@@ -1,0 +1,34 @@
+
+
+.suggested-products h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.suggested-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    min-width: 0; /* impedisce overflow del contenitore stesso */
+}
+
+.suggested-products-grid > * {
+    min-width: 0; /* impedisce che il contenuto forzi la colonna ad allargarsi */
+}
+
+
+/* su schermi molto piccoli, max 2 colonne per non schiacciare troppo le card */
+@media (max-width: 576px) {
+    .suggested-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* su schermi grandi, evita che le card si allarghino troppo se sono poche */
+@media (min-width: 1200px) {
+    .suggested-products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

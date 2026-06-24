@@ -106,12 +106,53 @@
 }
 
 .quest-toggler {
-    border: 1px solid rgba(231, 189, 45, 0.45);
-    background: rgba(244, 239, 225, 0.08);
+    width: 56px;
+    height: 46px;
+    border: 1px solid rgba(231, 189, 45, 0.65);
+    border-radius: 8px;
+    background: rgba(231, 189, 45, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.quest-toggler:hover {
+    background: rgba(231, 189, 45, 0.18);
+    border-color: #f3c72e;
 }
 
 .quest-toggler:focus {
-    box-shadow: 0 0 0 0.15rem rgba(231, 189, 45, 0.25);
+    box-shadow: 0 0 0 0.18rem rgba(243, 199, 46, 0.22);
+}
+
+.quest-toggler .navbar-toggler-icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: none;
+    position: relative;
+}
+
+.quest-toggler .navbar-toggler-icon::before,
+.quest-toggler .navbar-toggler-icon::after,
+.quest-toggler .navbar-toggler-icon {
+    border-top: 2px solid #f3c72e;
+}
+
+.quest-toggler .navbar-toggler-icon::before,
+.quest-toggler .navbar-toggler-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+}
+
+.quest-toggler .navbar-toggler-icon::before {
+    top: 0.45rem;
+}
+
+.quest-toggler .navbar-toggler-icon::after {
+    top: 0.9rem;
 }
 
 @media (max-width: 991px) {
@@ -129,12 +170,22 @@
     }
 
     .navbar-collapse {
-        padding: 1rem 0;
+        margin-top: 1rem;
+        padding: 1rem;
+        border: 1px solid rgba(231, 189, 45, 0.35);
+        background: rgba(21, 17, 13, 0.98);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
     }
 
-    .nav-links {
-        gap: 0;
+    .nav-link {
+        color: #f4efe1;
     }
+
+    .nav-link:hover,
+    .nav-link.active {
+        color: #f3c72e !important;
+    }
+
 
     .theme-button {
         margin-top: 0.8rem;
