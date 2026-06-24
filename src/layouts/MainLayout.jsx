@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/index.css";
 import NewsletterBanner from "../components/NewsletterBanner";
+import ChatbotWidget from "../components/ChatbotWidget";
 
 function MainLayout() {
     return <>
@@ -17,6 +18,8 @@ function MainLayout() {
             <Footer />
 
             <NewsletterBanner />
+
+            <ChatbotWidget />
 
         {/* </div> */}
     </>
