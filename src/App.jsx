@@ -1,34 +1,41 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ThemeProvider } from "./contexts/ThemeContext.jsx";
-import { WishlistProvider } from "./contexts/WishlistContext.jsx";
-import MainLayout from "./layouts/MainLayout.jsx";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { WishlistProvider } from "./contexts/WishlistContext";
+import { CartProvider } from "./contexts/CartContext";
 import { NewsletterProvider } from "./contexts/NewsletterContext.jsx";
-import ProductList from "./pages/ProductsList.jsx";
-import HomePage from "./pages/HomePage.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import ProductDetails from "./pages/ProductDetails.jsx";
-import Wishlist from "./pages/Wishlist.jsx";
-import ChiSiamo from "./pages/ChiSiamo.jsx";
-import ProductsList from "./pages/ProductsList.jsx";
-import ScrollToTop from "./hooks/ScrollToTop.jsx";
+import MainLayout from "./layouts/MainLayout";
+
+import HomePage from "./pages/HomePage";
+import NotFound from "./pages/NotFound";
+import ProductDetails from "./pages/ProductDetails";
+import Wishlist from "./pages/Wishlist";
+import ChiSiamo from "./pages/ChiSiamo";
+import ProductsList from "./pages/ProductsList";
+import ScrollToTop from "./hooks/ScrollToTop";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <ScrollToTop/>
+
+        <ScrollToTop />
         <NewsletterProvider>
+
         <WishlistProvider>
-          <Routes>
-            <Route element={<MainLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="products" element={<ProductsList />} />
-              <Route path="products/:slug" element={<ProductDetails />} />
-              <Route path="chi-siamo" element={<ChiSiamo />} />
-              <Route path="preferiti" element={<Wishlist />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
+          <CartProvider>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="products" element={<ProductsList />} />
+                <Route path="products/:slug" element={<ProductDetails />} />
+                <Route path="chi-siamo" element={<ChiSiamo />} />
+                <Route path="preferiti" element={<Wishlist />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </CartProvider>
         </WishlistProvider>
         </NewsletterProvider>
       </ThemeProvider>

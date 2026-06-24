@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom";
 import useTheme from "../hooks/useTheme.js";
+import useWishlist from "../hooks/useWishlist";
+import useCart from "../hooks/useCart";
 import "./header.css";
 
 function Header() {
     const { theme, toggleTheme } = useTheme();
+    const { totalItems } = useCart();
+    const { wishlist } = useWishlist();
 
     return (
         <header className="container-header">
@@ -69,7 +73,7 @@ function Header() {
 
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/preferiti">
-                                    Preferiti ♥
+                                    Preferiti ({wishlist.length})♥
                                 </NavLink>
                             </li>
 
@@ -78,9 +82,9 @@ function Header() {
                                     className={({ isActive }) =>
                                         isActive ? "nav-link active" : "nav-link"
                                     }
-                                    to="/carrello"
+                                    to="/cart"
                                 >
-                                    Carrello 🛒
+                                    Inventario ({totalItems})🛒
                                 </NavLink>
                             </li>
 

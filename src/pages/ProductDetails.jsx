@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import "./ProductDetails.css";
 import { getImgUrl } from "../utils/getImgUrl";
 import useWishlist from "../hooks/useWishlist";
+import useCart from "../hooks/useCart";
 import { SuggestedProducts } from "../components/SuggestedProducts";
 import { fetchSuggestedProducts } from "../utils/fetchSuggestedProducts";
 
@@ -11,7 +12,11 @@ function ProductDetails() {
     const navigate = useNavigate();
 
     const { toggleWishlist, isInWishlist } = useWishlist();
+
+    const { addToCart } = useCart();
+
     const {suggestedProducts} = fetchSuggestedProducts(slug);
+
 
     const [product, setProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -46,6 +51,7 @@ function ProductDetails() {
     }
 
     function handleAddToCart() {
+        addToCart(product);
         setCartMessage("Artefatto aggiunto all'inventario!");
     }
 
