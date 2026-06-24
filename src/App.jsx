@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
 import { CartProvider } from "./contexts/CartContext";
+import { NewsletterProvider } from "./contexts/NewsletterContext.jsx";
 import MainLayout from "./layouts/MainLayout";
 
 import HomePage from "./pages/HomePage";
@@ -17,7 +18,10 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
+
         <ScrollToTop />
+        <NewsletterProvider>
+
         <WishlistProvider>
           <CartProvider>
             <Routes>
@@ -33,6 +37,7 @@ function App() {
             </Routes>
           </CartProvider>
         </WishlistProvider>
+        </NewsletterProvider>
       </ThemeProvider>
     </BrowserRouter>
 
