@@ -9,11 +9,13 @@ import ProductDetails from "./pages/ProductDetails";
 import Wishlist from "./pages/Wishlist";
 import ChiSiamo from "./pages/ChiSiamo";
 import ProductsList from "./pages/ProductsList";
+import ScrollToTop from "./hooks/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
+        <ScrollToTop/>
         <WishlistProvider>
           <Routes>
             <Route element={<MainLayout />}>
