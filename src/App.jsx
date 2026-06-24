@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
 import MainLayout from "./layouts/MainLayout";
-
+import { NewsletterProvider } from "./contexts/NewsletterContext";
+import Catalogo from "./pages/PaginaCatalogo";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
@@ -16,6 +17,7 @@ function App() {
     <BrowserRouter>
       <ThemeProvider>
         <ScrollToTop/>
+        <NewsletterProvider>
         <WishlistProvider>
           <Routes>
             <Route element={<MainLayout />}>
@@ -27,6 +29,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
+         </NewsletterProvider>
         </WishlistProvider>
       </ThemeProvider>
     </BrowserRouter>
