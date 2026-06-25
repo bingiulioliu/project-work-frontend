@@ -124,13 +124,27 @@ function extractAssistantText(payload) {
   return "Non sono riuscito a generare una risposta.";
 }
 
-export async function chatWithJsonny(message, history = [], sessionId = "default") {
+export async function chatWithJsonny(message, history = [], sessionId = "default", options = {}) {
+  const body = {
+    message,
+    history,
+    sessionId,
+  };
+
+  if (options?.productSlug) {
+    body.productSlug = options.productSlug;
+  }
+
+  if (options?.productId) {
+    body.productId = options.productId;
+  }
+
   const response = await fetch(`${BACKEND_URL}${CHAT_ENDPOINT}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message, history, sessionId }),
+    body: JSON.stringify(body),
   });
 
   if (!response.ok) {

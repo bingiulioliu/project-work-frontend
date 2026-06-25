@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { chatWithJsonny } from "../utils/chatWithJsonny";
 import "./ChatbotWidget.css";
 
@@ -20,7 +23,19 @@ const INITIAL_MESSAGES = [
   },
 ];
 
+function getProductSlugFromPath(pathname) {
+  const match = String(pathname || "").match(/^\/products\/([^/]+)$/i);
+  if (!match?.[1]) return "";
+
+  try {
+    return decodeURIComponent(match[1]);
+  } catch {
+    return match[1];
+  }
+}
+
 function ChatbotWidget() {
+  const location = useLocation();
   const widgetRef = useRef(null);
   const messagesEndRef = useRef(null);
   const dragRef = useRef({
@@ -82,7 +97,12 @@ function ChatbotWidget() {
     setIsLoading(true);
 
     try {
-      const assistantReply = await chatWithJsonny(trimmedInput, historyForApi, sessionId);
+      const productSlug = getProductSlugFromPath(location.pathname);
+      const effectiveSessionId = productSlug ? `product-${productSlug}` : sessionId;
+
+      const assistantReply = await chatWithJsonny(trimmedInput, historyForApi, effectiveSessionId, {
+        productSlug: productSlug || undefined,
+      });
 
       setMessages((prev) => [
         ...prev,
@@ -220,7 +240,13 @@ function ChatbotWidget() {
                 key={`${message.role}-${index}`}
                 className={`chatbot-message chatbot-message-${message.role}`}
               >
-                {message.content}
+                {message.role === "assistant" ? (
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {message.content}
+                  </ReactMarkdown>
+                ) : (
+                  message.content
+                )}
               </article>
             ))}
 

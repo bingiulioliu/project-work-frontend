@@ -138,8 +138,8 @@
 
 .quest-favorite-button {
     position: absolute;
-    top: -0.4rem;
-    right: -0.4rem;
+    top: -1.0rem;
+    right: -1.0rem;
     z-index: 20;
 
     width: 42px;
@@ -202,16 +202,21 @@
     }
 }
 
-/* -----------icona carrello------------*/
+/* --------------bottone carrello sotto 400px------------- */
+
 .quest-card-button .button-icon {
     display: none;
 }
+
 
 .quest-card-button .button-text {
     display: inline;
 }
 
-@media (max-width: 500px) {
+
+
+@media (max-width: 520px) {
+
 
     .quest-card-button .button-text {
         display: none;
@@ -221,6 +226,6 @@
     .quest-card-button .button-icon {
         display: inline-block;
         font-size: 1.4rem;
-        /* Regola la grandezza dell'icona se serve */
+
     }
 }

@@ -90,11 +90,15 @@ function ProductCard({ product }) {
                             </button>
                         </div>
 
-                        {cartMessage && (
-                            <p className="quest-card-cart-message">
-                                ✓ {cartMessage}
-                            </p>
-                        )}
+                            <span className="button-text">
+                                {cartMessage ? "Aggiunto!" : "Aggiungi all'inventario"}
+                            </span>
+
+
+                            <span className="button-icon">
+                                {cartMessage ? "✅" : "🛒"}
+                            </span>
+                        </button>
                     </div>
 
                     <Link to={`/products/${product.slug}`} className="quest-card-detail">
