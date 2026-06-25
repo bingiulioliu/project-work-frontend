@@ -107,6 +107,56 @@
   color: var(--text-ivory);
 }
 
+.chatbot-message-assistant p {
+  margin: 0;
+}
+
+.chatbot-message-assistant p + p,
+.chatbot-message-assistant p + ul,
+.chatbot-message-assistant p + ol,
+.chatbot-message-assistant p + table,
+.chatbot-message-assistant ul + p,
+.chatbot-message-assistant ol + p,
+.chatbot-message-assistant table + p {
+  margin-top: 0.5rem;
+}
+
+.chatbot-message-assistant ul,
+.chatbot-message-assistant ol {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.chatbot-message-assistant h1,
+.chatbot-message-assistant h2,
+.chatbot-message-assistant h3,
+.chatbot-message-assistant h4,
+.chatbot-message-assistant h5,
+.chatbot-message-assistant h6 {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.25;
+}
+
+.chatbot-message-assistant table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.chatbot-message-assistant th,
+.chatbot-message-assistant td {
+  border: 1px solid rgba(245, 242, 235, 0.18);
+  padding: 0.35rem 0.4rem;
+  text-align: left;
+}
+
+.chatbot-message-assistant code {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 0.08rem 0.25rem;
+}
+
 .chatbot-form {
   display: grid;
   grid-template-columns: 1fr auto;
