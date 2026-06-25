@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./ProductCard.css";
 import { getImgUrl } from "../utils/getImgUrl";
@@ -6,12 +5,19 @@ import useWishlist from "../hooks/useWishlist";
 import useCart from "../hooks/useCart";
 
 function ProductCard({ product }) {
-    const [cartMessage, setCartMessage] = useState("");
+    const {
+        cartItems,
+        addToCart,
+        removeFromCart,
+        increaseQuantity,
+        decreaseQuantity,
+    } = useCart();
 
-    const { addToCart } = useCart();
     const { toggleWishlist, isInWishlist } = useWishlist();
 
     const isFavorite = isInWishlist(product.slug);
+
+    const cartProduct = cartItems.find((item) => item.slug === product.slug);
 
     const imageSrc = product.image?.startsWith("http")
         ? product.image
@@ -23,11 +29,18 @@ function ProductCard({ product }) {
 
     function handleAddToCart() {
         addToCart(product);
-        setCartMessage("Aggiunto con successo!");
+    }
 
-        setTimeout(() => {
-            setCartMessage("");
-        }, 2000);
+    function handleIncreaseQuantity() {
+        increaseQuantity(product.slug);
+    }
+
+    function handleDecreaseQuantity() {
+        decreaseQuantity(product.slug);
+    }
+
+    function handleRemoveFromCart() {
+        removeFromCart(product.slug);
     }
 
     return (
@@ -71,19 +84,59 @@ function ProductCard({ product }) {
                     </p>
 
                     <div className="quest-card-actions">
-                        <button
-                            className="quest-card-button"
-                            type="button"
-                            onClick={handleAddToCart}
-                        >
-                            <span className="button-text">
-                                {cartMessage ? "Aggiunto!" : "Aggiungi all'inventario"}
-                            </span>
+                        {cartProduct ? (
+                            <div className="quest-card-cart-controls">
+                                <p className="quest-card-cart-status">
+                                    Già nell&apos;inventario: {cartProduct.quantity}
+                                </p>
 
-                            <span className="button-icon">
-                                {cartMessage ? "✅" : "🛒"}
-                            </span>
-                        </button>
+                                <div className="quest-card-quantity-actions">
+                                    <button
+                                        className="quest-card-quantity-button"
+                                        type="button"
+                                        onClick={handleDecreaseQuantity}
+                                        aria-label="Diminuisci quantità"
+                                    >
+                                        -
+                                    </button>
+
+                                    <span className="quest-card-quantity-value">
+                                        {cartProduct.quantity}
+                                    </span>
+
+                                    <button
+                                        className="quest-card-quantity-button"
+                                        type="button"
+                                        onClick={handleIncreaseQuantity}
+                                        aria-label="Aumenta quantità"
+                                    >
+                                        +
+                                    </button>
+                                </div>
+
+                                <button
+                                    className="quest-card-remove-button"
+                                    type="button"
+                                    onClick={handleRemoveFromCart}
+                                >
+                                    Rimuovi dall&apos;inventario
+                                </button>
+                            </div>
+                        ) : (
+                            <button
+                                className="quest-card-button"
+                                type="button"
+                                onClick={handleAddToCart}
+                            >
+                                <span className="button-text">
+                                    Aggiungi all&apos;inventario
+                                </span>
+
+                                <span className="button-icon">
+                                    🛒
+                                </span>
+                            </button>
+                        )}
                     </div>
 
                     <Link to={`/products/${product.slug}`} className="quest-card-detail">
