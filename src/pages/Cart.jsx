@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { getImgUrl } from "../utils/getImgUrl";
@@ -20,14 +21,19 @@ function Cart() {
         currency: "EUR",
     });
 
-    function handleClearCart() {
-        const confirmClear = window.confirm(
-            "Sei sicura di voler svuotare tutto l'inventario?"
-        );
+    const [showClearModal, setShowClearModal] = useState(false);
 
-        if (confirmClear) {
-            clearCart();
-        }
+    function handleOpenClearModal() {
+        setShowClearModal(true);
+    }
+
+    function handleCloseClearModal() {
+        setShowClearModal(false);
+    }
+
+    function handleConfirmClearCart() {
+        clearCart();
+        setShowClearModal(false);
     }
 
     return (
@@ -205,7 +211,7 @@ function Cart() {
                                 <button
                                     type="button"
                                     className="cart-clear-button"
-                                    onClick={handleClearCart}
+                                    onClick={handleOpenClearModal}
                                 >
                                     Svuota Inventario
                                 </button>
@@ -214,6 +220,41 @@ function Cart() {
                     </div>
                 )}
             </section>
+
+            {showClearModal && (
+                <div className="cart-modal-overlay">
+                    <div className="cart-modal">
+                        <div className="cart-modal-inner">
+                            <p className="cart-modal-kicker">Conferma azione</p>
+
+                            <h2>Svuotare l&apos;inventario?</h2>
+
+                            <p>
+                                Tutti gli artefatti presenti nella tua borsa verranno rimossi.
+                                Questa azione non può essere annullata.
+                            </p>
+
+                            <div className="cart-modal-actions">
+                                <button
+                                    type="button"
+                                    className="cart-modal-button secondary"
+                                    onClick={handleCloseClearModal}
+                                >
+                                    Annulla
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className="cart-modal-button danger"
+                                    onClick={handleConfirmClearCart}
+                                >
+                                    Svuota inventario
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }

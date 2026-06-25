@@ -400,6 +400,153 @@
     box-shadow: 0 8px 0 rgba(0, 0, 0, 0.62);
 }
 
+.cart-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.cart-modal {
+    width: min(100%, 560px);
+    background: #15110d;
+    border: 1px solid rgba(231, 189, 45, 0.72);
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.72),
+        0 0 28px rgba(231, 189, 45, 0.12);
+    animation: cartModalEnter 0.18s ease;
+}
+
+.cart-modal-inner {
+    position: relative;
+    border: 1px solid rgba(196, 129, 45, 0.42);
+    background:
+        radial-gradient(circle at top, rgba(125, 31, 42, 0.72), transparent 58%),
+        linear-gradient(180deg, #271719 0%, #450711 100%);
+    padding: 2rem;
+    text-align: center;
+}
+
+.cart-modal-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0.8rem;
+    border: 1px solid rgba(231, 189, 45, 0.12);
+    pointer-events: none;
+}
+
+.cart-modal-kicker,
+.cart-modal h2,
+.cart-modal p,
+.cart-modal-actions {
+    position: relative;
+    z-index: 2;
+}
+
+.cart-modal-kicker {
+    color: #f3c72e;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    font-size: 0.7rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 12px rgba(243, 199, 46, 0.35);
+}
+
+.cart-modal h2 {
+    color: #fff7e8;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 0.95;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.cart-modal p {
+    color: #d8ccb2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 auto 1.8rem;
+    max-width: 420px;
+}
+
+.cart-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cart-modal-button {
+    min-width: 190px;
+    border-radius: 4px;
+    padding: 0.85rem 1.2rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.55);
+    transition: all 0.2s ease;
+}
+
+.cart-modal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.62);
+}
+
+.cart-modal-button.secondary {
+    border: 2px solid rgba(231, 189, 45, 0.65);
+    background: rgba(13, 11, 5, 0.72);
+    color: #f3c72e;
+}
+
+.cart-modal-button.secondary:hover {
+    background: rgba(231, 189, 45, 0.15);
+    color: #ffe27a;
+}
+
+.cart-modal-button.danger {
+    border: 2px solid #ff8a8a;
+    background: linear-gradient(180deg, #b63232, #7e1616);
+    color: #fff7e8;
+}
+
+.cart-modal-button.danger:hover {
+    background: linear-gradient(180deg, #d44747, #951d1d);
+}
+
+@keyframes cartModalEnter {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 575px) {
+    .cart-modal-inner {
+        padding: 1.6rem 1rem;
+    }
+
+    .cart-modal-button {
+        width: 100%;
+    }
+}
+
 @media (max-width: 991px) {
     .cart-summary {
         position: static;
