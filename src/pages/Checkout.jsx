@@ -145,8 +145,7 @@ function Checkout() {
                     <h1>Checkout</h1>
 
                     <p>
-                        Inserisci i dati di fatturazione e spedizione. Il totale
-                        finale verrà ricalcolato dal backend.
+                        Compila tutti i dati di fatturazione e spedizione obbligatori.
                     </p>
                 </div>
 
@@ -159,7 +158,7 @@ function Checkout() {
                                 <div className="row g-3">
                                     <div className="col-12">
                                         <label htmlFor="customer_name">
-                                            Nome e cognome
+                                            Nome e cognome*
                                         </label>
 
                                         <input
@@ -174,7 +173,7 @@ function Checkout() {
 
                                     <div className="col-12">
                                         <label htmlFor="mail">
-                                            Email
+                                            Email*
                                         </label>
 
                                         <input
@@ -189,7 +188,7 @@ function Checkout() {
 
                                     <div className="col-12 col-md-6">
                                         <label htmlFor="telephone_number">
-                                            Telefono
+                                            Telefono*
                                         </label>
 
                                         <input
@@ -204,7 +203,7 @@ function Checkout() {
 
                                     <div className="col-12 col-md-6">
                                         <label htmlFor="customer_postal_code">
-                                            CAP
+                                            CAP*
                                         </label>
 
                                         <input
@@ -220,7 +219,7 @@ function Checkout() {
 
                                     <div className="col-12">
                                         <label htmlFor="customer_address">
-                                            Indirizzo di spedizione
+                                            Indirizzo di spedizione*
                                         </label>
 
                                         <input
@@ -235,7 +234,7 @@ function Checkout() {
 
                                     <div className="col-12">
                                         <label htmlFor="customer_city">
-                                            Città
+                                            Città*
                                         </label>
 
                                         <input
