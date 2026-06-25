@@ -27,7 +27,7 @@ function ProductsList() {
 
     // evito il debounce al primo render
     const firstRender = useRef(true);
-    const limit = 10;
+    const limit = 12;
 
     useEffect(() => {
         const debounce = firstRender.current ? 0 : 500;
