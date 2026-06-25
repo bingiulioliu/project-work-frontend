@@ -25,7 +25,12 @@ function ProductsList() {
     const [category, setCategory] = useState(searchParams.get('category') || 'all');
     const [minPrice, setMinPrice] = useState(searchParams.get('min_price') || '');
     const [maxPrice, setMaxPrice] = useState(searchParams.get('max_price') || '');
-    const [rarity, setRarity] = useState(searchParams.get('rarity') || 'all');
+    const ALL_RARITIES = ['common', 'rare', 'legendary'];
+    const [selectedRarities, setSelectedRarities] = useState(
+        searchParams.get('rarity')
+            ? searchParams.get('rarity').split(',')
+            : []
+    );
     const [sortBy, setSortBy] = useState(getSortFromParams(searchParams.get('sort'), searchParams.get('order')));
 
 
@@ -44,7 +49,9 @@ function ProductsList() {
     useEffect(() => {
         setSearchTerm(searchParams.get('search') || '');
         setCategory(searchParams.get('category') || 'all');
-        setRarity(searchParams.get('rarity') || 'all');
+        setSelectedRarities(
+            searchParams.get('rarity') ? searchParams.get('rarity').split(',') : []
+        );
         setMinPrice(searchParams.get('min_price') || '');
         setMaxPrice(searchParams.get('max_price') || '');
         setSortBy(getSortFromParams(searchParams.get('sort'), searchParams.get('order')));
@@ -64,11 +71,11 @@ function ProductsList() {
 
             if (searchTerm.trim()) filters.search = searchTerm.trim();
             if (category !== 'all') filters.category = category;
-            if (rarity !== 'all') filters.rarity = rarity;
             if (minPrice) filters.min_price = minPrice;
             if (maxPrice) filters.max_price = maxPrice;
             if (sort) filters.sort = sort;
             if (order) filters.order = order;
+            if (selectedRarities.length > 0) filters.rarity = selectedRarities.join(',');
 
             const urlParams = { ...filters };
             delete urlParams.limit;
@@ -93,7 +100,7 @@ function ProductsList() {
 
         return () => clearTimeout(timer);
 
-    }, [searchTerm, category, rarity, minPrice, maxPrice, sortBy, currentPage])
+    }, [searchTerm, category, selectedRarities, minPrice, maxPrice, sortBy, currentPage])
 
     function handleSearchChange(event) {
         setSearchTerm(event.target.value);
@@ -120,8 +127,13 @@ function ProductsList() {
         setCurrentPage(1);
     }
 
-    function handleRarityChange(event) {
-        setRarity(event.target.value);
+    function handleRarityToggle(rarityValue) {
+        setSelectedRarities((current) => {
+            if (current.includes(rarityValue)) {
+                return current.filter((r) => r !== rarityValue);
+            }
+            return [...current, rarityValue];
+        });
         setCurrentPage(1);
     }
 
@@ -181,23 +193,6 @@ function ProductsList() {
                             </select>
                         </div>
 
-                        <div className="col-md-2">
-                            <label className="form-label text-light">
-                                Rarità
-                            </label>
-
-                            <select
-                                className="form-select filter-input"
-                                value={rarity}
-                                onChange={handleRarityChange}
-                            >
-                                <option value="all">Tutte</option>
-                                <option value="common">Comune</option>
-                                <option value="rare">Rara</option>
-                                <option value="legendary">Leggendaria</option>
-                            </select>
-                        </div>
-
                         <div className="col-md-3">
                             <label className="form-label text-light">
                                 Range Prezzo (€)
@@ -244,6 +239,29 @@ function ProductsList() {
                                 <option value="data-recente">Più recenti</option>
                             </select>
                         </div>
+
+                        <div className="col-md-3">
+                            <label className="form-label text-light">
+                                Rarità
+                            </label>
+
+                            <div className="rarity-toggle-group">
+                                {ALL_RARITIES.map((rarityValue) => (
+                                    <button
+                                        key={rarityValue}
+                                        type="button"
+                                        className={`rarity-toggle rarity-toggle-${rarityValue} ${selectedRarities.includes(rarityValue) ? "is-active" : ""
+                                            }`}
+                                        onClick={() => handleRarityToggle(rarityValue)}
+                                    >
+                                        {rarityValue === 'common' && 'Comune'}
+                                        {rarityValue === 'rare' && 'Raro'}
+                                        {rarityValue === 'legendary' && 'Leggendario'}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
