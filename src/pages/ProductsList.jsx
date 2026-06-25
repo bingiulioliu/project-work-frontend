@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import "./ProductsList.css";
 import { fetchProducts } from '../utils/fetchProducts';
 import ProductCard from '../components/ProductCard';
+import { useSearchParams } from 'react-router-dom';
 
 const sortMap = {
     'prezzo-crescente': { sort: 'price', order: 'asc' },
@@ -10,17 +11,28 @@ const sortMap = {
     'data-recente': { sort: 'updated_at', order: 'desc' }
 };
 
+function getSortFromParams(sort, order) {
+    const found = Object.entries(sortMap).find(
+        ([, value]) => value.sort === sort && value.order === order
+    );
+    return found ? found[0] : 'data-recente';
+}
+
 function ProductsList() {
 
-    const [searchTerm, setSearchTerm] = useState('');
-    const [category, setCategory] = useState('all');
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
-    const [sortBy, setSortBy] = useState('data-recente');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+    const [category, setCategory] = useState(searchParams.get('category') || 'all');
+    const [minPrice, setMinPrice] = useState(searchParams.get('min_price') || '');
+    const [maxPrice, setMaxPrice] = useState(searchParams.get('max_price') || '');
+    const [rarity, setRarity] = useState(searchParams.get('rarity') || 'all');
+    const [sortBy, setSortBy] = useState(getSortFromParams(searchParams.get('sort'), searchParams.get('order')));
+
 
     const [products, setProducts] = useState([]);
     const [pagination, setPagination] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
+
 
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
@@ -28,6 +40,16 @@ function ProductsList() {
     // evito il debounce al primo render
     const firstRender = useRef(true);
     const limit = 12;
+
+    useEffect(() => {
+        setSearchTerm(searchParams.get('search') || '');
+        setCategory(searchParams.get('category') || 'all');
+        setRarity(searchParams.get('rarity') || 'all');
+        setMinPrice(searchParams.get('min_price') || '');
+        setMaxPrice(searchParams.get('max_price') || '');
+        setSortBy(getSortFromParams(searchParams.get('sort'), searchParams.get('order')));
+        setCurrentPage(Number(searchParams.get('page')) || 1);
+    }, [searchParams]);
 
     useEffect(() => {
         const debounce = firstRender.current ? 0 : 500;
@@ -40,13 +62,17 @@ function ProductsList() {
                 limit: limit,
             };
 
-
             if (searchTerm.trim()) filters.search = searchTerm.trim();
             if (category !== 'all') filters.category = category;
+            if (rarity !== 'all') filters.rarity = rarity;
             if (minPrice) filters.min_price = minPrice;
             if (maxPrice) filters.max_price = maxPrice;
             if (sort) filters.sort = sort;
             if (order) filters.order = order;
+
+            const urlParams = { ...filters };
+            delete urlParams.limit;
+            setSearchParams(urlParams, { replace: true });
 
             setIsLoading(true);
             setErrorMessage("");
@@ -67,7 +93,7 @@ function ProductsList() {
 
         return () => clearTimeout(timer);
 
-    }, [searchTerm, category, minPrice, maxPrice, sortBy, currentPage])
+    }, [searchTerm, category, rarity, minPrice, maxPrice, sortBy, currentPage])
 
     function handleSearchChange(event) {
         setSearchTerm(event.target.value);
@@ -91,6 +117,11 @@ function ProductsList() {
 
     function handleSortChange(event) {
         setSortBy(event.target.value);
+        setCurrentPage(1);
+    }
+
+    function handleRarityChange(event) {
+        setRarity(event.target.value);
         setCurrentPage(1);
     }
 
@@ -147,6 +178,23 @@ function ProductsList() {
                                 </option>
                                 <option value="consumabili">Consumabili</option>
                                 <option value="reliquie">Reliquie</option>
+                            </select>
+                        </div>
+
+                        <div className="col-md-2">
+                            <label className="form-label text-light">
+                                Rarità
+                            </label>
+
+                            <select
+                                className="form-select filter-input"
+                                value={rarity}
+                                onChange={handleRarityChange}
+                            >
+                                <option value="all">Tutte</option>
+                                <option value="common">Comune</option>
+                                <option value="rare">Rara</option>
+                                <option value="legendary">Leggendaria</option>
                             </select>
                         </div>
 

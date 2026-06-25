@@ -45,7 +45,7 @@ function Footer() {
                                 <Link to="/preferiti">Preferiti</Link>
                             </li>
                             <li>
-                                <Link to="/carrello">Inventario</Link>
+                                <Link to="/cart">Inventario</Link>
                             </li>
                         </ul>
                     </div>
@@ -55,16 +55,16 @@ function Footer() {
 
                         <ul className="footer-list">
                             <li>
-                                <Link to="/products">Artefatti rari</Link>
+                                <Link to="/products?page=1&rarity=legendary&sort=updated_at&order=desc">Le nostre rarità</Link>
                             </li>
                             <li>
-                                <Link to="/products">Offerte</Link>
+                                <Link to="/products?page=1&rarity=common&sort=price&order=asc">Gli essenziali</Link>
                             </li>
                             <li>
-                                <Link to="/products">Equipaggiamento</Link>
+                                <Link to="/products?page=1&category=equipaggiamento&sort=updated_at&order=desc">Equipaggiamento</Link>
                             </li>
                             <li>
-                                <Link to="/products">Pozioni</Link>
+                                <Link to="/products?page=1&category=consumabili&sort=updated_at&order=desc">Consumabili</Link>
                             </li>
                         </ul>
                     </div>
