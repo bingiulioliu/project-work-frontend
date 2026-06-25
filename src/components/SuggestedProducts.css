@@ -1,20 +1,21 @@
-
-
 .suggested-products h2 {
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
     text-align: center;
 }
+
 .suggested-products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
-    min-width: 0; /* impedisce overflow del contenitore stesso */
+    min-width: 0;
+    /* impedisce overflow del contenitore stesso */
 }
 
-.suggested-products-grid > * {
-    min-width: 0; /* impedisce che il contenuto forzi la colonna ad allargarsi */
+.suggested-products-grid>* {
+    min-width: 0;
+    /* impedisce che il contenuto forzi la colonna ad allargarsi */
 }
 
 
