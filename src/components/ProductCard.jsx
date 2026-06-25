@@ -57,7 +57,6 @@ function ProductCard({ product }) {
                     )}
                 </Link>
 
-
                 <div className="quest-card-body">
                     <span className={`quest-card-rarity quest-card-rarity-${product.rarity}`}>
                         {product.rarity}
@@ -72,28 +71,14 @@ function ProductCard({ product }) {
                     </p>
 
                     <div className="quest-card-actions">
-                        <div className="quest-card-actions">
-                            <button
-                                className="quest-card-button"
-                                type="button"
-                                onClick={handleAddToCart}
-                            >
-
-                                <span className="button-text">
-                                    {cartMessage ? "Aggiunto!" : "Aggiungi all'inventario"}
-                                </span>
-
-
-                                <span className="button-icon">
-                                    {cartMessage ? "✅" : "🛒"}
-                                </span>
-                            </button>
-                        </div>
-
+                        <button
+                            className="quest-card-button"
+                            type="button"
+                            onClick={handleAddToCart}
+                        >
                             <span className="button-text">
                                 {cartMessage ? "Aggiunto!" : "Aggiungi all'inventario"}
                             </span>
-
 
                             <span className="button-icon">
                                 {cartMessage ? "✅" : "🛒"}
