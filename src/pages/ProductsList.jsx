@@ -42,6 +42,16 @@ function ProductsList() {
     const limit = 12;
 
     useEffect(() => {
+        setSearchTerm(searchParams.get('search') || '');
+        setCategory(searchParams.get('category') || 'all');
+        setRarity(searchParams.get('rarity') || 'all');
+        setMinPrice(searchParams.get('min_price') || '');
+        setMaxPrice(searchParams.get('max_price') || '');
+        setSortBy(getSortFromParams(searchParams.get('sort'), searchParams.get('order')));
+        setCurrentPage(Number(searchParams.get('page')) || 1);
+    }, [searchParams]);
+
+    useEffect(() => {
         const debounce = firstRender.current ? 0 : 500;
         firstRender.current = false;
 
@@ -51,7 +61,6 @@ function ProductsList() {
                 page: currentPage,
                 limit: limit,
             };
-
 
             if (searchTerm.trim()) filters.search = searchTerm.trim();
             if (category !== 'all') filters.category = category;
