@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { createOrder } from "../utils/createOrder";
+import { getImgUrl } from "../utils/getImgUrl";
 import "./Checkout.css";
 
 function Checkout() {
@@ -10,8 +11,10 @@ function Checkout() {
     const {
         cartItems,
         cartTotal,
-        totalItems,
         clearCart,
+        increaseQuantity,
+        decreaseQuantity,
+        removeFromCart,
     } = useCart();
 
     const [formData, setFormData] = useState({
@@ -145,7 +148,8 @@ function Checkout() {
                     <h1>Checkout</h1>
 
                     <p>
-                        Compila tutti i dati di fatturazione e spedizione obbligatori.
+                        Completa i dati per la consegna e controlla il riepilogo del tuo ordine
+                        prima di confermare.
                     </p>
                 </div>
 
@@ -155,10 +159,16 @@ function Checkout() {
                             <section className="checkout-card">
                                 <h2>Dati cliente</h2>
 
+                                <p className="checkout-required-note">
+                                    I campi contrassegnati come <strong>Obbligatorio</strong> devono essere compilati
+                                    per completare l&apos;ordine.
+                                </p>
+
                                 <div className="row g-3">
                                     <div className="col-12">
                                         <label htmlFor="customer_name">
-                                            Nome e cognome*
+                                            Nome e cognome
+                                            <span className="checkout-required-badge">Obbligatorio</span>
                                         </label>
 
                                         <input
@@ -173,7 +183,8 @@ function Checkout() {
 
                                     <div className="col-12">
                                         <label htmlFor="mail">
-                                            Email*
+                                            Email
+                                            <span className="checkout-required-badge">Obbligatorio</span>
                                         </label>
 
                                         <input
@@ -184,11 +195,16 @@ function Checkout() {
                                             onChange={handleChange}
                                             required
                                         />
+
+                                        <small className="checkout-field-help">
+                                            Useremo questa email per inviarti la conferma dell&apos;ordine.
+                                        </small>
                                     </div>
 
                                     <div className="col-12 col-md-6">
                                         <label htmlFor="telephone_number">
-                                            Telefono*
+                                            Telefono
+                                            <span className="checkout-required-badge">Obbligatorio</span>
                                         </label>
 
                                         <input
@@ -197,13 +213,15 @@ function Checkout() {
                                             type="tel"
                                             value={formData.telephone_number}
                                             onChange={handleChange}
+                                            maxLength="10"
                                             required
                                         />
                                     </div>
 
                                     <div className="col-12 col-md-6">
                                         <label htmlFor="customer_postal_code">
-                                            CAP*
+                                            CAP
+                                            <span className="checkout-required-badge">Obbligatorio</span>
                                         </label>
 
                                         <input
@@ -215,11 +233,16 @@ function Checkout() {
                                             maxLength="5"
                                             required
                                         />
+
+                                        <small className="checkout-field-help">
+                                            Inserisci un CAP di 5 cifre.
+                                        </small>
                                     </div>
 
                                     <div className="col-12">
                                         <label htmlFor="customer_address">
-                                            Indirizzo di spedizione*
+                                            Indirizzo di spedizione
+                                            <span className="checkout-required-badge">Obbligatorio</span>
                                         </label>
 
                                         <input
@@ -234,7 +257,8 @@ function Checkout() {
 
                                     <div className="col-12">
                                         <label htmlFor="customer_city">
-                                            Città*
+                                            Città
+                                            <span className="checkout-required-badge">Obbligatorio</span>
                                         </label>
 
                                         <input
@@ -250,6 +274,7 @@ function Checkout() {
                                     <div className="col-12">
                                         <label htmlFor="notes">
                                             Note
+                                            <span className="checkout-optional-badge">Facoltativo</span>
                                         </label>
 
                                         <textarea
@@ -275,43 +300,87 @@ function Checkout() {
 
                                 <div className="checkout-products">
                                     {cartItems.map((item) => {
+                                        const imageSrc = item.image?.startsWith("http")
+                                            ? item.image
+                                            : getImgUrl(item.image);
+
                                         const subtotal = Number(item.price) * item.quantity;
 
+                                        const formattedPrice = Number(item.price).toLocaleString("it-IT", {
+                                            style: "currency",
+                                            currency: "EUR",
+                                        });
+
+                                        const formattedSubtotal = subtotal.toLocaleString("it-IT", {
+                                            style: "currency",
+                                            currency: "EUR",
+                                        });
+
                                         return (
-                                            <div
-                                                className="checkout-product-row"
-                                                key={item.slug}
-                                            >
-                                                <div>
+                                            <article className="checkout-product-card" key={item.slug}>
+                                                <Link
+                                                    to={`/products/${item.slug}`}
+                                                    className="checkout-product-image-link"
+                                                >
+                                                    <img
+                                                        src={imageSrc}
+                                                        alt={item.name}
+                                                        className="checkout-product-image"
+                                                    />
+                                                </Link>
+
+                                                <div className="checkout-product-info">
                                                     <strong>{item.name}</strong>
-                                                    <span>Quantità: {item.quantity}</span>
+
+                                                    <span>Prezzo unitario: {formattedPrice}</span>
+
+                                                    <div className="checkout-quantity-controls">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => decreaseQuantity(item.slug)}
+                                                            disabled={item.quantity === 1}
+                                                            aria-label="Diminuisci quantità"
+                                                        >
+                                                            −
+                                                        </button>
+
+                                                        <span>{item.quantity}</span>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => increaseQuantity(item.slug)}
+                                                            aria-label="Aumenta quantità"
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+
+                                                    <button
+                                                        type="button"
+                                                        className="checkout-remove-button"
+                                                        onClick={() => removeFromCart(item.slug)}
+                                                    >
+                                                        Rimuovi
+                                                    </button>
                                                 </div>
 
-                                                <p>
-                                                    {subtotal.toLocaleString("it-IT", {
-                                                        style: "currency",
-                                                        currency: "EUR",
-                                                    })}
-                                                </p>
-                                            </div>
+                                                <div className="checkout-product-subtotal">
+                                                    <span>Subtotale</span>
+                                                    <strong>{formattedSubtotal}</strong>
+                                                </div>
+                                            </article>
                                         );
                                     })}
                                 </div>
 
-                                <div className="checkout-summary-row">
-                                    <span>Prodotti</span>
-                                    <strong>{totalItems}</strong>
-                                </div>
-
-                                <div className="checkout-summary-row">
-                                    <span>Spedizione</span>
-                                    <strong>Da calcolare</strong>
-                                </div>
-
                                 <div className="checkout-summary-total">
-                                    <span>Totale provvisorio</span>
+                                    <span>Totale</span>
                                     <strong>{formattedTotal}</strong>
                                 </div>
+
+                                <p className="checkout-summary-note">
+                                    Controlla quantità e dati di spedizione prima di confermare l&apos;ordine.
+                                </p>
 
                                 {errorMessage && (
                                     <p className="checkout-error">
