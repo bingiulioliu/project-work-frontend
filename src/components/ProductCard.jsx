@@ -72,11 +72,23 @@ function ProductCard({ product }) {
                     </p>
 
                     <div className="quest-card-actions">
-                        <button
-                            className="quest-card-button"
-                            type="button"
-                            onClick={handleAddToCart}
-                        >
+                        <div className="quest-card-actions">
+                            <button
+                                className="quest-card-button"
+                                type="button"
+                                onClick={handleAddToCart}
+                            >
+
+                                <span className="button-text">
+                                    {cartMessage ? "Aggiunto!" : "Aggiungi all'inventario"}
+                                </span>
+
+
+                                <span className="button-icon">
+                                    {cartMessage ? "✅" : "🛒"}
+                                </span>
+                            </button>
+                        </div>
 
                             <span className="button-text">
                                 {cartMessage ? "Aggiunto!" : "Aggiungi all'inventario"}
