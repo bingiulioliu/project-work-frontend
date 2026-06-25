@@ -328,7 +328,7 @@ function Checkout() {
                                     {isSubmitting ? "Invio ordine..." : "Conferma ordine"}
                                 </button>
 
-                                <Link to="/carrello" className="checkout-back-link">
+                                <Link to="/cart" className="checkout-back-link">
                                     ← Torna all&apos;inventario
                                 </Link>
                             </aside>
