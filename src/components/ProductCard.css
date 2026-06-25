@@ -201,3 +201,26 @@
         transform: translateY(0);
     }
 }
+
+/* -----------icona carrello------------*/
+.quest-card-button .button-icon {
+    display: none;
+}
+
+.quest-card-button .button-text {
+    display: inline;
+}
+
+@media (max-width: 500px) {
+
+    .quest-card-button .button-text {
+        display: none;
+    }
+
+
+    .quest-card-button .button-icon {
+        display: inline-block;
+        font-size: 1.4rem;
+        /* Regola la grandezza dell'icona se serve */
+    }
+}
