@@ -200,3 +200,31 @@
         transform: translateY(0);
     }
 }
+
+/* --------------bottone carrello sotto 400px------------- */
+
+.quest-card-button .button-icon {
+    display: none;
+}
+
+
+.quest-card-button .button-text {
+    display: inline;
+}
+
+
+
+@media (max-width: 520px) {
+
+
+    .quest-card-button .button-text {
+        display: none;
+    }
+
+
+    .quest-card-button .button-icon {
+        display: inline-block;
+        font-size: 1.4rem;
+
+    }
+}
