@@ -20,6 +20,16 @@ function Cart() {
         currency: "EUR",
     });
 
+    function handleClearCart() {
+        const confirmClear = window.confirm(
+            "Sei sicura di voler svuotare tutto l'inventario?"
+        );
+
+        if (confirmClear) {
+            clearCart();
+        }
+    }
+
     return (
         <main className="cart-page">
             <section className="container">
@@ -50,8 +60,13 @@ function Cart() {
                 ) : (
                     <div className="row g-4 align-items-start">
                         <div className="col-12 col-lg-8">
-                            
-                            <div className="cart-catalog-link-wrapper">
+
+                            <div className="cart-list-toolbar">
+                                <div>
+                                    <p className="cart-toolbar-label">Artefatti selezionati</p>
+                                    <h2>La tua borsa da viaggio</h2>
+                                </div>
+
                                 <Link to="/products" className="cart-back-catalog-button">
                                     ← Aggiungi altri artefatti
                                 </Link>
@@ -122,6 +137,7 @@ function Cart() {
                                                         type="button"
                                                         onClick={() => decreaseQuantity(item.slug)}
                                                         aria-label="Diminuisci quantità"
+                                                        disabled={item.quantity === 1}
                                                     >
                                                         −
                                                     </button>
@@ -171,15 +187,16 @@ function Cart() {
                                     <strong>{totalItems}</strong>
                                 </div>
 
-                                <div className="cart-summary-row">
-                                    <span>Spedizione</span>
-                                    <strong>Da calcolare</strong>
-                                </div>
+
 
                                 <div className="cart-summary-total">
                                     <span>Totale</span>
                                     <strong>{formattedTotal}</strong>
                                 </div>
+
+                                <p className="cart-summary-note">
+                                    Il totale verrà confermato nel checkout prima dell&apos;invio dell&apos;ordine.
+                                </p>
 
                                 <Link to="/checkout" className="cart-checkout-button">
                                     Procedi al checkout
@@ -188,7 +205,7 @@ function Cart() {
                                 <button
                                     type="button"
                                     className="cart-clear-button"
-                                    onClick={clearCart}
+                                    onClick={handleClearCart}
                                 >
                                     Svuota Inventario
                                 </button>
