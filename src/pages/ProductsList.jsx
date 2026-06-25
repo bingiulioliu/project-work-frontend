@@ -25,6 +25,7 @@ function ProductsList() {
     const [category, setCategory] = useState(searchParams.get('category') || 'all');
     const [minPrice, setMinPrice] = useState(searchParams.get('min_price') || '');
     const [maxPrice, setMaxPrice] = useState(searchParams.get('max_price') || '');
+    const [rarity, setRarity] = useState(searchParams.get('rarity') || 'all');
     const [sortBy, setSortBy] = useState(getSortFromParams(searchParams.get('sort'), searchParams.get('order')));
 
 
@@ -54,15 +55,16 @@ function ProductsList() {
 
             if (searchTerm.trim()) filters.search = searchTerm.trim();
             if (category !== 'all') filters.category = category;
+            if (rarity !== 'all') filters.rarity = rarity;
             if (minPrice) filters.min_price = minPrice;
             if (maxPrice) filters.max_price = maxPrice;
             if (sort) filters.sort = sort;
             if (order) filters.order = order;
 
-            const urlParams = {...filters};
+            const urlParams = { ...filters };
             delete urlParams.limit;
-            setSearchParams(urlParams, {replace: true});
-            
+            setSearchParams(urlParams, { replace: true });
+
             setIsLoading(true);
             setErrorMessage("");
 
@@ -82,7 +84,7 @@ function ProductsList() {
 
         return () => clearTimeout(timer);
 
-    }, [searchTerm, category, minPrice, maxPrice, sortBy, currentPage])
+    }, [searchTerm, category, rarity, minPrice, maxPrice, sortBy, currentPage])
 
     function handleSearchChange(event) {
         setSearchTerm(event.target.value);
@@ -106,6 +108,11 @@ function ProductsList() {
 
     function handleSortChange(event) {
         setSortBy(event.target.value);
+        setCurrentPage(1);
+    }
+
+    function handleRarityChange(event) {
+        setRarity(event.target.value);
         setCurrentPage(1);
     }
 
@@ -162,6 +169,23 @@ function ProductsList() {
                                 </option>
                                 <option value="consumabili">Consumabili</option>
                                 <option value="reliquie">Reliquie</option>
+                            </select>
+                        </div>
+
+                        <div className="col-md-2">
+                            <label className="form-label text-light">
+                                Rarità
+                            </label>
+
+                            <select
+                                className="form-select filter-input"
+                                value={rarity}
+                                onChange={handleRarityChange}
+                            >
+                                <option value="all">Tutte</option>
+                                <option value="common">Comune</option>
+                                <option value="rare">Rara</option>
+                                <option value="legendary">Leggendaria</option>
                             </select>
                         </div>
 
