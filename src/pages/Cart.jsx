@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { getImgUrl } from "../utils/getImgUrl";
@@ -19,6 +20,21 @@ function Cart() {
         style: "currency",
         currency: "EUR",
     });
+
+    const [showClearModal, setShowClearModal] = useState(false);
+
+    function handleOpenClearModal() {
+        setShowClearModal(true);
+    }
+
+    function handleCloseClearModal() {
+        setShowClearModal(false);
+    }
+
+    function handleConfirmClearCart() {
+        clearCart();
+        setShowClearModal(false);
+    }
 
     return (
         <main className="cart-page">
@@ -50,8 +66,13 @@ function Cart() {
                 ) : (
                     <div className="row g-4 align-items-start">
                         <div className="col-12 col-lg-8">
-                            
-                            <div className="cart-catalog-link-wrapper">
+
+                            <div className="cart-list-toolbar">
+                                <div>
+                                    <p className="cart-toolbar-label">Artefatti selezionati</p>
+                                    <h2>La tua borsa da viaggio</h2>
+                                </div>
+
                                 <Link to="/products" className="cart-back-catalog-button">
                                     ← Aggiungi altri artefatti
                                 </Link>
@@ -122,6 +143,7 @@ function Cart() {
                                                         type="button"
                                                         onClick={() => decreaseQuantity(item.slug)}
                                                         aria-label="Diminuisci quantità"
+                                                        disabled={item.quantity === 1}
                                                     >
                                                         −
                                                     </button>
@@ -171,15 +193,16 @@ function Cart() {
                                     <strong>{totalItems}</strong>
                                 </div>
 
-                                <div className="cart-summary-row">
-                                    <span>Spedizione</span>
-                                    <strong>Da calcolare</strong>
-                                </div>
+
 
                                 <div className="cart-summary-total">
                                     <span>Totale</span>
                                     <strong>{formattedTotal}</strong>
                                 </div>
+
+                                <p className="cart-summary-note">
+                                    Il totale verrà confermato nel checkout prima dell&apos;invio dell&apos;ordine.
+                                </p>
 
                                 <Link to="/checkout" className="cart-checkout-button">
                                     Procedi al checkout
@@ -188,7 +211,7 @@ function Cart() {
                                 <button
                                     type="button"
                                     className="cart-clear-button"
-                                    onClick={clearCart}
+                                    onClick={handleOpenClearModal}
                                 >
                                     Svuota Inventario
                                 </button>
@@ -197,6 +220,41 @@ function Cart() {
                     </div>
                 )}
             </section>
+
+            {showClearModal && (
+                <div className="cart-modal-overlay">
+                    <div className="cart-modal">
+                        <div className="cart-modal-inner">
+                            <p className="cart-modal-kicker">Conferma azione</p>
+
+                            <h2>Svuotare l&apos;inventario?</h2>
+
+                            <p>
+                                Tutti gli artefatti presenti nella tua borsa verranno rimossi.
+                                Questa azione non può essere annullata.
+                            </p>
+
+                            <div className="cart-modal-actions">
+                                <button
+                                    type="button"
+                                    className="cart-modal-button secondary"
+                                    onClick={handleCloseClearModal}
+                                >
+                                    Annulla
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className="cart-modal-button danger"
+                                    onClick={handleConfirmClearCart}
+                                >
+                                    Svuota inventario
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
