@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import "./ProductsList.css";
 import { fetchProducts } from '../utils/fetchProducts';
 import ProductCard from '../components/ProductCard';
+import { useSearchParams } from 'react-router-dom';
 
 const sortMap = {
     'prezzo-crescente': { sort: 'price', order: 'asc' },
@@ -10,17 +11,27 @@ const sortMap = {
     'data-recente': { sort: 'updated_at', order: 'desc' }
 };
 
+function getSortFromParams(sort, order) {
+    const found = Object.entries(sortMap).find(
+        ([, value]) => value.sort === sort && value.order === order
+    );
+    return found ? found[0] : 'data-recente';
+}
+
 function ProductsList() {
 
-    const [searchTerm, setSearchTerm] = useState('');
-    const [category, setCategory] = useState('all');
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
-    const [sortBy, setSortBy] = useState('data-recente');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+    const [category, setCategory] = useState(searchParams.get('category') || 'all');
+    const [minPrice, setMinPrice] = useState(searchParams.get('min_price') || '');
+    const [maxPrice, setMaxPrice] = useState(searchParams.get('max_price') || '');
+    const [sortBy, setSortBy] = useState(getSortFromParams(searchParams.get('sort'), searchParams.get('order')));
+
 
     const [products, setProducts] = useState([]);
     const [pagination, setPagination] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
+
 
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
@@ -48,6 +59,10 @@ function ProductsList() {
             if (sort) filters.sort = sort;
             if (order) filters.order = order;
 
+            const urlParams = {...filters};
+            delete urlParams.limit;
+            setSearchParams(urlParams, {replace: true});
+            
             setIsLoading(true);
             setErrorMessage("");
 
