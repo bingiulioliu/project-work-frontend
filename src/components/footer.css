@@ -5,6 +5,7 @@
     border-top: 1px solid rgba(231, 189, 45, 0.28);
     color: #f4efe1;
     padding: 4.5rem 0 1.5rem;
+    margin-top: 4rem;
 }
 
 .footer-brand {
@@ -83,51 +84,16 @@
     transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
-.footer-list a:hover {
+.footer-list a:hover,
+.footer-list a:focus {
     color: #f3c72e;
     padding-left: 0.25rem;
 }
 
-.footer-scroll-card {
-    border: 1px solid rgba(231, 189, 45, 0.35);
-    background:
-        linear-gradient(180deg, rgba(244, 239, 225, 0.08), rgba(244, 239, 225, 0.03));
-    border-radius: 10px;
-    padding: 1.25rem;
-    box-shadow:
-        inset 0 0 0 1px rgba(255, 232, 113, 0.05),
-        0 12px 24px rgba(0, 0, 0, 0.25);
-}
-
-.footer-scroll-label {
-    color: #cfc4ad;
-    font-family: "Cinzel", serif;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.68rem;
-    font-weight: 900;
-    margin-bottom: 0.6rem;
-}
-
-.footer-code {
-    display: inline-block;
-    background: linear-gradient(180deg, #e7bd2d, #c89206);
-    color: #211906;
-    padding: 0.4rem 0.75rem;
-    border-radius: 5px;
-    font-family: "Cinzel", serif;
-    font-size: 0.9rem;
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    margin-bottom: 0.8rem;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.45);
-}
-
-.footer-scroll-text {
-    color: #bdb19a;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 0;
+.footer-list a:focus-visible {
+    outline: 2px solid #f3c72e;
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .footer-bottom {
@@ -151,18 +117,48 @@
     color: #bdb19a;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .quest-footer {
         padding-top: 3.5rem;
     }
 
     .footer-brand-title {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .quest-footer .row {
+        --bs-gutter-x: 0.75rem;
+        --bs-gutter-y: 2rem;
     }
 
+    .footer-title {
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-list li {
+        margin-bottom: 0.5rem;
+    }
+
+    .footer-list a {
+        font-size: 0.78rem;
+        line-height: 1.25;
+    }
+
+    .footer-description {
+        font-size: 0.88rem;
+        margin-bottom: 0.5rem;
+    }
     .footer-logo {
         width: 52px;
         height: 52px;
+    }
+
+    .footer-brand-title {
+        font-size: 1.6rem;
     }
 
     .footer-bottom {
@@ -172,5 +168,9 @@
 
     .footer-slogan {
         text-align: left;
+    }
+
+    .footer-list a {
+        overflow-wrap: anywhere;
     }
 }

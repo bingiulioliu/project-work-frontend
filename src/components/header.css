@@ -45,28 +45,36 @@
 }
 
 .tagline {
-    margin-top: 0.25rem;
+    margin: 0.25rem 0 0;
     color: #cfc4ad;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-family: "Cinzel", serif;
 }
 
 .nav-links {
-    gap: 1.7rem;
+    gap: 1.15rem;
 }
 
 .nav-link {
     color: #c8bda5;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.13em;
     font-family: "Cinzel", serif;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 900;
     text-decoration: none;
     position: relative;
     padding: 0.7rem 0 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.nav-icon {
+    font-size: 0.95rem;
+    line-height: 1;
 }
 
 .nav-link::after {
@@ -79,6 +87,7 @@
     background: #e7bd2d;
     transition: width 0.2s ease;
 }
+
 .nav-link:hover,
 .nav-link.active {
     color: #f3c72e !important;
@@ -91,6 +100,25 @@
     background: #f3c72e;
 }
 
+.nav-action {
+    position: relative;
+}
+
+.nav-badge {
+    min-width: 18px;
+    height: 18px;
+    padding: 0 0.35rem;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #e7bd2d, #c89206);
+    color: #211906;
+    font-family: Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 18px;
+    text-align: center;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.45);
+}
+
 .theme-button {
     width: 42px;
     height: 42px;
@@ -99,22 +127,35 @@
     background: rgba(231, 189, 45, 0.08);
     color: #f3c72e;
     font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .theme-button:hover {
     background: rgba(231, 189, 45, 0.18);
+    border-color: #f3c72e;
+    transform: translateY(-1px);
+}
+
+.theme-button:focus-visible {
+    outline: 2px solid #f3c72e;
+    outline-offset: 4px;
 }
 
 .quest-toggler {
-    width: 56px;
-    height: 46px;
+    width: 48px;
+    height: 42px;
     border: 1px solid rgba(231, 189, 45, 0.65);
     border-radius: 8px;
     background: rgba(231, 189, 45, 0.10);
+    color: #f3c72e;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
+    font-size: 1.6rem;
 }
 
 .quest-toggler:hover {
@@ -126,36 +167,16 @@
     box-shadow: 0 0 0 0.18rem rgba(243, 199, 46, 0.22);
 }
 
-.quest-toggler .navbar-toggler-icon {
-    width: 1.6rem;
-    height: 1.6rem;
-    background-image: none;
-    position: relative;
-}
-
-.quest-toggler .navbar-toggler-icon::before,
-.quest-toggler .navbar-toggler-icon::after,
-.quest-toggler .navbar-toggler-icon {
-    border-top: 2px solid #f3c72e;
-}
-
-.quest-toggler .navbar-toggler-icon::before,
-.quest-toggler .navbar-toggler-icon::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-}
-
-.quest-toggler .navbar-toggler-icon::before {
-    top: 0.45rem;
-}
-
-.quest-toggler .navbar-toggler-icon::after {
-    top: 0.9rem;
-}
-
 @media (max-width: 991px) {
+    .quest-navbar {
+        min-height: 72px;
+    }
+
+    .header-logo {
+        width: 48px;
+        height: 48px;
+    }
+
     .brand-title {
         font-size: 1.55rem;
     }
@@ -164,31 +185,48 @@
         font-size: 0.62rem;
     }
 
-    .header-logo {
-        width: 48px;
-        height: 48px;
-    }
-
     .navbar-collapse {
         margin-top: 1rem;
         padding: 1rem;
         border: 1px solid rgba(231, 189, 45, 0.35);
+        border-radius: 12px;
         background: rgba(21, 17, 13, 0.98);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
     }
 
+    .nav-links {
+        gap: 0.4rem;
+        align-items: flex-start !important;
+    }
+
     .nav-link {
+        width: 100%;
         color: #f4efe1;
+        padding: 0.7rem 0 !important;
+        justify-content: flex-start;
     }
 
-    .nav-link:hover,
-    .nav-link.active {
-        color: #f3c72e !important;
+    .nav-link::after {
+        bottom: 0.35rem;
     }
 
+    .nav-badge {
+        margin-left: auto;
+    }
 
     .theme-button {
         margin-top: 0.8rem;
     }
 }
 
+@media (max-width: 575px) {
+    .container-fluid {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .header-logo {
+        width: 46px;
+        height: 46px;
+    }
+}

@@ -15,10 +15,14 @@ function Header() {
                 <div className="container-fluid px-4 px-lg-5">
                     <NavLink className="navbar-brand brand" to="/">
                         <img
-                            src="img/jason_logo.png"
+                            src="/img/jason_logo.png"
                             alt="JSON's Quest"
                             className="header-logo"
                         />
+                        <div className="brand-text d-none d-sm-block">
+                            <span className="brand-title">JSON&apos;s Quest</span>
+                            <p className="tagline">Prodotti per la missione quotidiana</p>
+                        </div>
 
 
                     </NavLink>
@@ -32,7 +36,7 @@ function Header() {
                         aria-expanded="false"
                         aria-label="Apri menu"
                     >
-                        <span className="navbar-toggler-icon" />
+                        <i className="bi bi-list"></i>
                     </button>
 
                     <div className="collapse navbar-collapse" id="mainNav">
@@ -45,7 +49,8 @@ function Header() {
                                     to="/"
                                     end
                                 >
-                                    Home
+                                    <i className="bi bi-house-door nav-icon"></i>
+                                    <span>Home</span>
                                 </NavLink>
                             </li>
 
@@ -56,7 +61,8 @@ function Header() {
                                     }
                                     to="/products"
                                 >
-                                    Catalogo
+                                    <i className="bi bi-shop nav-icon"></i>
+                                    <span>Catalogo</span>
                                 </NavLink>
                             </li>
 
@@ -67,24 +73,42 @@ function Header() {
                                     }
                                     to="/chi-siamo"
                                 >
-                                    Chi siamo
-                                </NavLink>
-                            </li>
-
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/preferiti">
-                                    Preferiti ({wishlist.length})♥
+                                    <i className="bi bi-people nav-icon"></i>
+                                    <span>Chi siamo</span>
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
                                 <NavLink
                                     className={({ isActive }) =>
-                                        isActive ? "nav-link active" : "nav-link"
+                                        isActive ? "nav-link nav-action active" : "nav-link nav-action"
+                                    }
+                                    to="/preferiti"
+                                    aria-label={`Preferiti: ${wishlist.length} elementi`}
+                                >
+                                    <i className="bi bi-heart nav-icon"></i>
+                                    <span>Preferiti</span>
+
+                                    {wishlist.length > 0 && (
+                                        <span className="nav-badge">{wishlist.length}</span>
+                                    )}
+                                </NavLink>
+                            </li>
+
+                            <li className="nav-item">
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive ? "nav-link nav-action active" : "nav-link nav-action"
                                     }
                                     to="/cart"
+                                    aria-label={`Inventario: ${totalItems} elementi`}
                                 >
-                                    Inventario ({totalItems})🛒
+                                    <i className="bi bi-bag nav-icon"></i>
+                                    <span>Inventario</span>
+
+                                    {totalItems > 0 && (
+                                        <span className="nav-badge">{totalItems}</span>
+                                    )}
                                 </NavLink>
                             </li>
 
