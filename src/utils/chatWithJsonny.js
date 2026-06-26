@@ -1,5 +1,7 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 const CHAT_ENDPOINT = import.meta.env.VITE_CHAT_ENDPOINT || "/ai/assistant";
+const PRESET_QUESTIONS_ENDPOINT =
+  import.meta.env.VITE_CHAT_PRESET_ENDPOINT || "/ai/assistant/preset-questions";
 
 const PREFERRED_KEYS = new Set([
   "reply",
@@ -166,4 +168,24 @@ export async function chatWithJsonny(message, history = [], sessionId = "default
   }
 
   return extractAssistantText(payload);
+}
+
+export async function fetchJsonnyPresetQuestions() {
+  const response = await fetch(`${BACKEND_URL}${PRESET_QUESTIONS_ENDPOINT}`);
+
+  if (!response.ok) {
+    throw new Error("Errore durante il recupero delle domande preimpostate");
+  }
+
+  const payload = await response.json();
+  const directList = Array.isArray(payload?.result)
+    ? payload.result
+    : Array.isArray(payload)
+      ? payload
+      : [];
+
+  return directList
+    .filter((item) => typeof item === "string")
+    .map((item) => item.trim())
+    .filter(Boolean);
 }

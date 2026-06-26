@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { chatWithJsonny } from "../utils/chatWithJsonny";
+import { chatWithJsonny, fetchJsonnyPresetQuestions } from "../utils/chatWithJsonny";
 import "./ChatbotWidget.css";
 
 const STORAGE_SESSION_KEY = "jsonny_session_id";
@@ -21,6 +21,13 @@ const INITIAL_MESSAGES = [
     role: "assistant",
     content: "Ciao, sono Jsonny. Come posso aiutarti oggi?",
   },
+];
+
+const FALLBACK_PRESET_QUESTIONS = [
+  "che prodotti vendi?",
+  "parlami di json's quest",
+  "quali categorie ci sono",
+  "cosa fa il bastone tra le ruote",
 ];
 
 function getProductSlugFromPath(pathname) {
@@ -50,6 +57,8 @@ function ChatbotWidget() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
+  const [presetQuestions, setPresetQuestions] = useState(FALLBACK_PRESET_QUESTIONS);
+  const [hasLoadedPresetQuestions, setHasLoadedPresetQuestions] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -76,6 +85,33 @@ function ChatbotWidget() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen || hasLoadedPresetQuestions) return;
+
+    let cancelled = false;
+
+    async function loadPresetQuestions() {
+      try {
+        const questions = await fetchJsonnyPresetQuestions();
+        if (!cancelled && questions.length > 0) {
+          setPresetQuestions(questions);
+        }
+      } catch {
+        // Mantiene fallback locale senza interrompere la chat
+      } finally {
+        if (!cancelled) {
+          setHasLoadedPresetQuestions(true);
+        }
+      }
+    }
+
+    loadPresetQuestions();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, hasLoadedPresetQuestions]);
+
   const historyForApi = useMemo(
     () =>
       messages
@@ -84,10 +120,8 @@ function ChatbotWidget() {
     [messages]
   );
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const trimmedInput = input.trim();
+  async function sendMessage(rawMessage) {
+    const trimmedInput = String(rawMessage || "").trim();
     if (!trimmedInput || isLoading) return;
 
     const userMessage = { role: "user", content: trimmedInput };
@@ -120,6 +154,15 @@ function ChatbotWidget() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await sendMessage(input);
+  }
+
+  async function handlePresetQuestionClick(question) {
+    await sendMessage(question);
   }
 
   function handleTogglePointerDown(event) {
@@ -258,6 +301,22 @@ function ChatbotWidget() {
 
             <div ref={messagesEndRef} />
           </div>
+
+          {presetQuestions.length > 0 ? (
+            <div className="chatbot-preset-questions" aria-label="Domande preimpostate">
+              {presetQuestions.map((question) => (
+                <button
+                  key={question}
+                  type="button"
+                  className="chatbot-preset-button"
+                  onClick={() => handlePresetQuestionClick(question)}
+                  disabled={isLoading}
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+          ) : null}
 
           <form className="chatbot-form" onSubmit={handleSubmit}>
             <input

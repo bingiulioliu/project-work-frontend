@@ -1,7 +1,7 @@
 .chatbot-widget {
   position: fixed;
   right: 2.5rem;
-  bottom: 4rem;
+  bottom: 10rem;
   z-index: 1200;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
 
 .chatbot-panel {
   width: min(360px, calc(100vw - 2rem));
-  height: 460px;
+  height: 600px;
   border: 1px solid rgba(133, 88, 49, 0.7);
   border-radius: 16px;
   overflow: hidden;
@@ -85,6 +85,36 @@
   gap: 0.65rem;
   padding: 0.9rem;
   overflow-y: auto;
+}
+
+.chatbot-preset-questions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem;
+  padding: 0.55rem 0.9rem 0.2rem;
+}
+
+.chatbot-preset-button {
+  border: 1px solid rgba(245, 242, 235, 0.25);
+  background: rgba(245, 242, 235, 0.08);
+  color: var(--text-ivory);
+  border-radius: 8px;
+  padding: 0.26rem 0.45rem;
+  min-height: 2rem;
+  font-size: 0.72rem;
+  line-height: 1.15;
+  text-align: center;
+  cursor: pointer;
+}
+
+.chatbot-preset-button:hover:not(:disabled) {
+  border-color: rgba(217, 119, 6, 0.7);
+  background: rgba(217, 119, 6, 0.25);
+}
+
+.chatbot-preset-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .chatbot-message {
@@ -198,6 +228,6 @@
   }
 
   .chatbot-panel {
-    height: 70vh;
+    height: 78vh;
   }
 }
