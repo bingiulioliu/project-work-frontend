@@ -55,14 +55,17 @@ export default function HomePage() {
             </p>
 
             <div className="quest-actions d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-              <Link to="/products" className="btn quest-btn quest-btn-primary">
-                <span className="me-2">🪄</span>
-                Vedi offerte
-              </Link>
 
               <Link to="/products" className="btn quest-btn quest-btn-secondary">
+                <span className="me-2">📜</span>
                 Inizia l&apos;avventura
               </Link>
+
+              <Link to="/products?page=1&category=testato-sui-goblin&sort=updated_at&order=desc" className="btn quest-btn quest-btn-primary">
+                <span className="me-2">⚔️</span>
+                Testato sui goblin
+              </Link>
+              
             </div>
 
           </div>
@@ -77,7 +80,7 @@ export default function HomePage() {
               <div className="quest-section-heading d-flex justify-content-between align-items-center mb-4">
                 <h2>Oggetti più rari</h2>
 
-                <Link to="/products" className="quest-see-all">
+                <Link to="/products?page=1&sort=price&order=desc&rarity=legendary" className="quest-see-all">
                   Vedi tutti
                 </Link>
               </div>
@@ -108,7 +111,7 @@ export default function HomePage() {
                 <div className="quest-section-heading d-flex justify-content-between align-items-center mb-4">
                   <h2>Essenziali</h2>
 
-                  <Link to="/products" className="quest-see-all">
+                  <Link to="/products?page=1&sort=price&order=asc&rarity=common" className="quest-see-all">
                     Vedi tutti
                   </Link>
                 </div>
