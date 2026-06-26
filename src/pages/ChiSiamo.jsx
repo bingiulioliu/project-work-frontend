@@ -87,6 +87,13 @@ function ChiSiamo() {
                     <div className="about-section-heading text-center">
                         <p className="about-kicker">La squadra della gilda</p>
                         <h2>Gli artefici della quest</h2>
+                        <div className="team-image-container my-4">
+                            <img
+                                src="img/team-goblin.png"
+                                alt="Il team di JSON's Quest"
+                                className="team-photo"
+                            />
+                        </div>
                     </div>
 
                     <div className="row g-4">
