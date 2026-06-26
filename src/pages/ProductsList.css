@@ -1,55 +1,185 @@
+/* =========================
+   PRODUCTS PAGE - TITLE
+========================= */
+
 .page-title {
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     letter-spacing: 2px;
     color: var(--text-ivory);
-    /*---------*/
     font-size: 2.5rem;
     font-weight: bold;
     text-transform: uppercase;
     transition: font-size 0.2s ease-in-out;
+    margin-bottom: 2rem;
 }
 
-/* Pannello orizzontale superiore dei filtri */
+/* =========================
+   FILTER PANEL
+========================= */
+
 .filter-main-box {
-    background-color: var(--bg-header-box);
+    background:
+        radial-gradient(circle at top left, rgba(231, 189, 45, 0.08), transparent 32%),
+        linear-gradient(180deg, rgba(20, 18, 10, 0.96), rgba(9, 8, 3, 0.96));
     border: 1px solid var(--border-gold);
-    padding: 26px;
-    border-radius: 6px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
 }
 
-/* Modifiche ai campi input e select per adattarsi al tema scuro */
+.filter-label {
+    color: var(--text-ivory);
+    font-family: "Cinzel", serif;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
 .filter-input {
+    min-height: 44px;
     background-color: var(--bg-black) !important;
     border: 1px solid var(--border-gold) !important;
     color: var(--text-ivory) !important;
+    border-radius: 6px;
+    font-size: 0.92rem;
+}
+
+.filter-input::placeholder {
+    color: rgba(244, 239, 225, 0.35);
 }
 
 .filter-input:focus {
     border-color: var(--button-amber) !important;
-    box-shadow: 0 0 8px rgba(217, 119, 6, 0.4) !important;
+    box-shadow: 0 0 0 0.18rem rgba(217, 119, 6, 0.25) !important;
 }
 
-.filter-range::-webkit-slider-thumb {
-    background: var(--button-amber) !important;
+.price-filter-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
 }
 
-/* STRUTTURA ESTERNA DELLE CARD (Design Sfumato Rosso/Borgogna) */
+/* =========================
+   RARITY + RESET
+========================= */
+
+.filter-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    padding-top: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.rarity-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.rarity-label {
+    margin-bottom: 0;
+}
+
+.rarity-toggle-group {
+    display: flex;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+}
+
+.rarity-toggle {
+    background-color: var(--bg-black);
+    border: 1px solid var(--border-gold);
+    color: var(--text-ivory);
+    padding: 0.55rem 0.85rem;
+    border-radius: 6px;
+    font-family: "Cinzel", serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.rarity-toggle:hover {
+    border-color: var(--button-amber);
+    color: var(--button-amber);
+}
+
+.rarity-toggle-common.is-active {
+    background-color: #6b7280;
+    border-color: #9ca3af;
+    color: #ffffff;
+}
+
+.rarity-toggle-rare.is-active {
+    background-color: #2563eb;
+    border-color: #60a5fa;
+    color: #ffffff;
+}
+
+.rarity-toggle-legendary.is-active {
+    background: linear-gradient(180deg, #ef9300, #d97800);
+    border-color: var(--button-amber);
+    color: #140b04;
+}
+
+.reset-filters-button {
+    min-height: 42px;
+    border: 1px solid rgba(231, 189, 45, 0.65);
+    border-radius: 6px;
+    background: rgba(231, 189, 45, 0.08);
+    color: #f3c72e;
+    padding: 0.55rem 0.95rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.2s ease;
+}
+
+.reset-filters-button:hover {
+    background: rgba(231, 189, 45, 0.18);
+    border-color: #f3c72e;
+    color: #ffd95a;
+}
+
+/* =========================
+   PRODUCTS COUNT
+========================= */
+
+.products-count {
+    color: #cfc4ad;
+    font-family: "Cinzel", serif;
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.products-count p {
+    margin-bottom: 0;
+}
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
 .item-card {
     background: radial-gradient(circle, var(--bg-card-center) 0%, var(--bg-card-edge) 100%);
     border: 1px solid var(--border-gold);
     border-radius: 4px;
     padding: 12px;
     height: 100%;
-
-    /*transizione fluidasui cambiamenti di dimensione */
     transition: all 0.3s ease-in-out;
-
-    /*Evita che la card diventi troppo stretta e illeggibile */
     min-width: 250px;
     max-width: 340px;
     margin: 0 auto;
-
 }
 
 .item-card:hover {
@@ -58,7 +188,6 @@
     border-color: var(--button-amber);
 }
 
-/* Filetto interno decorativo */
 .card-inner-border {
     border: 1px solid rgba(133, 88, 49, 0.3);
     padding: 15px 10px;
@@ -85,7 +214,7 @@
 }
 
 .item-card-title {
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     font-size: 1.15rem;
     color: var(--text-ivory);
     margin-bottom: 5px;
@@ -98,17 +227,16 @@
 }
 
 .item-card-price {
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     font-size: 1.25rem;
     color: var(--text-ivory);
     font-weight: bold;
 }
 
-/* Pulsante principale color ambra */
 .btn-amber-action {
     background-color: var(--button-amber);
     color: var(--bg-black);
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     font-weight: bold;
     border: 1px solid #b45309;
     padding: 6px 12px;
@@ -121,18 +249,9 @@
     color: var(--text-ivory);
 }
 
-.products-count {
-    color: #cfc4ad;
-    font-family: "Cinzel", serif;
-    font-size: 0.8rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.products-count p {
-    margin-bottom: 0;
-}
+/* =========================
+   PAGINATION
+========================= */
 
 .products-pagination {
     display: flex;
@@ -177,7 +296,53 @@
     text-transform: uppercase;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1200px) {
+    .page-title {
+        font-size: 2rem;
+        letter-spacing: 1.5px;
+    }
+}
+
 @media (max-width: 767px) {
+    .page-title {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        line-height: 1.3;
+    }
+
+    .filter-main-box {
+        padding: 1rem;
+    }
+
+    .filter-bottom-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .rarity-area {
+        width: 100%;
+    }
+
+    .rarity-toggle-group {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        gap: 0.45rem;
+    }
+
+    .rarity-toggle {
+        padding: 0.5rem 0.4rem;
+        font-size: 0.62rem;
+    }
+
+    .reset-filters-button {
+        width: 100%;
+    }
+
     .products-page-button {
         width: 100%;
     }
@@ -189,72 +354,12 @@
     }
 }
 
-/*--------------*/
-
-@media (max-width: 1200px) {
-    .page-title {
-        font-size: 2rem;
-        letter-spacing: 1.5px;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .page-title {
-        font-size: 1.6rem;
-        letter-spacing: 1px;
-        line-height: 1.3;
-    }
-}
-
-.rarity-toggle-group {
-    display: flex;
-    gap: 8px;
-}
-
-.rarity-toggle {
-    flex: 1;
-    background-color: var(--bg-black);
-    border: 1px solid var(--border-gold);
-    color: var(--text-ivory);
-    padding: 0.5rem 0.6rem;
-    border-radius: 4px;
-    font-family: "Cinzel", serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.rarity-toggle:hover {
-    border-color: var(--button-amber);
-}
-
-/* Comune - attivo */
-.rarity-toggle-common.is-active {
-    background-color: #6b7280;
-    border-color: #9ca3af;
-    color: #ffffff;
-}
-
-/* Raro - attivo */
-.rarity-toggle-rare.is-active {
-    background-color: #2563eb;
-    border-color: #60a5fa;
-    color: #ffffff;
-}
-
-/* Leggendario - attivo */
-.rarity-toggle-legendary.is-active {
-    background: linear-gradient(180deg, #ef9300, #d97800);
-    border-color: var(--button-amber);
-    color: #140b04;
-}
-
 @media (max-width: 480px) {
+    .price-filter-group {
+        grid-template-columns: 1fr;
+    }
+
     .rarity-toggle-group {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 }
