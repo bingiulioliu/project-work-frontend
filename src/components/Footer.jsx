@@ -9,7 +9,7 @@ function Footer() {
                     <div className="col-12 col-lg-5">
                         <Link to="/" className="footer-brand">
                             <img
-                                src="img/jason_logo.png"
+                                src="/img/jason_logo.png"
                                 alt="JSON's Quest"
                                 className="footer-logo"
                             />
@@ -23,52 +23,52 @@ function Footer() {
                         </Link>
 
                         <p className="footer-description">
-                            Un catalogo fantasy per avventurieri e
-                            cercatori di artefatti utili nelle sfide di ogni giorno.
+                            Un catalogo fantasy per avventurieri e cercatori di artefatti
+                            utili nelle sfide di ogni giorno.
                         </p>
                     </div>
 
-                    <div className="col-6 col-lg-2">
-                        <h3 className="footer-title">Navigazione</h3>
+                    <div className="col-4 col-lg-2">
+                        <div className="footer-column">
+                            <h5 className="footer-title">Navigazione</h5>
 
-                        <ul className="footer-list">
-                            <li>
-                                <Link to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/products">Catalogo</Link>
-                            </li>
-                            <li>
-                                <Link to="/chi-siamo">Chi siamo</Link>
-                            </li>
-                            <li>
-                                <Link to="/preferiti">Preferiti</Link>
-                            </li>
-                            <li>
-                                <Link to="/cart">Inventario</Link>
-                            </li>
-                        </ul>
+                            <ul className="footer-list">
+                                <li><Link to="/">Home</Link></li>
+                                <li><Link to="/products">Catalogo</Link></li>
+                                <li><Link to="/chi-siamo">Chi siamo</Link></li>
+                                <li><Link to="/preferiti">Preferiti</Link></li>
+                                <li><Link to="/cart">Inventario</Link></li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div className="col-6 col-lg-2">
-                        <h3 className="footer-title">Categorie</h3>
+                    <div className="col-4 col-lg-2">
+                        <div className="footer-column">
+                            <h5 className="footer-title">Categorie</h5>
 
-                        <ul className="footer-list">
-                            <li>
-                                <Link to="/products?page=1&rarity=legendary&sort=updated_at&order=desc">Le nostre rarità</Link>
-                            </li>
-                            <li>
-                                <Link to="/products?page=1&rarity=common&sort=price&order=asc">Gli essenziali</Link>
-                            </li>
-                            <li>
-                                <Link to="/products?page=1&category=equipaggiamento&sort=updated_at&order=desc">Equipaggiamento</Link>
-                            </li>
-                            <li>
-                                <Link to="/products?page=1&category=consumabili&sort=updated_at&order=desc">Consumabili</Link>
-                            </li>
-                        </ul>
+                            <ul className="footer-list">
+                                <li><Link to="/products?category=armi">Armi</Link></li>
+                                <li><Link to="/products?category=accessori">Accessori</Link></li>
+                                <li><Link to="/products?category=equipaggiamento">Equipaggiamento</Link></li>
+                                <li><Link to="/products?category=consumabili">Consumabili</Link></li>
+                                <li><Link to="/products?category=libri">Libri</Link></li>
+                                <li><Link to="/products?category=reliquie">Reliquie</Link></li>
+                            </ul>
+                        </div>
                     </div>
-                    
+
+                    <div className="col-4 col-lg-3">
+                        <div className="footer-column">
+                            <h5 className="footer-title">Scopri</h5>
+
+                            <ul className="footer-list">
+                                <li><Link to="/products?category=ultimi-arrivi">Ultimi arrivi</Link></li>
+                                <li><Link to="/products?category=sconti-del-mercante">Sconti del mercante</Link></li>
+                                <li><Link to="/products?category=imperdibili">Imperdibili</Link></li>
+                                <li><Link to="/products?category=idea-regalo">Idea regalo</Link></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="footer-bottom">
@@ -77,7 +77,7 @@ function Footer() {
                     </p>
 
                     <p className="footer-slogan">
-                        Le risposte ai tuoi problemi quotidiani, l&apos;equipaggiamento per le tue battaglie.
+                        L&apos;equipaggiamento giusto per ogni missione quotidiana.
                     </p>
                 </div>
             </div>
