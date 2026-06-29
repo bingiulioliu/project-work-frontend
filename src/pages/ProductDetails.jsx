@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "./ProductDetails.css";
 import { getImgUrl } from "../utils/getImgUrl";
@@ -13,7 +13,13 @@ function ProductDetails() {
 
     const { toggleWishlist, isInWishlist } = useWishlist();
 
-    const { addToCart } = useCart();
+    const {
+        cartItems,
+        addToCart,
+        increaseQuantity,
+        decreaseQuantity,
+        removeFromCart,
+    } = useCart();
 
     const { suggestedProducts } = fetchSuggestedProducts(slug);
 
@@ -22,11 +28,14 @@ function ProductDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const [showCartModal, setShowCartModal] = useState(false);
+    const [isCartModalClosing, setIsCartModalClosing] = useState(false);
+    const modalCloseTimeoutRef = useRef(null);
 
     useEffect(() => {
         setIsLoading(true);
         setErrorMessage("");
         setShowCartModal(false);
+        setIsCartModalClosing(false);
 
         fetch(`http://localhost:3000/products/${slug}`)
             .then((response) => response.json())
@@ -51,11 +60,23 @@ function ProductDetails() {
     }
 
     function handleAddToCart() {
+        if (modalCloseTimeoutRef.current) {
+            clearTimeout(modalCloseTimeoutRef.current);
+            modalCloseTimeoutRef.current = null;
+        }
+
+        setIsCartModalClosing(false);
         addToCart(product);
         setShowCartModal(true);
     }
 
     function handleCloseCartModal() {
+        if (modalCloseTimeoutRef.current) {
+            clearTimeout(modalCloseTimeoutRef.current);
+            modalCloseTimeoutRef.current = null;
+        }
+
+        setIsCartModalClosing(false);
         setShowCartModal(false);
     }
 
@@ -66,6 +87,34 @@ function ProductDetails() {
     function handleFavoriteClick() {
         toggleWishlist(product);
     }
+
+    function handleRemoveFromModal(productSlug) {
+        removeFromCart(productSlug);
+
+        if (productSlug !== product.slug) {
+            return;
+        }
+
+        setIsCartModalClosing(true);
+
+        if (modalCloseTimeoutRef.current) {
+            clearTimeout(modalCloseTimeoutRef.current);
+        }
+
+        modalCloseTimeoutRef.current = setTimeout(() => {
+            setShowCartModal(false);
+            setIsCartModalClosing(false);
+            modalCloseTimeoutRef.current = null;
+        }, 500);
+    }
+
+    useEffect(() => {
+        return () => {
+            if (modalCloseTimeoutRef.current) {
+                clearTimeout(modalCloseTimeoutRef.current);
+            }
+        };
+    }, []);
 
     if (isLoading) {
         return (
@@ -118,6 +167,13 @@ function ProductDetails() {
     const imageSrc = product.image?.startsWith("http")
         ? product.image
         : getImgUrl(product.image);
+
+    const productInCart = cartItems.find((item) => item.slug === product.slug);
+    const productQuantity = productInCart?.quantity ?? 0;
+    const getCartQuantityBySlug = (productSlug) => {
+        const cartItem = cartItems.find((item) => item.slug === productSlug);
+        return cartItem?.quantity ?? 0;
+    };
 
     return (
         <main className="product-details-page">
@@ -222,14 +278,55 @@ function ProductDetails() {
                                     )}
 
                                     <div className="product-actions">
-                                        <button
-                                            type="button"
-                                            className="product-cart-button"
-                                            onClick={handleAddToCart}
-                                        >
-                                            <i className="bi bi-bag-plus"></i>
-                                            <span>Aggiungi all&apos;inventario</span>
-                                        </button>
+                                        {productQuantity > 0 ? (
+                                            <div className="product-cart-controls" aria-label="Gestione quantità nel carrello">
+                                                <button
+                                                    type="button"
+                                                    className="product-quantity-button"
+                                                    onClick={() => {
+                                                        if (productQuantity > 1) {
+                                                            decreaseQuantity(product.slug);
+                                                        }
+                                                    }}
+                                                    disabled={productQuantity <= 1}
+                                                    aria-label={`Diminuisci quantità di ${product.name}`}
+                                                >
+                                                    <i className="bi bi-dash-lg"></i>
+                                                </button>
+
+                                                <span className="product-quantity-value" aria-live="polite">
+                                                    {productQuantity}
+                                                </span>
+
+                                                <button
+                                                    type="button"
+                                                    className="product-quantity-button"
+                                                    onClick={() => increaseQuantity(product.slug)}
+                                                    aria-label={`Aumenta quantità di ${product.name}`}
+                                                >
+                                                    <i className="bi bi-plus-lg"></i>
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    className="product-remove-button"
+                                                    onClick={() => removeFromCart(product.slug)}
+                                                    aria-label={`Rimuovi ${product.name} dal carrello`}
+                                                    title="Rimuovi dal carrello"
+                                                >
+                                                    <i className="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                type="button"
+                                                className="product-cart-button"
+                                                onClick={handleAddToCart}
+                                            >
+                                                <i className="bi bi-bag-plus"></i>
+                                                <span>Aggiungi all&apos;inventario</span>
+                                            </button>
+                                        )}
 
                                         <button
                                             type="button"
@@ -250,9 +347,9 @@ function ProductDetails() {
             </section>
 
             {showCartModal && (
-                <div className="add-cart-modal-overlay">
+                <div className={`add-cart-modal-overlay ${isCartModalClosing ? "is-closing" : ""}`}>
                     <aside
-                        className="add-cart-modal"
+                        className={`add-cart-modal ${isCartModalClosing ? "is-closing" : ""}`}
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="add-cart-modal-title"
@@ -288,6 +385,45 @@ function ProductDetails() {
                             </div>
                         </div>
 
+                        <div className="add-cart-selected-controls" aria-label="Gestione quantità prodotto aggiunto">
+                            <button
+                                type="button"
+                                className="add-cart-item-quantity-button"
+                                onClick={() => {
+                                    if (productQuantity > 1) {
+                                        decreaseQuantity(product.slug);
+                                    }
+                                }}
+                                disabled={productQuantity <= 1}
+                                aria-label={`Diminuisci quantità di ${product.name}`}
+                            >
+                                <i className="bi bi-dash-lg"></i>
+                            </button>
+
+                            <span className="add-cart-item-quantity-value" aria-live="polite">
+                                {productQuantity}
+                            </span>
+
+                            <button
+                                type="button"
+                                className="add-cart-item-quantity-button"
+                                onClick={() => increaseQuantity(product.slug)}
+                                aria-label={`Aumenta quantità di ${product.name}`}
+                            >
+                                <i className="bi bi-plus-lg"></i>
+                            </button>
+
+                            <button
+                                type="button"
+                                className="add-cart-item-remove-button"
+                                onClick={() => handleRemoveFromModal(product.slug)}
+                                aria-label={`Rimuovi ${product.name} dal carrello`}
+                                title="Rimuovi dal carrello"
+                            >
+                                <i className="bi bi-trash"></i>
+                            </button>
+                        </div>
+
                         <p className="add-cart-message">
                             <strong>{product.name}</strong> è stato aggiunto all&apos;inventario.
                         </p>
@@ -298,6 +434,7 @@ function ProductDetails() {
 
                                 <div className="add-cart-suggestions-list">
                                     {suggestedProducts.slice(0, 3).map((suggestedProduct) => {
+                                        const suggestedQuantity = getCartQuantityBySlug(suggestedProduct.slug);
                                         const suggestedImageSrc = suggestedProduct.image?.startsWith("http")
                                             ? suggestedProduct.image
                                             : getImgUrl(suggestedProduct.image);
@@ -337,15 +474,56 @@ function ProductDetails() {
                                                     <strong>{suggestedPrice}</strong>
                                                 </div>
 
-                                                <button
-                                                    type="button"
-                                                    className="add-cart-suggestion-button"
-                                                    onClick={() => addToCart(suggestedProduct)}
-                                                    aria-label={`Aggiungi ${suggestedProduct.name} all'inventario`}
-                                                    title="Aggiungi all'inventario"
-                                                >
-                                                    <i className="bi bi-bag-plus"></i>
-                                                </button>
+                                                {suggestedQuantity > 0 ? (
+                                                    <div className="add-cart-item-controls" aria-label={`Gestione quantità di ${suggestedProduct.name}`}>
+                                                        <button
+                                                            type="button"
+                                                            className="add-cart-item-quantity-button"
+                                                            onClick={() => {
+                                                                if (suggestedQuantity > 1) {
+                                                                    decreaseQuantity(suggestedProduct.slug);
+                                                                }
+                                                            }}
+                                                            disabled={suggestedQuantity <= 1}
+                                                            aria-label={`Diminuisci quantità di ${suggestedProduct.name}`}
+                                                        >
+                                                            <i className="bi bi-dash-lg"></i>
+                                                        </button>
+
+                                                        <span className="add-cart-item-quantity-value" aria-live="polite">
+                                                            {suggestedQuantity}
+                                                        </span>
+
+                                                        <button
+                                                            type="button"
+                                                            className="add-cart-item-quantity-button"
+                                                            onClick={() => increaseQuantity(suggestedProduct.slug)}
+                                                            aria-label={`Aumenta quantità di ${suggestedProduct.name}`}
+                                                        >
+                                                            <i className="bi bi-plus-lg"></i>
+                                                        </button>
+
+                                                        <button
+                                                            type="button"
+                                                            className="add-cart-item-remove-button"
+                                                            onClick={() => handleRemoveFromModal(suggestedProduct.slug)}
+                                                            aria-label={`Rimuovi ${suggestedProduct.name} dal carrello`}
+                                                            title="Rimuovi dal carrello"
+                                                        >
+                                                            <i className="bi bi-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <button
+                                                        type="button"
+                                                        className="add-cart-suggestion-button"
+                                                        onClick={() => addToCart(suggestedProduct)}
+                                                        aria-label={`Aggiungi ${suggestedProduct.name} all'inventario`}
+                                                        title="Aggiungi all'inventario"
+                                                    >
+                                                        <i className="bi bi-bag-plus"></i>
+                                                    </button>
+                                                )}
                                             </article>
                                         );
                                     })}
