@@ -43,3 +43,39 @@ body {
   padding-bottom: 50px;
 
 }
+
+.route-transition-container {
+  min-height: 1px;
+}
+
+.route-transition-container.route-enter {
+  animation: routeFadeIn 0.5s ease both;
+}
+
+.route-transition-container.route-exit {
+  animation: routeFadeOut 0.5s ease both;
+}
+
+@keyframes routeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes routeFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

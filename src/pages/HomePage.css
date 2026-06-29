@@ -158,7 +158,6 @@
     background:
         linear-gradient(180deg, #1c1a11 0%, #211e13 100%);
     padding: 8rem 0 5.5rem;
-    border-top: 1px solid rgba(225, 189, 75, 0.18);
 }
 
 .quest-products-section+.quest-products-section {
@@ -202,7 +201,6 @@
 .quest-market {
     min-height: 55vh;
     background: #1c1a11;
-    padding: 4rem 0 0;
     position: relative;
     overflow: hidden;
 }
