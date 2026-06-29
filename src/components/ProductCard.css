@@ -5,6 +5,16 @@
     padding: 1rem;
     color: #fff7e8;
     box-shadow: 0 14px 26px rgba(0, 0, 0, 0.35);
+    height: 100%;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quest-card:hover {
+    transform: translateY(-4px);
+    border-color: #e7bd2d;
+    box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.5),
+        0 0 18px rgba(231, 189, 45, 0.08);
 }
 
 .quest-card-inner {
@@ -20,8 +30,12 @@
 }
 
 .quest-card-image-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 190px;
     text-decoration: none;
+    margin-bottom: 1.3rem;
 }
 
 .quest-card-image {
@@ -29,7 +43,12 @@
     height: 180px;
     object-fit: contain;
     display: block;
-    margin-bottom: 1.6rem;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.45));
+    transition: transform 0.2s ease;
+}
+
+.quest-card-image-link:hover .quest-card-image {
+    transform: scale(1.04);
 }
 
 .quest-card-body {
@@ -44,8 +63,9 @@
     margin-bottom: 0.7rem;
     padding: 0.25rem 0.65rem;
     border-radius: 999px;
+    font-family: "Cinzel", serif;
     font-size: 0.65rem;
-    font-weight: 800;
+    font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.12em;
 }
@@ -69,10 +89,19 @@
     font-family: "Cormorant Garamond", serif;
     color: #fff7e8;
     font-size: 1.45rem;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.1;
     text-transform: uppercase;
     margin-bottom: 0.8rem;
+}
+
+.quest-card-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.quest-card-title a:hover {
+    color: #f3c72e;
 }
 
 .quest-card-description {
@@ -80,9 +109,7 @@
     font-style: italic;
     line-height: 1.35;
     margin-bottom: 1.2rem;
-
     display: -webkit-box;
-
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -97,185 +124,287 @@
     margin-bottom: 1rem;
 }
 
-.quest-card-button {
-    width: 100%;
-    border: 0;
-    border-radius: 3px;
-    background: #e58400;
-    color: #140b04;
-    padding: 0.8rem 1rem;
-    font-family: "Cinzel", serif;
-    font-weight: 900;
-    font-size: 85%;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.quest-card-button:hover {
-    background: #ff9d18;
-    transform: translateY(-2px);
-}
-
-.quest-card-detail {
-    display: inline-block;
-    margin-top: 0.9rem;
-    color: #f0c34a;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    text-decoration: none;
-}
-
-.quest-card-detail:hover {
-    color: #ffe27a;
-}
-
-.quest-card-image-wrapper {
-    position: relative;
-}
+/* =========================
+   CUORE PREFERITI
+========================= */
 
 .quest-favorite-button {
     position: absolute;
-    top: -1.0rem;
-    right: -1.0rem;
+    top: 0.75rem;
+    right: 0.75rem;
     z-index: 20;
 
     width: 42px;
     height: 42px;
-    border-radius: 50%;
-    border: 2px solid #e7bd2d;
+    padding: 0;
 
+    border-radius: 999px;
+    border: 1px solid rgba(231, 189, 45, 0.75);
     background: rgba(13, 11, 5, 0.9);
     color: #f3c72e;
 
-    font-size: 1.35rem;
-    line-height: 1;
+    display: grid;
+    place-items: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.05rem;
+    line-height: 1;
 
     cursor: pointer;
     box-shadow: 0 0 14px rgba(0, 0, 0, 0.55);
-    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .quest-favorite-button:hover {
-    transform: scale(1.08);
     background: rgba(231, 189, 45, 0.18);
+    border-color: #f3c72e;
+    color: #ffd95a;
+    transform: translateY(-1px) scale(1.04);
 }
 
 .quest-favorite-button.is-favorite {
-    background: #e7bd2d;
-    color: #3a0810;
-    box-shadow: 0 0 18px rgba(231, 189, 45, 0.6);
+    background: rgba(220, 53, 69, 0.16);
+    border-color: rgba(255, 107, 107, 0.8);
+    color: #ff6b6b;
+    box-shadow: 0 0 18px rgba(220, 53, 69, 0.22);
 }
+
+.quest-favorite-button:focus-visible {
+    outline: 2px solid #f3c72e;
+    outline-offset: 4px;
+}
+
+.quest-favorite-button i {
+    display: block;
+    line-height: 1;
+    transform: translateY(2px);
+}
+
+/* =========================
+   AZIONI CARD
+========================= */
 
 .quest-card-actions {
     margin-top: auto;
 }
 
-.quest-card-cart-message {
-    margin: 0.9rem 0 0;
-    color: #0e9131;
+.quest-card-button {
+    width: 100%;
+    min-height: 44px;
+
+    border: 1px solid rgba(231, 189, 45, 0.85);
+    border-radius: 6px;
+    background: linear-gradient(180deg, #ef9300, #d97800);
+    color: #140b04;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    padding: 0.8rem 1rem;
     font-family: "Cinzel", serif;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.55);
+    transition: all 0.2s ease;
+}
+
+.quest-card-button:hover {
+    background: linear-gradient(180deg, #ffae24, #ec8500);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.62);
+}
+
+.quest-card-button i {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* =========================
+   PRODOTTO GIÀ NELL'INVENTARIO
+========================= */
+
+.quest-card-cart-controls {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.quest-card-cart-status {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: #f3c72e;
+    font-family: "Cinzel", serif;
+    font-size: 0.68rem;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     text-align: center;
-    text-shadow: 0 0 10px rgba(243, 199, 46, 0.35);
-    animation: cartMessageFade 0.25s ease;
-}
-
-@keyframes cartMessageFade {
-    from {
-        opacity: 0;
-        transform: translateY(-4px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --------------bottone carrello sotto 400px------------- */
-
-.quest-card-button .button-icon {
-    display: none;
-}
-
-
-.quest-card-button .button-text {
-    display: inline;
-}
-
-
-
-@media (max-width: 520px) {
-
-
-    .quest-card-button .button-text {
-        display: none;
-    }
-
-
-    .quest-card-button .button-icon {
-        display: inline-block;
-        font-size: 1.4rem;
-
-    }
-}
-
-
-.quest-card-cart-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.quest-card-cart-status {
-    margin: 0;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-align: center;
-    color: #f4c542;
 }
 
 .quest-card-quantity-actions {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    width: fit-content;
+    border: 1px solid rgba(231, 189, 45, 0.55);
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(13, 11, 5, 0.72);
 }
 
 .quest-card-quantity-button {
     width: 36px;
     height: 36px;
-    border: 1px solid #f4c542;
-    border-radius: 50%;
-    background-color: transparent;
-    color: #f4c542;
-    font-weight: 700;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #f3c72e;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quest-card-quantity-button:hover:not(:disabled) {
+    background: rgba(231, 189, 45, 0.14);
+    color: #ffd95a;
+}
+
+.quest-card-quantity-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.quest-card-quantity-button i {
+    font-size: 0.82rem;
+    line-height: 1;
 }
 
 .quest-card-quantity-value {
-    min-width: 24px;
-    text-align: center;
-    font-weight: 700;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 0.55rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-left: 1px solid rgba(231, 189, 45, 0.35);
+    border-right: 1px solid rgba(231, 189, 45, 0.35);
+
     color: #f4efe1;
+    font-weight: 900;
+    font-size: 0.9rem;
 }
 
 .quest-card-remove-button {
-    border: 1px solid #f4c542;
+    width: 42px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid rgba(220, 53, 69, 0.65);
     border-radius: 8px;
-    padding: 0.5rem 0.75rem;
-    background-color: transparent;
-    color: #f4c542;
-    font-weight: 700;
+    background: rgba(220, 53, 69, 0.08);
+    color: #ff6b6b;
+    display: grid;
+    place-items: center;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quest-card-remove-button:hover {
+    background: rgba(220, 53, 69, 0.18);
+    border-color: #ff6b6b;
+    color: #ff8a8a;
+    transform: translateY(-1px);
+}
+
+.quest-card-remove-button:focus-visible {
+    outline: 2px solid #ff6b6b;
+    outline-offset: 3px;
+}
+
+.quest-card-remove-button i {
+    display: block;
+    line-height: 1;
+}
+
+/* =========================
+   LINK DETTAGLIO
+========================= */
+
+.quest-card-detail {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.9rem;
+
+    color: #f0c34a;
+    font-family: "Cinzel", serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+}
+
+.quest-card-detail:hover {
+    color: #ffe27a;
+    text-shadow: 0 0 10px rgba(243, 199, 46, 0.35);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 520px) {
+    .quest-card {
+        padding: 0.8rem;
+    }
+
+    .quest-card-inner {
+        padding: 0.85rem;
+    }
+
+    .quest-card-image-link {
+        min-height: 160px;
+    }
+
+    .quest-card-image {
+        height: 150px;
+    }
+
+    .quest-card-title {
+        font-size: 1.25rem;
+    }
+
+    .quest-card-price {
+        font-size: 1.5rem;
+    }
+
+    .quest-card-button span {
+        display: none;
+    }
+
+    .quest-card-button i {
+        font-size: 1.25rem;
+    }
+
+    .quest-card-cart-controls {
+        grid-template-columns: auto auto;
+        justify-content: center;
+    }
+
+    .quest-card-remove-button {
+        width: 42px;
+        height: 38px;
+    }
 }
