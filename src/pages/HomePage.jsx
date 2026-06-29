@@ -92,7 +92,7 @@ export default function HomePage() {
                             <div className="row g-4">
                                 {rarestProducts.slice(0, 8).map((product) => (
                                     <div
-                                        className="col-12 col-sm-6 col-lg-3"
+                                        className="col-12 col-sm-6 col-lg-4"
                                         key={product.slug}
                                     >
                                         <ProductCard product={product} />
@@ -120,7 +120,7 @@ export default function HomePage() {
                             <div className="row g-4">
                                 {cheapestProducts.slice(0, 8).map((product) => (
                                     <div
-                                        className="col-12 col-sm-6 col-lg-3"
+                                        className="col-12 col-sm-6 col-lg-4"
                                         key={product.slug}
                                     >
                                         <ProductCard product={product} />
