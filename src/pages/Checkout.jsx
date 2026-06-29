@@ -359,8 +359,10 @@ function Checkout() {
                                                         type="button"
                                                         className="checkout-remove-button"
                                                         onClick={() => removeFromCart(item.slug)}
+                                                        aria-label={`Rimuovi ${item.name} dal checkout`}
+                                                        title="Rimuovi dal checkout"
                                                     >
-                                                        Rimuovi
+                                                        <i className="bi bi-trash3"></i>
                                                     </button>
                                                 </div>
 

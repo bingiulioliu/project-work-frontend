@@ -337,17 +337,34 @@
 }
 
 .checkout-remove-button {
-    display: inline-block;
-    margin-top: 0.65rem;
-    border: 0;
-    background: transparent;
-    color: #ffb3b3;
-    padding: 3;
-    font-family: "Cinzel", serif;
-    font-size: 0.68rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(220, 53, 69, 0.65);
+    border-radius: 8px;
+    background: rgba(220, 53, 69, 0.08);
+    color: #ff6b6b;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    margin-left: 0.5rem;
+}
+
+.checkout-remove-button:hover {
+    background: rgba(220, 53, 69, 0.18);
+    border-color: #ff6b6b;
+    color: #ff8a8a;
+    transform: translateY(-1px);
+}
+
+.checkout-remove-button:focus-visible {
+    outline: 2px solid #ff6b6b;
+    outline-offset: 3px;
+}
+
+.checkout-remove-button i {
+    line-height: 1;
 }
 
 .checkout-remove-button:hover {
