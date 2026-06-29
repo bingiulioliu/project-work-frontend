@@ -16,12 +16,16 @@ function ProductCard({ product }) {
     const { toggleWishlist, isInWishlist } = useWishlist();
 
     const isFavorite = isInWishlist(product.slug);
-
     const cartProduct = cartItems.find((item) => item.slug === product.slug);
 
     const imageSrc = product.image?.startsWith("http")
         ? product.image
         : getImgUrl(product.image);
+
+    const formattedPrice = Number(product.price).toLocaleString("it-IT", {
+        style: "currency",
+        currency: "EUR",
+    });
 
     function handleFavoriteClick() {
         toggleWishlist(product);
@@ -42,22 +46,23 @@ function ProductCard({ product }) {
     function handleRemoveFromCart() {
         removeFromCart(product.slug);
     }
+    console.log("PRODUCT CARD:", product);
 
     return (
         <article className="quest-card h-100">
             <div className="quest-card-inner">
-
                 <button
                     className={`quest-favorite-button ${isFavorite ? "is-favorite" : ""}`}
                     type="button"
                     onClick={handleFavoriteClick}
                     aria-label={
                         isFavorite
-                            ? "Rimuovi dai preferiti"
-                            : "Aggiungi ai preferiti"
+                            ? `Rimuovi ${product.name} dai preferiti`
+                            : `Aggiungi ${product.name} ai preferiti`
                     }
+                    title={isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
                 >
-                    {isFavorite ? "♥" : "♡"}
+                    <i className={isFavorite ? "bi bi-heart-fill" : "bi bi-heart"}></i>
                 </button>
 
                 <Link to={`/products/${product.slug}`} className="quest-card-image-link">
@@ -76,18 +81,20 @@ function ProductCard({ product }) {
                     </span>
 
                     <h3 className="quest-card-title">
-                        {product.name}
+                        <Link to={`/products/${product.slug}`}>
+                            {product.name}
+                        </Link>
                     </h3>
 
                     <p className="quest-card-price">
-                        {Number(product.price).toFixed(2)} €
+                        {formattedPrice}
                     </p>
 
                     <div className="quest-card-actions">
                         {cartProduct ? (
                             <div className="quest-card-cart-controls">
                                 <p className="quest-card-cart-status">
-                                    Già nell&apos;inventario: {cartProduct.quantity}
+                                    Nell&apos;inventario
                                 </p>
 
                                 <div className="quest-card-quantity-actions">
@@ -96,8 +103,9 @@ function ProductCard({ product }) {
                                         type="button"
                                         onClick={handleDecreaseQuantity}
                                         aria-label="Diminuisci quantità"
+                                        disabled={cartProduct.quantity === 1}
                                     >
-                                        -
+                                        <i className="bi bi-dash-lg"></i>
                                     </button>
 
                                     <span className="quest-card-quantity-value">
@@ -110,7 +118,7 @@ function ProductCard({ product }) {
                                         onClick={handleIncreaseQuantity}
                                         aria-label="Aumenta quantità"
                                     >
-                                        +
+                                        <i className="bi bi-plus-lg"></i>
                                     </button>
                                 </div>
 
@@ -118,8 +126,10 @@ function ProductCard({ product }) {
                                     className="quest-card-remove-button"
                                     type="button"
                                     onClick={handleRemoveFromCart}
+                                    aria-label={`Rimuovi ${product.name} dall'inventario`}
+                                    title="Rimuovi dall'inventario"
                                 >
-                                    Rimuovi dall&apos;inventario
+                                    <i className="bi bi-trash3"></i>
                                 </button>
                             </div>
                         ) : (
@@ -128,13 +138,8 @@ function ProductCard({ product }) {
                                 type="button"
                                 onClick={handleAddToCart}
                             >
-                                <span className="button-text">
-                                    Aggiungi all&apos;inventario
-                                </span>
-
-                                <span className="button-icon">
-                                    🛒
-                                </span>
+                                <i className="bi bi-bag-plus"></i>
+                                <span>Aggiungi</span>
                             </button>
                         )}
                     </div>
