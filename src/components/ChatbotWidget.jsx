@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -29,6 +29,8 @@ const FALLBACK_PRESET_QUESTIONS = [
   "quali categorie ci sono",
   "cosa fa il bastone tra le ruote",
 ];
+
+const VIEWPORT_PADDING = 8;
 
 function getProductSlugFromPath(pathname) {
   const match = String(pathname || "").match(/^\/products\/([^/]+)$/i);
@@ -61,10 +63,61 @@ function ChatbotWidget() {
   const [hasLoadedPresetQuestions, setHasLoadedPresetQuestions] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
 
+  const keepWidgetInViewport = useCallback(() => {
+    const widget = widgetRef.current;
+    if (!widget) return;
+
+    const rect = widget.getBoundingClientRect();
+    let deltaX = 0;
+    let deltaY = 0;
+
+    if (rect.left < VIEWPORT_PADDING) {
+      deltaX = VIEWPORT_PADDING - rect.left;
+    } else if (rect.right > window.innerWidth - VIEWPORT_PADDING) {
+      deltaX = window.innerWidth - VIEWPORT_PADDING - rect.right;
+    }
+
+    if (rect.top < VIEWPORT_PADDING) {
+      deltaY = VIEWPORT_PADDING - rect.top;
+    } else if (rect.bottom > window.innerHeight - VIEWPORT_PADDING) {
+      deltaY = window.innerHeight - VIEWPORT_PADDING - rect.bottom;
+    }
+
+    if (deltaX !== 0 || deltaY !== 0) {
+      setDragOffset((prev) => ({
+        x: prev.x + deltaX,
+        y: prev.y + deltaY,
+      }));
+    }
+  }, []);
+
   useEffect(() => {
     if (!isOpen) return;
     messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
   }, [isOpen, messages, isLoading]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const rafId = window.requestAnimationFrame(() => {
+      keepWidgetInViewport();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+    };
+  }, [isOpen, keepWidgetInViewport]);
+
+  useEffect(() => {
+    function handleViewportResize() {
+      keepWidgetInViewport();
+    }
+
+    window.addEventListener("resize", handleViewportResize);
+    return () => {
+      window.removeEventListener("resize", handleViewportResize);
+    };
+  }, [keepWidgetInViewport]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -197,7 +250,7 @@ function ChatbotWidget() {
       if (!widget) return prev;
 
       const rect = widget.getBoundingClientRect();
-      const viewportPadding = 8;
+      const viewportPadding = VIEWPORT_PADDING;
 
       let allowedDeltaX = deltaX;
       let allowedDeltaY = deltaY;

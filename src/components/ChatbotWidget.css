@@ -41,7 +41,7 @@
 
 .chatbot-panel {
   width: min(360px, calc(100vw - 2rem));
-  height: 600px;
+  height: min(600px, calc(100vh - 1rem));
   border: 1px solid rgba(133, 88, 49, 0.7);
   border-radius: 16px;
   overflow: hidden;
@@ -228,6 +228,6 @@
   }
 
   .chatbot-panel {
-    height: 78vh;
+    height: min(78vh, calc(100vh - 1rem));
   }
 }
