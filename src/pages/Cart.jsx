@@ -128,8 +128,10 @@ function Cart() {
                                                     type="button"
                                                     className="cart-remove-button"
                                                     onClick={() => removeFromCart(item.slug)}
+                                                    aria-label={`Rimuovi ${item.name} dal carrello`}
+                                                    title="Rimuovi dal carrello"
                                                 >
-                                                    Rimuovi
+                                                    <i className="bi bi-trash3"></i>
                                                 </button>
                                             </div>
 

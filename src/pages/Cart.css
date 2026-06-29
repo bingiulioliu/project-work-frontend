@@ -184,15 +184,33 @@
 }
 
 .cart-remove-button {
-    border: 0;
-    background: transparent;
-    color: #ffb3b3;
-    padding: 0;
-    font-family: "Cinzel", serif;
-    font-size: 0.75rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(220, 53, 69, 0.65);
+    border-radius: 8px;
+    background: rgba(220, 53, 69, 0.08);
+    color: #ff6b6b;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.cart-remove-button:hover {
+    background: rgba(220, 53, 69, 0.18);
+    border-color: #ff6b6b;
+    color: #ff8a8a;
+    transform: translateY(-1px);
+}
+
+.cart-remove-button:focus-visible {
+    outline: 2px solid #ff6b6b;
+    outline-offset: 3px;
+}
+
+.cart-remove-button i {
+    line-height: 1;
 }
 
 .cart-remove-button:hover {
