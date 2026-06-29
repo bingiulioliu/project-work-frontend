@@ -229,3 +229,53 @@
 
     }
 }
+
+
+.quest-card-cart-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.quest-card-cart-status {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    color: #f4c542;
+}
+
+.quest-card-quantity-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.quest-card-quantity-button {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #f4c542;
+    border-radius: 50%;
+    background-color: transparent;
+    color: #f4c542;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.quest-card-quantity-value {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 700;
+    color: #f4efe1;
+}
+
+.quest-card-remove-button {
+    border: 1px solid #f4c542;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    background-color: transparent;
+    color: #f4c542;
+    font-weight: 700;
+    cursor: pointer;
+}
