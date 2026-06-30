@@ -47,6 +47,7 @@ function ProductDetails() {
         setIsCartModalClosing(false);
         addToCart(product);
         setShowCartModal(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function handleCloseCartModal() {
@@ -289,7 +290,7 @@ function ProductDetails() {
                                                 <button
                                                     type="button"
                                                     className="product-remove-button"
-                                                    onClick={() => removeFromCart(product.slug)}
+                                                    onClick={() => handleRemoveFromModal(product.slug)}
                                                     aria-label={`Rimuovi ${product.name} dal carrello`}
                                                     title="Rimuovi dal carrello"
                                                 >
@@ -326,7 +327,6 @@ function ProductDetails() {
             </section>
 
             {showCartModal && (
-                <div className={`add-cart-modal-overlay ${isCartModalClosing ? "is-closing" : ""}`}>
                     <aside
                         className={`add-cart-modal ${isCartModalClosing ? "is-closing" : ""}`}
                         role="dialog"
@@ -528,7 +528,6 @@ function ProductDetails() {
                             </button>
                         </div>
                     </aside>
-                </div>
             )}
             <SuggestedProducts products={suggestedProducts} />
         </main>
