@@ -6,6 +6,7 @@ import useWishlist from "../hooks/useWishlist";
 import useCart from "../hooks/useCart";
 import { SuggestedProducts } from "../components/SuggestedProducts";
 import { fetchSuggestedProducts } from "../utils/fetchSuggestedProducts";
+import { fetchProduct } from "../utils/fetchProduct";
 
 function ProductDetails() {
     const { slug } = useParams();
@@ -22,37 +23,15 @@ function ProductDetails() {
     } = useCart();
 
     const { suggestedProducts } = fetchSuggestedProducts(slug);
+    const { product, isLoading, error: errorMessage } = fetchProduct(slug);
 
-
-    const [product, setProduct] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [errorMessage, setErrorMessage] = useState("");
     const [showCartModal, setShowCartModal] = useState(false);
     const [isCartModalClosing, setIsCartModalClosing] = useState(false);
     const modalCloseTimeoutRef = useRef(null);
 
     useEffect(() => {
-        setIsLoading(true);
-        setErrorMessage("");
         setShowCartModal(false);
         setIsCartModalClosing(false);
-
-        fetch(`http://localhost:3000/products/${slug}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.error) {
-                    setErrorMessage("Prodotto non trovato.");
-                    return;
-                }
-
-                setProduct(data.results);
-            })
-            .catch(() => {
-                setErrorMessage("Errore durante il caricamento del prodotto.");
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
     }, [slug]);
 
     function handleGoBack() {

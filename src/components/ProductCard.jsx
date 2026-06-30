@@ -46,7 +46,6 @@ function ProductCard({ product }) {
     function handleRemoveFromCart() {
         removeFromCart(product.slug);
     }
-    console.log("PRODUCT CARD:", product);
 
     return (
         <article className="quest-card h-100">
