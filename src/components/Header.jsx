@@ -61,8 +61,8 @@ function Header() {
                                     }
                                     to="/products"
                                 >
-                                    <i className="bi bi-shop nav-icon"></i>
-                                    <span>Catalogo</span>
+                                    <i className="bi bi-shop-window nav-icon"></i>
+                                    <span>Emporio</span>
                                 </NavLink>
                             </li>
 
@@ -103,7 +103,7 @@ function Header() {
                                     to="/cart"
                                     aria-label={`Inventario: ${totalItems} elementi`}
                                 >
-                                    <i className="bi bi-bag nav-icon"></i>
+                                    <i className="bi bi-backpack2 nav-icon"></i>
                                     <span>Inventario</span>
 
                                     {totalItems > 0 && (
