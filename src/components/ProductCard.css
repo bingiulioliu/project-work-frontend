@@ -365,7 +365,7 @@
    RESPONSIVE
 ========================= */
 
-@media (max-width: 520px) {
+@media (max-width: 575px) {
     .quest-card {
         padding: 0.8rem;
     }
