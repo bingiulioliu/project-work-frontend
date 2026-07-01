@@ -1,6 +1,6 @@
 # JSON's Quest — Frontend
 
-> SPA React (Vite) per **JSON's Quest**, l'e-commerce a tema fantasy/RPG. Consuma le API REST esposte dal backend Express/MySQL ([repo separata](../project-work-backend)).
+> SPA React (Vite) per **JSON's Quest**, l'e-commerce a tema fantasy/RPG. Consuma le API REST esposte dal backend Express/MySQL ([repo separata](https://github.com/bingiulioliu/project-work-backend)).
 
 *"Le risposte alle tue API, l'equipaggiamento per le tue battaglie."*
 
