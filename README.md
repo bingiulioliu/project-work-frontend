@@ -45,7 +45,7 @@ project-work-frontend/
 ### Prerequisiti
 - Node.js (versione LTS consigliata)
 - pnpm
-- Backend JSON's Quest avviato [`https://github.com/bingiulioliu/project-work-backend`](Repo Backend)
+- Backend JSON's Quest avviato [`Repo Backend`](https://github.com/bingiulioliu/project-work-backend)
 
 ### Installazione
 
