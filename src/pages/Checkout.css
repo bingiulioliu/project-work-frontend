@@ -455,6 +455,30 @@
     line-height: 1.4;
 }
 
+.checkout-field-error {
+    display: block;
+    margin-top: 0.45rem;
+    color: #ff8a8a;
+    background: rgba(255, 120, 120, 0.08);
+    border-left: 2px solid #ff6b6b;
+    padding: 0.4rem 0.7rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.checkout-input-error {
+    border-color: #ff6b6b !important;
+    background: rgba(255, 120, 120, 0.05) !important;
+    box-shadow: 0 0 0 0.15rem rgba(255, 107, 107, 0.1) !important;
+}
+
+.checkout-input-error:focus {
+    border-color: #ff8a8a !important;
+    box-shadow: 0 0 0 0.15rem rgba(255, 120, 120, 0.2) !important;
+}
+
 @media (max-width: 991px) {
     .checkout-summary {
         position: static;

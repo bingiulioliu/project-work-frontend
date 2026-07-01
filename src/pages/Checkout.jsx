@@ -2,6 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { createOrder } from "../utils/createOrder";
+import {
+    emptyCheckoutErrors,
+    sanitizeCheckoutForm,
+    validateCheckoutField,
+    validateCheckoutForm,
+} from "../utils/checkoutValidation";
 import { getImgUrl } from "../utils/getImgUrl";
 import "./Checkout.css";
 
@@ -26,6 +32,7 @@ function Checkout() {
         mail: "",
         notes: "",
     });
+    const [fieldErrors, setFieldErrors] = useState(emptyCheckoutErrors);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -39,9 +46,46 @@ function Checkout() {
     function handleChange(event) {
         const { name, value } = event.target;
 
+        const normalizedValue =
+            name === "customer_postal_code" || name === "telephone_number"
+                ? value.replace(/\D/g, "")
+                : value;
+
+        const nextValue = name === "notes" ? normalizedValue.slice(0, 500) : normalizedValue;
+
         setFormData((currentData) => ({
             ...currentData,
+            [name]: nextValue,
+        }));
+
+        setFieldErrors((currentErrors) => ({
+            ...currentErrors,
+            [name]: validateCheckoutField(name, nextValue),
+        }));
+
+        if (errorMessage) {
+            setErrorMessage("");
+        }
+    }
+
+    function handleBlur(event) {
+        const { name, value } = event.target;
+
+        const sanitizedFieldData = sanitizeCheckoutForm({
+            ...formData,
             [name]: value,
+        });
+
+        const sanitizedValue = sanitizedFieldData[name];
+
+        setFormData((currentData) => ({
+            ...currentData,
+            [name]: sanitizedValue,
+        }));
+
+        setFieldErrors((currentErrors) => ({
+            ...currentErrors,
+            [name]: validateCheckoutField(name, sanitizedValue),
         }));
     }
 
@@ -53,8 +97,17 @@ function Checkout() {
             return;
         }
 
+        const validation = validateCheckoutForm(formData);
+
+        setFieldErrors(validation.errors);
+
+        if (!validation.isValid) {
+            setErrorMessage("Correggi i campi evidenziati prima di confermare l'ordine.");
+            return;
+        }
+
         const orderData = {
-            ...formData,
+            ...validation.sanitized,
             products: cartItems.map((item) => ({
                 product_id: item.id,
                 quantity: item.quantity,
@@ -70,6 +123,21 @@ function Checkout() {
             setSuccessOrder(data.results);
             clearCart();
         } catch (error) {
+            if (Array.isArray(error?.errors)) {
+                const serverFieldErrors = emptyCheckoutErrors();
+
+                error.errors.forEach((serverError) => {
+                    if (serverError?.field in serverFieldErrors) {
+                        serverFieldErrors[serverError.field] = serverError.message;
+                    }
+                });
+
+                setFieldErrors((currentErrors) => ({
+                    ...currentErrors,
+                    ...serverFieldErrors,
+                }));
+            }
+
             setErrorMessage(error.message);
         } finally {
             setIsSubmitting(false);
@@ -177,8 +245,18 @@ function Checkout() {
                                             type="text"
                                             value={formData.customer_name}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            maxLength="80"
+                                            autoComplete="name"
+                                            aria-invalid={Boolean(fieldErrors.customer_name)}
+                                            className={fieldErrors.customer_name ? "checkout-input-error" : ""}
                                             required
                                         />
+                                        {fieldErrors.customer_name && (
+                                            <small className="checkout-field-error">
+                                                {fieldErrors.customer_name}
+                                            </small>
+                                        )}
                                     </div>
 
                                     <div className="col-12">
@@ -193,12 +271,21 @@ function Checkout() {
                                             type="email"
                                             value={formData.mail}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            autoComplete="email"
+                                            aria-invalid={Boolean(fieldErrors.mail)}
+                                            className={fieldErrors.mail ? "checkout-input-error" : ""}
                                             required
                                         />
 
                                         <small className="checkout-field-help">
                                             Useremo questa email per inviarti la conferma dell&apos;ordine.
                                         </small>
+                                        {fieldErrors.mail && (
+                                            <small className="checkout-field-error">
+                                                {fieldErrors.mail}
+                                            </small>
+                                        )}
                                     </div>
 
                                     <div className="col-12 col-md-6">
@@ -213,9 +300,20 @@ function Checkout() {
                                             type="tel"
                                             value={formData.telephone_number}
                                             onChange={handleChange}
-                                            maxLength="10"
+                                            onBlur={handleBlur}
+                                            maxLength="11"
+                                            inputMode="numeric"
+                                            pattern="[0-9]{9,11}"
+                                            autoComplete="tel"
+                                            aria-invalid={Boolean(fieldErrors.telephone_number)}
+                                            className={fieldErrors.telephone_number ? "checkout-input-error" : ""}
                                             required
                                         />
+                                        {fieldErrors.telephone_number && (
+                                            <small className="checkout-field-error">
+                                                {fieldErrors.telephone_number}
+                                            </small>
+                                        )}
                                     </div>
 
                                     <div className="col-12 col-md-6">
@@ -230,13 +328,24 @@ function Checkout() {
                                             type="text"
                                             value={formData.customer_postal_code}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
                                             maxLength="5"
+                                            inputMode="numeric"
+                                            pattern="[0-9]{5}"
+                                            autoComplete="postal-code"
+                                            aria-invalid={Boolean(fieldErrors.customer_postal_code)}
+                                            className={fieldErrors.customer_postal_code ? "checkout-input-error" : ""}
                                             required
                                         />
 
                                         <small className="checkout-field-help">
                                             Inserisci un CAP di 5 cifre.
                                         </small>
+                                        {fieldErrors.customer_postal_code && (
+                                            <small className="checkout-field-error">
+                                                {fieldErrors.customer_postal_code}
+                                            </small>
+                                        )}
                                     </div>
 
                                     <div className="col-12">
@@ -251,8 +360,18 @@ function Checkout() {
                                             type="text"
                                             value={formData.customer_address}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            maxLength="150"
+                                            autoComplete="street-address"
+                                            aria-invalid={Boolean(fieldErrors.customer_address)}
+                                            className={fieldErrors.customer_address ? "checkout-input-error" : ""}
                                             required
                                         />
+                                        {fieldErrors.customer_address && (
+                                            <small className="checkout-field-error">
+                                                {fieldErrors.customer_address}
+                                            </small>
+                                        )}
                                     </div>
 
                                     <div className="col-12">
@@ -267,8 +386,18 @@ function Checkout() {
                                             type="text"
                                             value={formData.customer_city}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            maxLength="80"
+                                            autoComplete="address-level2"
+                                            aria-invalid={Boolean(fieldErrors.customer_city)}
+                                            className={fieldErrors.customer_city ? "checkout-input-error" : ""}
                                             required
                                         />
+                                        {fieldErrors.customer_city && (
+                                            <small className="checkout-field-error">
+                                                {fieldErrors.customer_city}
+                                            </small>
+                                        )}
                                     </div>
 
                                     <div className="col-12">
@@ -283,8 +412,20 @@ function Checkout() {
                                             rows="4"
                                             value={formData.notes}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            maxLength="500"
+                                            aria-invalid={Boolean(fieldErrors.notes)}
+                                            className={fieldErrors.notes ? "checkout-input-error" : ""}
                                             placeholder="Es. citofonare, consegna al portone..."
                                         />
+                                        <small className="checkout-field-help">
+                                            {formData.notes.length}/500 caratteri
+                                        </small>
+                                        {fieldErrors.notes && (
+                                            <small className="checkout-field-error">
+                                                {fieldErrors.notes}
+                                            </small>
+                                        )}
                                     </div>
                                 </div>
                             </section>
@@ -393,7 +534,7 @@ function Checkout() {
                                 <button
                                     type="submit"
                                     className="checkout-main-button"
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || Object.values(fieldErrors).some(Boolean)}
                                 >
                                     {isSubmitting ? "Invio ordine..." : "Conferma ordine"}
                                 </button>
