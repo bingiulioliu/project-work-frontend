@@ -25,13 +25,13 @@ project-work-frontend/
 │   ├── assets/              # Immagini, font, risorse statiche
 │   ├── components/          # Componenti riutilizzabili (UI)
 │   ├── contexts/            # Context API per lo stato globale
-│   ├── hooks/                # Custom hook
-│   ├── layouts/              # Layout condivisi tra pagine
-│   ├── pages/                 # Pagine/route dell'applicazione
-│   ├── styles/                # Stili globali
-│   ├── utils/                  # Funzioni di utilità e chiamate API
-│   ├── App.jsx                  # Definizione router e provider globali
-│   └── main.jsx                  # Entry point React
+│   ├── hooks/               # Custom hook
+│   ├── layouts/             # Layout condivisi tra pagine
+│   ├── pages/               # Pagine/route dell'applicazione
+│   ├── styles/              # Stili globali
+│   ├── utils/               # Funzioni di utilità e chiamate API
+│   ├── App.jsx              # Definizione router e provider globali
+│   └── main.jsx             # Entry point React
 ├── index.html
 ├── eslint.config.js
 ├── package.json
