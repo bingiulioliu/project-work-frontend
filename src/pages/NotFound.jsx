@@ -7,11 +7,16 @@ function NotFound() {
             <section className="container">
                 <div className="not-found-card">
                     <div className="not-found-inner text-center">
+
                         <p className="not-found-kicker">Quest interrotta</p>
 
-                        <h1>404</h1>
-
-                        <h2>Pagina non trovata</h2>
+                        <div className="not-found-image-wrapper">
+                            <img
+                                src="img/not-found.png"
+                                alt="404 - Goblin non trovato"
+                                className="not-found-img"
+                            />
+                        </div>
 
                         <p>
                             Sembra che tu abbia imboccato un sentiero inesplorato.
