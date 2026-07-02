@@ -42,7 +42,7 @@ export default function HomePage() {
                 <div className="container-fluid px-4">
                     <div className="quest-hero-content text-center">
                         <p className="quest-kicker">
-                            Benvenuto alla piazza del mercato
+                            Try. Catch. Conquer.
                         </p>
 
                         <h1 className="quest-title">
