@@ -21,6 +21,10 @@
 
 /* su schermi molto piccoli, max 2 colonne per non schiacciare troppo le card */
 @media (max-width: 576px) {
+    .suggested-products .quest-card-title {
+        font-size: 1rem;
+    }
+
     .suggested-products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
