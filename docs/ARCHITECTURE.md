@@ -1,4 +1,4 @@
-# Architettura — Frontend
+﻿# Architettura — Frontend
 
 ## Panoramica
 
@@ -27,7 +27,7 @@ Le chiamate API sono centralizzate in `src/utils/` (es. `fetchProducts`, `fetchP
 - **Stato globale via Context API**, non Redux: la complessità dello stato (carrello, wishlist, tema, newsletter) non giustificava una libreria esterna (vedi [`STATE-MANAGEMENT.md`](STATE-MANAGEMENT.md)).
 - **Persistenza locale**: carrello e wishlist sono salvati in `localStorage` tramite i rispettivi Context, per sopravvivere al refresh della pagina.
 - **Componenti "dumb" riutilizzabili** (es. `ProductCard`) alimentati da pagine "smart" che gestiscono i dati (es. `ProductsList`).
-- **Sincronizzazione filtri con URL**: nel catalogo i filtri di ricerca sono riflessi nei search params, per permettere la condivisione di un link con filtri già applicati.
+- **Sincronizzazione filtri con URL**: nel emporio i filtri di ricerca sono riflessi nei search params, per permettere la condivisione di un link con filtri già applicati.
 
 ## Chatbot AI (JSON's Quest Assistant)
 

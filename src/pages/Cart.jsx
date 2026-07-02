@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { getImgUrl } from "../utils/getImgUrl";
@@ -56,11 +56,11 @@ function Cart() {
 
                         <p>
                             Non hai ancora aggiunto nessun artefatto al carrello.
-                            Esplora il catalogo e scegli il tuo equipaggiamento.
+                            Esplora il emporio e scegli il tuo equipaggiamento.
                         </p>
 
                         <Link to="/products" className="cart-primary-link">
-                            Vai al catalogo
+                                            Vai all'emporio
                         </Link>
                     </div>
                 ) : (

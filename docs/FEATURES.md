@@ -1,4 +1,4 @@
-# JSON's Quest
+﻿# JSON's Quest
 
 > *Prodotti per la missione quotidiana* — un e-commerce a tema fantasy/RPG, dove ogni acquisto è una quest e ogni prodotto un artefatto della Gilda.
 
@@ -6,7 +6,7 @@
 
 - [Panoramica](#panoramica)
 - [Homepage](#homepage)
-- [Catalogo](#catalogo)
+- [Emporio](#emporio)
 - [Chi siamo](#chi-siamo)
 - [Preferiti e Inventario](#preferiti-e-inventario)
 - [Pagina dettaglio prodotto](#pagina-dettaglio-prodotto)
@@ -16,8 +16,8 @@
 
 | Pagina | Funzione principale |
 |---|---|
-| Homepage | Vetrina del brand e accesso rapido al catalogo |
-| Catalogo | Ricerca, filtro e ordinamento di tutti i prodotti |
+| Homepage | Vetrina del brand e accesso rapido al emporio |
+| Emporio | Ricerca, filtro e ordinamento di tutti i prodotti |
 | Chi siamo | Presentazione del brand, del team e della mission |
 | Preferiti / Inventario | Prodotti salvati e posseduti dall'utente |
 | Dettaglio prodotto | Scheda completa del prodotto e prodotti suggeriti |
@@ -26,8 +26,8 @@
 
 ### Hero
 
-- CTA **Inizia l'avventura** → porta al catalogo con tutti i prodotti visibili.
-- CTA **Testato sui Goblin** → porta al catalogo già filtrato sulla categoria *Testato sui Goblin*.
+- CTA **Inizia l'avventura** → porta al emporio con tutti i prodotti visibili.
+- CTA **Testato sui Goblin** → porta al emporio già filtrato sulla categoria *Testato sui Goblin*.
 
 ### Sezioni in evidenza
 
@@ -36,7 +36,7 @@ Subito sotto la hero, due sezioni con prodotti filtrati automaticamente per cate
 1. **Oggetti più rari** — prodotti con rarità *Leggendaria*.
 2. **Essenziali** — prodotti con il prezzo più basso.
 
-## Catalogo
+## Emporio
 
 - Mostra tutti i prodotti, ordinati di default dal più recente.
 - **Filtri disponibili**:
@@ -52,7 +52,7 @@ Subito sotto la hero, due sezioni con prodotti filtrati automaticamente per cate
 
 - Presentazione di JSON's Quest e del team.
 - Racconto della mission del progetto.
-- CTA finale che riporta al catalogo.
+- CTA finale che riporta al emporio.
 
 ## Preferiti e Inventario
 
@@ -62,7 +62,7 @@ Subito sotto la hero, due sezioni con prodotti filtrati automaticamente per cate
 ## Pagina dettaglio prodotto
 
 - Scheda completa con tutte le informazioni sul prodotto.
-- Azioni disponibili sia da qui che dalla card prodotto nel catalogo:
+- Azioni disponibili sia da qui che dalla card prodotto nel emporio:
   - Aggiungi a Inventario o Preferiti
   - Aumenta la quantità
   - Rimuovi da Inventario o Preferiti

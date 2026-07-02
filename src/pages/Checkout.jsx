@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { createOrder } from "../utils/createOrder";
@@ -157,7 +157,7 @@ function Checkout() {
                         </p>
 
                         <Link to="/products" className="checkout-main-button">
-                            Vai al catalogo
+                               Vai all'emporio
                         </Link>
                     </div>
                 </section>
@@ -199,7 +199,7 @@ function Checkout() {
                             className="checkout-main-button"
                             onClick={() => navigate("/products")}
                         >
-                            Torna al catalogo
+                            Torna al emporio
                         </button>
                     </div>
                 </section>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import "./ChiSiamo.css";
 
 function ChiSiamo() {
@@ -37,7 +37,7 @@ function ChiSiamo() {
                                     <p>
                                         Il nostro obiettivo è rendere la navigazione più
                                         coinvolgente, chiara e memorabile, mantenendo però una
-                                        struttura semplice da usare: catalogo, dettaglio prodotto,
+                                        struttura semplice da usare: emporio, dettaglio prodotto,
                                         preferiti e carrello.
                                     </p>
                                 </div>
@@ -73,7 +73,7 @@ function ChiSiamo() {
                                             <h3>Prodotti come artefatti</h3>
                                             <p>
                                                 Rarità, immagini, preferiti e dettagli aiutano a dare
-                                                personalità al catalogo.
+                                                personalità al emporio.
                                             </p>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@ function ChiSiamo() {
                                 <h3>La Maga del Frontend</h3>
                                 <p>
                                     Cura l&apos;interfaccia, l&apos;atmosfera visiva e la resa delle
-                                    pagine, trasformando il catalogo in un vero mercato fantasy.
+                                    pagine, trasformando il emporio in un vero mercato fantasy.
                                 </p>
                             </article>
                         </div>
@@ -122,7 +122,7 @@ function ChiSiamo() {
                         <div className="col-12 col-md-6 col-lg">
                             <article className="about-member-card">
                                 <span className="about-member-icon">📜</span>
-                                <h3>Il Custode del Catalogo</h3>
+                                <h3>Il Custode dell'Emporio</h3>
                                 <p>
                                     Organizza prodotti, categorie, rarità e descrizioni, dando a
                                     ogni oggetto un ruolo chiaro dentro l&apos;inventario della gilda.
@@ -157,7 +157,7 @@ function ChiSiamo() {
                 <section className="about-cta text-center">
                     <p className="about-kicker">Pronto per la prossima missione?</p>
 
-                    <h2>Esplora il catalogo degli artefatti</h2>
+                    <h2>Esplora l'emporio degli artefatti</h2>
 
                     <p>
                         Scopri oggetti rari, offerte della gilda e strumenti pensati per
@@ -165,7 +165,7 @@ function ChiSiamo() {
                     </p>
 
                     <Link to="/products" className="about-cta-button">
-                        Vai al catalogo
+                            Vai all'emporio
                     </Link>
                 </section>
             </section>

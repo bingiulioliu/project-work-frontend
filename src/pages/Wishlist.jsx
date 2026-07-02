@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import useWishlist from "../hooks/useWishlist";
 import ProductCard from "../components/ProductCard";
 import "./Wishlist.css";
@@ -22,12 +22,12 @@ function Wishlist() {
                     <div className="wishlist-empty">
                         <h2>Nessun artefatto salvato</h2>
                         <p>
-                            Esplora il catalogo e aggiungi ai preferiti gli oggetti
+                            Esplora l'emporio e aggiungi ai preferiti gli oggetti
                             che vuoi tenere d&apos;occhio.
                         </p>
 
                         <Link to="/products" className="wishlist-empty-link">
-                            Vai al catalogo
+                               Vai all'emporio
                         </Link>
                     </div>
                 ) : (

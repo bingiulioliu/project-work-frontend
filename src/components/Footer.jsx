@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import "./footer.css";
 
 function Footer() {
@@ -23,7 +23,7 @@ function Footer() {
                         </Link>
 
                         <p className="footer-description">
-                            Un catalogo fantasy per avventurieri e cercatori di artefatti
+                            Un emporio fantasy per avventurieri e cercatori di artefatti
                             utili nelle sfide di ogni giorno.
                         </p>
                     </div>
@@ -34,7 +34,7 @@ function Footer() {
 
                             <ul className="footer-list">
                                 <li><Link to="/">Home</Link></li>
-                                <li><Link to="/products">Catalogo</Link></li>
+                                <li><Link to="/products">Emporio</Link></li>
                                 <li><Link to="/chi-siamo">Chi siamo</Link></li>
                                 <li><Link to="/preferiti">Preferiti</Link></li>
                                 <li><Link to="/cart">Inventario</Link></li>

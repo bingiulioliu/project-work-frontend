@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "./ProductDetails.css";
 import { getImgUrl } from "../utils/getImgUrl";
@@ -117,7 +117,7 @@ function ProductDetails() {
                         <p>{errorMessage}</p>
 
                         <Link to="/products" className="product-status-link">
-                            Torna al catalogo
+                            Torna al emporio
                         </Link>
                     </div>
                 </section>

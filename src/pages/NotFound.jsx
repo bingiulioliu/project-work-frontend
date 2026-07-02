@@ -24,12 +24,12 @@ function NotFound() {
                         </p>
 
                         <div className="not-found-actions">
-                            <Link to="/" className="not-found-button primary">
-                                Torna alla piazza
+                            <Link to="/" className="not-found-button secondary">
+                                Torna alla home
                             </Link>
 
-                            <Link to="/products" className="not-found-button secondary">
-                                Esplora catalogo
+                            <Link to="/products" className="not-found-button primary">
+                                Esplora l'emporio
                             </Link>
                         </div>
                     </div>
